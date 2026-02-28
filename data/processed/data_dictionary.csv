@@ -1,0 +1,9 @@
+column,dtype,n_missing
+word,string,0
+happiness_rank,float64,0
+happiness_average,float64,0
+happiness_standard_deviation,float64,0
+twitter_rank,float64,5222
+google_rank,float64,5222
+nyt_rank,float64,5222
+lyrics_rank,float64,5222
