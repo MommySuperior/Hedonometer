@@ -28,7 +28,7 @@ sample_15.to_csv("random_sample_15_rows.csv", index=False)
 
 show_cols = ["word", "happiness_average", "happiness_standard_deviation"]
 
-# Sort once and slice both ways
+
 sorted_df = df.sort_values("happiness_average")
 top_10_positive = sorted_df.tail(10)[show_cols]
 top_10_negative = sorted_df.head(10)[show_cols]
