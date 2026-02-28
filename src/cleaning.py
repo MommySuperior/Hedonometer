@@ -1,11 +1,14 @@
 import pandas as pd
 import numpy as np
-import pathlib as path
+from pathlib import Path
+
+coding_humanities = Path(__file__).resolve().parent
+ROOT = coding_humanities.parent
 
 print_section = ("1.1")
-path = "Hedonometer/data/raw/Data_Set_S1.txt"
+dataset_path = ROOT / "data" / "raw" / "Data_Set_S1.txt"
 
-df = pd.read_csv(path, sep="\t", skiprows=3, dtype=str)
+df = pd.read_csv(dataset_path, sep="\t", skiprows=3, dtype=str)
 
 df = df.replace("--", np.nan)
 df["word"] = df["word"].str.strip().str.lower()
@@ -41,7 +44,6 @@ print(top_10_negative)
 
 # top_10_positive.to_csv("top_10_positive_words.csv", index=False)
 # top_10_negative.to_csv("top_10_negative_words.csv", index=False)
-
 
 
 
