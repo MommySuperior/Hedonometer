@@ -97,3 +97,25 @@ plt.ylabel("# Words")
 plt.tight_layout()
 plt.savefig("output/figures/happiness_average_hist.png")
 plt.close()
+
+print("2.2 Disagreement: happiness_standard_deviation")
+
+plt.figure()
+plt.scatter(
+    df["happiness_average"],
+    df["happiness_standard_deviation"],
+    s=10,
+    alpha=0.35,
+    marker='1',
+)
+plt.title("Disagreement vs score: happiness_average vs happiness_standard_deviation")
+plt.xlabel("Happiness average")
+plt.ylabel("Happineess standard distribution")
+plt.tight_layout()
+plt.savefig("output/figures/happiness_vs_std_scatter.png")
+plt.close()
+
+most_contested_15 = df.sort_values("happiness_standard_deviation", ascending=False).head(15)
+print("Top 15 most 'contested' words (highest standard deviation):")
+print(most_contested_15.to_string(index=False))
+most_contested_15.to_csv("data/processed/top_15_contested_words.csv", index=False)
