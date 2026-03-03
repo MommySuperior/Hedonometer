@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 from pathlib import Path
+import matplotlib.pyplot as plt
 
 coding_humanities = Path(__file__).resolve().parent
 ROOT = coding_humanities.parent
@@ -61,7 +62,38 @@ print(top_10_negative)
 top_10_positive.to_csv("data/processed/top_10_positive_words.csv", index=False)
 top_10_negative.to_csv("data/processed/top_10_negative_words.csv", index=False)
 
+print("\n2.1 Distribution of happiness_average")
 
+h = df["happiness_average"].dropna()
+stats_summary = pd.DataFrame(
+    {
+        "Metric": [
+            "count",
+            "mean",
+            "median",
+            "std",
+            "p05",
+            "p95",
+        ],
+        "Value": [
+            float(h.shape[0]),
+            float(h.mean()),
+            float(h.median()),
+            float(h.std()),
+            float(h.quantile(0.05)),
+            float(h.quantile(0.95)),
+        ],
+    }
+)
 
+print(stats_summary.to_string(index=False))
+stats_summary.to_csv("data/processed/happiness_average_summary_stats.csv", index=False)
 
-
+plt.figure()
+plt.hist(h, bins=40, edgecolor="black")
+plt.title("Distrubution of average happiness")
+plt.xlabel("Happiness average")
+plt.ylabel("# Words")
+plt.tight_layout()
+plt.savefig("output/figures/happiness_average_hist.png")
+plt.close()
