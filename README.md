@@ -1,7 +1,20 @@
 1. Project title + 2–3 sentence overview
 2. Dataset section
+
   – where it came from
   – what each column means (data dictionary)
+  
+  **Data dictionary (per column)**
+   - word: A specific word from the dataset. The data type object of this column is a string. No words are missing by default.
+   - happiness_rank: The rank order of the word based on its average happiness rate. The data type object of this column is a 64-bit float. No happiness ranks were missing, meaning that each word had a happiness rank assigned.
+   - happiness_average: The average happiness rate based on the ratings given by 50 independent respondents on a scale of 1 to 9. The data type object of this column is a 64-bit float. No average rates were missing, meaning each word had an average happiness rate assigned.
+   - happiness_standard_deviation: How much raters disagree about the happiness rate. The data type object of this column is a 64-bit float. No standard deviation rates were missing, meaning each word had a standard deviation rate assigned.
+   - twitter_rank: The rank order of the word based on how many times it showed up in the top 5000 of words in a corpus of Twitter posts. The data type object of this column is a 64-bit float. 5222 words in total were missing from the top 5000 of words in the corpus of Twitter posts.
+   - google_rank: The rank order of the word based on how many times it showed up in the top 5000 of words in a corpus of Google Books. The data type object of this column is a 64-bit float. 5222 words in total were missing from the top 5000 of words in the corpus of Google Books.
+   - nyt_rank: The rank order of the word based on how many times it showed up in the top 5000 of words in a corpus of New York Times articles. The data type object of this column is a 64-bit float. 5222 words in total were missing from the top 5000 of words in the corpus of New York Times articles.
+   - lyrics_rank: The rank order of the word based on how many times it showed up in the top 5000 of words in a corpus of music lyrics. The data type object of this column is a 64-bit float. 5222 words in total were missing from the top 5000 of words in the corpus of music lyrics.
+
+
 3. Methods section (what you did in Python)
 4. Results section
   – plots + captions
@@ -33,7 +46,7 @@ The labMT dataset was created through several steps:
 **1: Rating words without context**
 - **The choice**: People rated words alone, without sentences.
 - **The consequence**: This misses how meaning changes with context. Words with multiple meanings get forced into one score.
-- **Example**: "Grand" (7.06, σ=1.3614) can mean "magnificent" (positive) or "a thousand dollars" (neutral). The higher standard deviation (compared to "love" at 1.1082) shows raters disagreed—likely because they imagined different contexts.
+- **Example**: "Grand" (7.06, σ=1.3614) can mean "magnificent" (positive) or "a thousand dollars" (neutral). The higher standard deviation (compared to "love" at 1.1082) shows raters disagreed, likely because they imagined different contexts.
 
 **2: Using a simple 1-9 scale**
 - **The choice**: Happiness measured as one number from 1-9.
@@ -52,13 +65,13 @@ The labMT dataset was created through several steps:
 
 **5: A snapshot instead of an ongoing picture**
 - **The choice**: The dataset was created at one point in time.
-- **The consequence**: Language evolves—new words appear, meanings shift—but the dataset can't capture this.
+- **The consequence**: Language evolves, new words appear, meanings shift, but the dataset can't capture this.
 - **Example**: "Wen" (4.8) appears only in Twitter. Today this might be a misspelling of "when" in texting slang. A 2024 dataset might show different patterns. Words that emerged after the dataset (like "COVID" or "doomscrolling") aren't included at all.
 
 ### 6.3 Instrument Note: Using This Dataset Today
 **What I would trust this dataset to measure well:**
 This dataset reliably captures broad, mainstream emotional associations for common English words as seen by a specific demographic (mostly U.S. English speakers) in the early 2010s. It excels at finding words with strong emotional consensus, your top 10 positives like "laughter" (8.5, σ=0.9313) and "happiness" (8.44, σ=0.9723) show strong agreement, as do your random sample negatives like "suicide" (1.3, σ=0.8391) and "rape" (1.44, σ=0.7866). The extremely low standard deviations here suggest these evaluations are deeply embedded in shared cultural values.
-The frequency rankings usefully show how language differs across domains. "On" appears in all four corpora with very high frequency, confirming function words are stable. But "friendship" appears in all four with varying ranks, showing it's universally discussed but more common in books than tweets. "Naval" appears only in Google Books and NYT—a word that belongs to formal discourse.
+The frequency rankings usefully show how language differs across domains. "On" appears in all four corpora with very high frequency, confirming function words are stable. But "friendship" appears in all four with varying ranks, showing it's universally discussed but more common in books than tweets. "Naval" appears only in Google Books and NYT, a word that belongs to formal discourse.
 
 **What I would NOT claim based on it:**
 I would not claim this dataset measures "universal" emotional meaning. The scores can't tell us how words actually make people feel in real life, only how isolated words were rated in an artificial task. I would avoid using it for claims about non-English languages, non-Western cultures, or communities different from the MTurk raters.
@@ -71,6 +84,7 @@ Second, I would diversify the rater pool and collect demographic information, al
 Third, I would expand beyond the 1-9 scale by asking raters to select emotion categories (joy, fear, anger, sadness) alongside the happiness score. This would distinguish between different kinds of negative emotions instead of lumping them all as "unhappy."
 Fourth, I would include frequency data beyond the top 5,000 and provide percentile ranks instead of arbitrary cutoffs, giving a more complete picture of language distribution.
 Finally, I would track changes over time by updating the dataset regularly to capture how word meanings evolve and to include new words (like "COVID") that have emerged since the dataset was created.
+
 7. How to run your code
   – setup steps
   – which script(s) to run
