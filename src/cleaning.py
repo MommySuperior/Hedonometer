@@ -153,6 +153,3 @@ out_csv = ROOT / "data" / "processed" / "exhibit_words_task3.csv"
 exhibit.to_csv(out_csv, index=False)
 
 
-print(exhibit.to_markdown(index=False))
-
-
