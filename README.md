@@ -7,21 +7,21 @@ This group project investigates the **labMT 1.0** “hedonometer” dataset, whi
   – where it came from
   – what each column means (data dictionary)
   
-**Load, Clean, and Describe the dataset**
+### Load, Clean, and Describe the dataset  
 The dataset was loaded using pd.read_cvs, the tab separation is specified (sep=”/t”) and the first three metadata lines are skipped (skiprows=3). To prevent parsing errors, all columns were read as strings. Replacing -- with just empty space and converting all numeric columns to floating point values for statistical analysis. All words were converted to lowercase to ensure consistency. 
 Furthermore, the data set contains 10222 rows and 8 columns. The missing rank value (--) indicates that the word does not appear among the top 5000 most frequent words google, twitter, etc.
   
-**Data dictionary (per column)**
-   - word: A specific word from the dataset. The data type object of this column is a string. No words are missing by default.
-   - happiness_rank: The rank order of the word based on its average happiness rate. The data type object of this column is a 64-bit float. No happiness ranks were missing, meaning that each word had a happiness rank assigned.
-   - happiness_average: The average happiness rate based on the ratings given by 50 independent respondents on a scale of 1 to 9. The data type object of this column is a 64-bit float. No average rates were missing, meaning each word had an average happiness rate assigned.
-   - happiness_standard_deviation: How much raters disagree about the happiness rate. The data type object of this column is a 64-bit float. No standard deviation rates were missing, meaning each word had a standard deviation rate assigned.
-   - twitter_rank: The rank order of the word based on how many times it showed up in the top 5000 of words in a corpus of Twitter posts. The data type object of this column is a 64-bit float. 5222 words in total were missing from the top 5000 of words in the corpus of Twitter posts.
-   - google_rank: The rank order of the word based on how many times it showed up in the top 5000 of words in a corpus of Google Books. The data type object of this column is a 64-bit float. 5222 words in total were missing from the top 5000 of words in the corpus of Google Books.
-   - nyt_rank: The rank order of the word based on how many times it showed up in the top 5000 of words in a corpus of New York Times articles. The data type object of this column is a 64-bit float. 5222 words in total were missing from the top 5000 of words in the corpus of New York Times articles.
-   - lyrics_rank: The rank order of the word based on how many times it showed up in the top 5000 of words in a corpus of music lyrics. The data type object of this column is a 64-bit float. 5222 words in total were missing from the top 5000 of words in the corpus of music lyrics.
+### Data dictionary (per column)  
+   - **word**: A specific word from the dataset. The data type object of this column is a string. No words are missing by default.
+   - **happiness_rank**: The rank order of the word based on its average happiness rate. The data type object of this column is a 64-bit float. No happiness ranks were missing, meaning that each word had a happiness rank assigned.
+   - **happiness_average**: The average happiness rate based on the ratings given by 50 independent respondents on a scale of 1 to 9. The data type object of this column is a 64-bit float. No average rates were missing, meaning each word had an average happiness rate assigned.
+   - **happiness_standard_deviation**: How much raters disagree about the happiness rate. The data type object of this column is a 64-bit float. No standard deviation rates were missing, meaning each word had a standard deviation rate assigned.
+   - **twitter_rank**: The rank order of the word based on how many times it showed up in the top 5000 of words in a corpus of Twitter posts. The data type object of this column is a 64-bit float. 5222 words in total were missing from the top 5000 of words in the corpus of Twitter posts.
+   - **google_rank**: The rank order of the word based on how many times it showed up in the top 5000 of words in a corpus of Google Books. The data type object of this column is a 64-bit float. 5222 words in total were missing from the top 5000 of words in the corpus of Google Books.
+   - **nyt_rank**: The rank order of the word based on how many times it showed up in the top 5000 of words in a corpus of New York Times articles. The data type object of this column is a 64-bit float. 5222 words in total were missing from the top 5000 of words in the corpus of New York Times articles.
+   - **lyrics_rank**: The rank order of the word based on how many times it showed up in the top 5000 of words in a corpus of music lyrics. The data type object of this column is a 64-bit float. 5222 words in total were missing from the top 5000 of words in the corpus of music lyrics.
 
-**Sanity Checks**
+### Sanity Checks  
 First, the word column was checked for unique entries, ensuring that no duplicate words appear. This confirms that each word has a single associated happiness score. Second, a random sample of 15 rows was inspected to confirm that the dataset was correctly loaded and cleaned, and that numeric values were converted properly. 
 
 Top 10 most positive and top 10 most negative words based on their average happiness scores were identified. Many positive words align with positive emotions such as love, and joy, while most negative words correspond to concepts associated with suffering, and death. 
