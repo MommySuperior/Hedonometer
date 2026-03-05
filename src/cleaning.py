@@ -152,4 +152,5 @@ exhibit = exhibit[[
 out_csv = ROOT / "data" / "processed" / "exhibit_words_task3.csv"
 exhibit.to_csv(out_csv, index=False)
 
-
+print("\n3.1 Qualitative exploration")
+print("\n", exhibit.to_string(index=False))
