@@ -19,11 +19,12 @@ df[num_cols] = df[num_cols].apply(pd.to_numeric, errors="coerce")
 df[num_cols] = df[num_cols].astype(float)
 
 df["word"] = df["word"].astype("string")
-print(df.head(10).to_csv(sep="\t", index=False))
+print("\n1.1 Clean dataset test")
+print("\n", df.head(10).to_string(index=False))
 
 df.to_csv("data/processed/Data_Set_S1_clean.csv", index=False)
 
-print("1.2 Data dictionary")
+print("\n1.2 Data dictionary")
 
 col_dtypes = df.dtypes.astype(str).reset_index()
 col_dtypes.columns = ["column", "dtype"]
@@ -39,11 +40,11 @@ data_dictionary.to_csv("data/processed/data_dictionary.csv", index=False)
     
 print("\n1.3 Sanity checks")
 
-print("Duplicated words:", df["word"].duplicated().sum())
+print("\nDuplicated words:", df["word"].duplicated().sum())
 
 sample_15 = df.sample(15, random_state=42)
 print("\nRandom sample (15 rows):")
-print(sample_15)
+print("\n", sample_15)
 sample_15.to_csv("data/processed/random_sample_15_rows.csv", index=False)
 
 show_cols = ["word", "happiness_average", "happiness_standard_deviation"]
@@ -54,10 +55,10 @@ top_10_positive = sorted_df.tail(10)[show_cols]
 top_10_negative = sorted_df.head(10)[show_cols]
 
 print("\nTop 10 positive words:")
-print(top_10_positive)
+print("\n", top_10_positive)
 
 print("\nTop 10 negative words:")
-print(top_10_negative)
+print("\n", top_10_negative)
 
 top_10_positive.to_csv("data/processed/top_10_positive_words.csv", index=False)
 top_10_negative.to_csv("data/processed/top_10_negative_words.csv", index=False)
@@ -86,7 +87,7 @@ stats_summary = pd.DataFrame(
     }
 )
 
-print(stats_summary.to_string(index=False))
+print("\n", stats_summary.to_string(index=False))
 stats_summary.to_csv("data/processed/happiness_average_summary_stats.csv", index=False)
 
 plt.figure()
@@ -98,7 +99,7 @@ plt.tight_layout()
 plt.savefig("output/figures/happiness_average_hist.png")
 plt.close()
 
-print("2.2 Disagreement: happiness_standard_deviation")
+print("\n2.2 Disagreement: happiness_standard_deviation")
 
 plt.figure()
 plt.scatter(
@@ -116,11 +117,11 @@ plt.savefig("output/figures/happiness_vs_std_scatter.png")
 plt.close()
 
 most_contested_15 = df.sort_values("happiness_standard_deviation", ascending=False).head(15)
-print("Top 15 most 'contested' words (highest standard deviation):")
-print(most_contested_15.to_string(index=False))
+print("\nTop 15 most 'contested' words (highest standard deviation):")
+print("\n", most_contested_15.to_string(index=False))
 most_contested_15.to_csv("data/processed/top_15_contested_words.csv", index=False)
 
-print("2.3 Corpus comparison: rank coverage + overlaps")
+print("\n2.3 Corpus comparison: rank coverage + overlaps")
 
 rank_cols = ["twitter_rank", "google_rank", "nyt_rank", "lyrics_rank"]
 
@@ -136,7 +137,7 @@ for col in rank_cols:
 )
 
 coverage = pd.DataFrame(coverage_rows)
-print(coverage.to_string(index=False))
+print("\n", coverage.to_string(index=False))
 coverage.to_csv("data/processed/corpus_rank_coverage.csv", index=False)
 
 plt.figure
@@ -163,7 +164,7 @@ patterns = flags.apply(lambda row: "+".join([lab for lab in labels if row[lab]])
 pattern_counts = patterns.value_counts().reset_index()
 
 print("\nOverlap of words over platforms:")
-print(pattern_counts.head(12).to_string(index=False))
+print("\n", pattern_counts.head(12).to_string(index=False))
 pattern_counts.to_csv("data/processed/corpus_overlap_patterns.csv", index=False)
 
 pairs = []
@@ -182,7 +183,7 @@ twitter_common_nyt_missing = (
 )
 
 print("\nExample words frequent on Twitter but missing in NYT top-5000 (top 20 by twitter_rank):")
-print(twitter_common_nyt_missing.to_string(index=False))
+print("\n", twitter_common_nyt_missing.to_string(index=False))
 twitter_common_nyt_missing.to_csv("data/processed/twitter_common_nyt_missing_top20.csv", index=False)
 
 both_twitter_nyt = df.dropna(subset=["twitter_rank", "nyt_rank"])
@@ -227,5 +228,7 @@ exhibit = exhibit[[
 out_csv = ROOT / "data" / "processed" / "exhibit_words_task3.csv"
 exhibit.to_csv(out_csv, index=False)
 
+pd.set_option("display.width", None)
+pd.set_option("display.max_columns", None)
 print("\n3.1 Qualitative exploration")
 print("\n", exhibit.to_string(index=False))
