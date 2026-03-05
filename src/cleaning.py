@@ -195,3 +195,37 @@ plt.ylabel("nyt_rank (1 = most frequent)")
 plt.tight_layout()
 plt.savefig("output/figures/twitter_rank_vs_nyt_rank_scatter.png")
 plt.close()
+
+BASE = Path(__file__).resolve().parent
+csv_path = ROOT / "data" / "processed" / "Data_Set_S1_clean.csv"
+
+df = pd.read_csv(csv_path)
+
+pos5 = df.sort_values("happiness_average", ascending=False).head(5).copy()
+pos5["category"] = "very positive"
+
+neg5 = df.sort_values("happiness_average", ascending=True).head(5).copy()
+neg5["category"] = "very negative"
+
+con5 = df.sort_values("happiness_standard_deviation", ascending=False).head(5).copy()
+con5["category"] = "highly contested"
+
+rank_cols = ["twitter_rank", "google_rank", "nyt_rank", "lyrics_rank"]
+df["rank_spread"] = df[rank_cols].max(axis=1, skipna=True) - df[rank_cols].min(axis=1, skipna=True)
+
+weird5 = df.sort_values("rank_spread", ascending=False).head(5).copy()
+weird5["category"] = "weird/corpus-specific"
+
+exhibit = pd.concat([pos5, neg5, con5, weird5], ignore_index=True)
+
+exhibit = exhibit[[
+    "category", "word",
+    "happiness_average", "happiness_standard_deviation",
+    "twitter_rank", "google_rank", "nyt_rank", "lyrics_rank"
+]].sort_values(["category", "happiness_average"], ascending=[True, False])
+
+out_csv = ROOT / "data" / "processed" / "exhibit_words_task3.csv"
+exhibit.to_csv(out_csv, index=False)
+
+print("\n3.1 Qualitative exploration")
+print("\n", exhibit.to_string(index=False))
