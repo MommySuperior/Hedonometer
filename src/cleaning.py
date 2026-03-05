@@ -119,3 +119,79 @@ most_contested_15 = df.sort_values("happiness_standard_deviation", ascending=Fal
 print("Top 15 most 'contested' words (highest standard deviation):")
 print(most_contested_15.to_string(index=False))
 most_contested_15.to_csv("data/processed/top_15_contested_words.csv", index=False)
+
+print("2.3 Corpus comparison: rank coverage + overlaps")
+
+rank_cols = ["twitter_rank", "google_rank", "nyt_rank", "lyrics_rank"]
+
+coverage_rows = []
+for col in rank_cols:
+    n_present = int(df[col].notna().sum())
+    coverage_rows.append(
+        {
+        "rank_column": col,
+        "n_words_with_rank": n_present,
+        "share_of_lexicon": n_present / len(df),
+        }
+)
+
+coverage = pd.DataFrame(coverage_rows)
+print(coverage.to_string(index=False))
+coverage.to_csv("data/processed/corpus_rank_coverage.csv", index=False)
+
+plt.figure
+plt.bar(coverage["rank_column"], coverage["n_words_with_rank"])
+plt.title("How many labMT words appear in each corpus top-5000?")
+plt.xlabel("Rank column")
+plt.ylabel("Number of words in 5000")
+plt.tight_layout()
+plt.savefig("output/figures/corpus_rank_coverage_bar.png")
+plt.close()
+
+flags = pd.DataFrame(
+    {
+        "Twitter": df["twitter_rank"].notna(),
+        "Google" : df["google_rank"].notna(),
+        "Nyt" : df["nyt_rank"].notna(),
+        "Lyrics" : df["lyrics_rank"].notna()
+    }
+)
+
+labels = ["Twitter", "Google", "Nyt", "Lyrics"]
+patterns = flags.apply(lambda row: "+".join([lab for lab in labels if row[lab]]) or "none", axis=1)
+
+pattern_counts = patterns.value_counts().reset_index()
+
+print("\nOverlap of words over platforms:")
+print(pattern_counts.head(12).to_string(index=False))
+pattern_counts.to_csv("data/processed/corpus_overlap_patterns.csv", index=False)
+
+pairs = []
+for i in range(len(labels)):
+    for j in range(i + 1, len(labels)):
+        a, b = labels[i], labels[j]
+        pairs.append({"pair": f"{a}+{b}", "n_words_in_both": int((flags[a] & flags[b]).sum())})
+
+pairwise_overlap = pd.DataFrame(pairs).sort_values("pair")
+pairwise_overlap.to_csv("data/processed/pairwise_overlap_counts.csv", index=False)
+
+twitter_common_nyt_missing = (
+    df[(df["twitter_rank"].notna()) & (df["nyt_rank"].isna())]
+    .sort_values("twitter_rank")
+    .head(20)[["word", "twitter_rank", "happiness_average"]]
+)
+
+print("\nExample words frequent on Twitter but missing in NYT top-5000 (top 20 by twitter_rank):")
+print(twitter_common_nyt_missing.to_string(index=False))
+twitter_common_nyt_missing.to_csv("data/processed/twitter_common_nyt_missing_top20.csv", index=False)
+
+both_twitter_nyt = df.dropna(subset=["twitter_rank", "nyt_rank"])
+
+plt.figure()
+plt.scatter(both_twitter_nyt["twitter_rank"], both_twitter_nyt["nyt_rank"], s=10, alpha=0.35)
+plt.title("Twitter rank vs NYT rank (words present in both)")
+plt.xlabel("twitter_rank (1 = most frequent)")
+plt.ylabel("nyt_rank (1 = most frequent)")
+plt.tight_layout()
+plt.savefig("output/figures/twitter_rank_vs_nyt_rank_scatter.png")
+plt.close()
