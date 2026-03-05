@@ -99,9 +99,14 @@ Third, I would expand beyond the 1-9 scale by asking raters to select emotion ca
 Fourth, I would include frequency data beyond the top 5,000 and provide percentile ranks instead of arbitrary cutoffs, giving a more complete picture of language distribution.
 Finally, I would track changes over time by updating the dataset regularly to capture how word meanings evolve and to include new words (like "COVID") that have emerged since the dataset was created.
 
-## 7. How to run your code
-  – setup steps
-  – which script(s) to run
+## 7. How to run the code
+
+**1: Clone the repository:** In your terminal, type `git clone https://github.com/MommySuperior/Hedonometer`.
+**2: Change directory to the repository:** In your terminal, type `cd Hedonometer`.
+**3: Create a virtual environment:** In your terminal, type `python -m venv .venv` for Windows, or `python3 -m venv .venv` for MacOS.
+**4: Activate virtual environment:** In your terminal, type `.\.venv\Scripts\Activate.ps1` for PowerShell, `.\.venv\Scripts\activate.bat` for Command Prompt, or `source .venv/bin/activate` for MacOS.
+**5: Install requirements.txt:** In your terminal, type `python -m pip install -r requirements.txt` for Windows, or `python3 -m pip install -r requirements.txt` for MacOS.
+**6: Run cleaning.py:** In your terminal, type `python src/cleaning.py` for Windows, or `python3 src/cleaning.py` for MacOS.
   
 ## 8. Credits
 
