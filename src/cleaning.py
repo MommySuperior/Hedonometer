@@ -152,7 +152,7 @@ exhibit = exhibit[[
 out_csv = ROOT / "data" / "processed" / "exhibit_words_task3.csv"
 exhibit.to_csv(out_csv, index=False)
 
-print("\n=== Task 3 Exhibit Table (copy into README) ===\n")
+
 print(exhibit.to_markdown(index=False))
 
-print(f"\nSaved: {out_csv}")
+
