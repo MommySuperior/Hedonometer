@@ -1,25 +1,17 @@
-
-1.1 Load, Clean, and Describe the dataset
-I loaded the dataset using pd.read_cvs, specifying tab separation (sep=”/t”) and skipping the first three metadata lines (skiprows=3). To prevent parsing errors, all columns were read as strings. Replacing -- with just empty space and converting all numeric columns to floating point values for statistical analysis. All words were converted to lowercase to ensure consistency. 
-Furthermore, the data set contains 10222 rows and 8 columns. The missing rank value (--) indicates that the word does not appear among the top 5000 most frequent words google, twitter, etc.
-
-1.3 Sanity Checks
-I first checked if the word column contains unique entries, ensuring that no duplicate words appear. This confirms that each word has a single associated happiness score. Second, I inspected a random sample of 15 rows to confirm that the dataset was correctly loaded and cleaned, and that numeric values were converted properly. 
-
-Top 10 most positive and top 10 most negative words based on their average happiness scores were identified. Many positive words align with positive emotions such as love, and joy, while most negative words correspond to concepts associated with suffering, and death. 
-In this sense, these words reflect widely shared social understandings of what counts as positive or negative emotion. Emotional meaning is shaped by cultural norms, historical context and perspectives. The strong agreement around words such as ‘suicice”, “rape”, and “murder” suggest that these words show little disagreement, meaning most people agree they are strongly negative. Moreover, they are embedded in moral and legal frameworks that shape how people are expected to evaluate them. It reflects both shared emotional response and what social norms consider harmful and tragic. Thus, the dataset captures a particular social consensus rather than an objective and universal definition of emotion.
-
-
 1. Hedonometer: Quantitative and Qualitative Exploration
 
 This group project investigates the **labMT 1.0** “hedonometer” dataset, which attribute happiness scores to words based on ratings from Amazon Mechanical Turk participants. Using data analytic methods, we examine the statistical distribution of word happiness and scores and explore how language can mirror emotional patterns. By grounding quantitative and qualitative ways of exploration of the Hedonometer in our project, we investigate how sentiment is measured and what kind of limitations this dataset may undergo.
 
 2. Dataset section
-
+   
   – where it came from
   – what each column means (data dictionary)
   
-  **Data dictionary (per column)**
+**Load, Clean, and Describe the dataset**
+The dataset was loaded using pd.read_cvs, the tab separation is specified (sep=”/t”) and the first three metadata lines are skipped (skiprows=3). To prevent parsing errors, all columns were read as strings. Replacing -- with just empty space and converting all numeric columns to floating point values for statistical analysis. All words were converted to lowercase to ensure consistency. 
+Furthermore, the data set contains 10222 rows and 8 columns. The missing rank value (--) indicates that the word does not appear among the top 5000 most frequent words google, twitter, etc.
+  
+**Data dictionary (per column)**
    - word: A specific word from the dataset. The data type object of this column is a string. No words are missing by default.
    - happiness_rank: The rank order of the word based on its average happiness rate. The data type object of this column is a 64-bit float. No happiness ranks were missing, meaning that each word had a happiness rank assigned.
    - happiness_average: The average happiness rate based on the ratings given by 50 independent respondents on a scale of 1 to 9. The data type object of this column is a 64-bit float. No average rates were missing, meaning each word had an average happiness rate assigned.
@@ -29,9 +21,14 @@ This group project investigates the **labMT 1.0** “hedonometer” dataset, whi
    - nyt_rank: The rank order of the word based on how many times it showed up in the top 5000 of words in a corpus of New York Times articles. The data type object of this column is a 64-bit float. 5222 words in total were missing from the top 5000 of words in the corpus of New York Times articles.
    - lyrics_rank: The rank order of the word based on how many times it showed up in the top 5000 of words in a corpus of music lyrics. The data type object of this column is a 64-bit float. 5222 words in total were missing from the top 5000 of words in the corpus of music lyrics.
 
+**Sanity Checks**
+I first checked if the word column contains unique entries, ensuring that no duplicate words appear. This confirms that each word has a single associated happiness score. Second, I inspected a random sample of 15 rows to confirm that the dataset was correctly loaded and cleaned, and that numeric values were converted properly. 
+
+Top 10 most positive and top 10 most negative words based on their average happiness scores were identified. Many positive words align with positive emotions such as love, and joy, while most negative words correspond to concepts associated with suffering, and death. 
+In this sense, these words reflect widely shared social understandings of what counts as positive or negative emotion. Emotional meaning is shaped by cultural norms, historical context and perspectives. The strong agreement around words such as ‘suicice”, “rape”, and “murder” suggest that these words show little disagreement, meaning most people agree they are strongly negative. Moreover, they are embedded in moral and legal frameworks that shape how people are expected to evaluate them. It reflects both shared emotional response and what social norms consider harmful and tragic. Thus, the dataset captures a particular social consensus rather than an objective and universal definition of emotion.
 
 3. Methods section (what you did in Python)
-4. Results section
+4.  Results section
   – plots + captions
   – interpretation in plain language
 
@@ -108,7 +105,7 @@ Finally, I would track changes over time by updating the dataset regularly to ca
   
 8. Credits
 
- Team Roles
+  **Team Roles**
 
 - Repo & workflow lead - Roos
 - Data wrangler - Leo
@@ -117,7 +114,7 @@ Finally, I would track changes over time by updating the dataset regularly to ca
 - Provenance & critique lead - Alessia
 - Editor & figure curator - Oskaras
 
-Citation (citation for the paper / dataset)
+  **Citation** (citation for the paper / dataset)
 
 Dodds, Peter Sheridan, Kameron Decker Harris, Isabel M. Kloumann, Catherine A. Bliss, and Christopher M. Danforth. "Temporal patterns of happiness and information in a global social network: Hedonometrics and Twitter." PloS one 6, no. 12 (2011): e26752.
 
