@@ -29,6 +29,10 @@ First, the word column was checked for unique entries, ensuring that no duplicat
 Top 10 most positive and top 10 most negative words based on their average happiness scores were identified. Many positive words align with positive emotions such as happiness and love, while most negative words correspond to concepts associated with suffering and death. 
 In this sense, these words reflect widely shared social understandings of what counts as positive or negative emotions. Emotional meaning is shaped by cultural norms, historical context and perspectives. The strong agreement around words such as “suicice”, “rape”, and “murder” suggest that these words show little disagreement, meaning most people agree they are strongly negative. Moreover, they are embedded in moral and legal frameworks that shape how people are expected to evaluate them. It reflects both shared emotional response and what social norms consider harmful and tragic. Thus, the dataset captures a particular social consensus rather than an objective and universal definition of emotion.  
 
+### Processing the dataset  
+  
+Multiple dataframes were created to extract the distribution of the happiness scores, the 15 most contested words, the overlap between words in the corpora, and words that occur on Twitter but do not occur in the New York Times from the dataset, as well as an exhibit of the five most positive, five most negative, five highly contested, and five corpus-specific words. The dataframes were converted to CSV files using pandas and printed to tables. Furthermore, Mathplotlib was used to create representational plots of the data and save the plots as PNG files. These plots include a histogram, a bar chart, and two scatterplots.
+
 ## 4.  Results section
 
 ### 2.1 Histogram and data distribution:  
