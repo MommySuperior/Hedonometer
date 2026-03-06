@@ -32,15 +32,19 @@ In this sense, these words reflect widely shared social understandings of what c
 What we can gather from the histogram is a skewed distribution. A majority of words in the graph skew right, indicating a higher overall happiness average per number of words. What we found to be unexpected was the averages which were found in both the 5th and 95th percentiles. The 5th percentile displayed an average of 3.18 which was significantly higher than initially expected. The same goes for the 95th percentile which displayed an average of 7.08 which indicates that the dataset contains words which are more positive than negative.  
   
 ### 2.2 What words are contested:
-1 Capitalism  
+**1. Capitalism**  
 Capitalism presents a very interesting case for a word which is somewhat contested. We can derive a few things from the data as well as through a bit of cultural reasoning. Firstly, the data suggests that capitalism is a word with a slightly positive connotation. We believe this implies that the data set has a bias towards the west. People living in a capitalist country may be more inclined to view the term in a positive light.  
-2 Porn  
+  
+**2. Porn**  
 Porn is a taboo word which presents with a happiness rating of 4.18, this implies that people more than less believe the concept of porn to be negative. It brings up interesting societal implications with porn being a media object which is consumed by many worldwide, the term and action of consuming pornography still remains taboo when discussed on the internet. Importantly to note the word was scrapped from twitter, which is a platform which both criticizes and hosts pornographic material.  
-3 Churches  
+  
+**3. Churches**  
 Churches is also an interesting word due to its societal connotations. Generally churches are seen to be a safe, common place of worship in western society however, the word can also have some negative meanings in some circumstances. Especially on the internet, churches can be seen as a symbol of oppression and indoctrination to some. The corpus it comes from (Google Books) suggests that the data set included both books with a relative positive as well as negative connotations.  
-4 Fucking (and variations)  
+  
+**4. Fucking (and variations)**  
 Fucking and its many variations is a word with many purpose. From its original meaning, its use in slang phrases as well as an intensifier for certain adjectives, it has become ubiquitous in online and even everyday vernacular. Due to the many situations and circumstances which the word finds itself used in, it is no surprise that the word is highly contested.  
-5 Mortality  
+  
+**5. Mortality**  
 Mortality, despite being overall a negative concept, is one which is found to be contested in our dataset. This could be for a plethora of reasons however, the most simple explanation is that the word was found in contexts both positive and negative. The corpus for the word was collected from Google books, which can somewhat explain the contested word with books varying in their descriptions of mortality.  
   
 ### 2.3 Plots, Diagrams and further reasoning:  
@@ -76,43 +80,43 @@ The labMT dataset was created through several steps:
 
  5. **Final compilation**: The dataset combines happiness scores with frequency information for 10,222 words.
 
-### 6.2 Consequences and Limitations: Five Critical Design Choices
-**1: Rating words without context**
-- **The choice**: People rated words alone, without sentences.
-- **The consequence**: This misses how meaning changes with context. Words with multiple meanings get forced into one score.
-- **Example**: "Grand" (7.06, σ=1.3614) can mean "magnificent" (positive) or "a thousand dollars" (neutral). The higher standard deviation (compared to "love" at 1.1082) shows raters disagreed, likely because they imagined different contexts.
-
-**2: Using a simple 1-9 scale**
-- **The choice**: Happiness measured as one number from 1-9.
-- **The consequence**: This oversimplifies emotions. Fear, anger, and sadness all become just "unhappy."
-- **Example**: From your random sample, "suicide" (1.3), "cancer" (1.54), "died" (1.56), and "kill" (1.56) all cluster together despite representing completely different experiences, self-death, disease, loss, and violence. The scale can't tell them apart.
-
-**3: Who did the ratings**
-- **The choice**: Ratings came from anonymous MTurk workers, who are mostly U.S.-based, English-speaking, and relatively young.
-- **The consequence**: The dataset reflects one demographic's feelings, not universal emotion.
-- **Example**: "Naval" (5.48) appears neutral, but might carry specific emotional weight for veterans or military families that the dataset misses. "Lit" (5.64) scores neutral, suggesting raters didn't strongly associate it with its positive slang meaning.
-
-**4: The "top 5000" corpus cutoff**
-- **The choice**: Words only ranked if they were among the top 5,000 most frequent in each source.
-- **The consequence**: This creates gaps that hide how language differs across domains.
-- **Example**: "Prom" (5.94) appears in Twitter (rank 4876) but is missing from Google Books, NYT, and lyrics. This makes sense, people tweet about prom, but it rarely appears in serious writing. But the cutoff means we can't see where "prom" would rank in books (maybe 8,000). "Mis" appears in Twitter and lyrics but not in formal writing, showing how abbreviations live in casual contexts.
-
-**5: A snapshot instead of an ongoing picture**
-- **The choice**: The dataset was created at one point in time.
-- **The consequence**: Language evolves, new words appear, meanings shift, but the dataset can't capture this.
-- **Example**: "Wen" (4.8) appears only in Twitter. Today this might be a misspelling of "when" in texting slang. A 2024 dataset might show different patterns. Words that emerged after the dataset (like "COVID" or "doomscrolling") aren't included at all.
-
-### 6.3 Instrument Note: Using This Dataset Today
-**What I would trust this dataset to measure well:**
+### 6.2 Consequences and Limitations: Five Critical Design Choices  
+**1: Rating words without context**  
+- **The choice**: People rated words alone, without sentences.  
+- **The consequence**: This misses how meaning changes with context. Words with multiple meanings get forced into one score.  
+- **Example**: "Grand" (7.06, σ=1.3614) can mean "magnificent" (positive) or "a thousand dollars" (neutral). The higher standard deviation (compared to "love" at 1.1082) shows raters disagreed, likely because they imagined different contexts.  
+  
+**2: Using a simple 1-9 scale**  
+- **The choice**: Happiness measured as one number from 1-9.  
+- **The consequence**: This oversimplifies emotions. Fear, anger, and sadness all become just "unhappy."  
+- **Example**: From your random sample, "suicide" (1.3), "cancer" (1.54), "died" (1.56), and "kill" (1.56) all cluster together despite representing completely different experiences, self-death, disease, loss, and violence. The scale can't tell them apart.  
+  
+**3: Who did the ratings**  
+- **The choice**: Ratings came from anonymous MTurk workers, who are mostly U.S.-based, English-speaking, and relatively young.  
+- **The consequence**: The dataset reflects one demographic's feelings, not universal emotion.  
+- **Example**: "Naval" (5.48) appears neutral, but might carry specific emotional weight for veterans or military families that the dataset misses. "Lit" (5.64) scores neutral, suggesting raters didn't strongly associate it with its positive slang meaning.  
+  
+**4: The "top 5000" corpus cutoff**  
+- **The choice**: Words only ranked if they were among the top 5,000 most frequent in each source.  
+- **The consequence**: This creates gaps that hide how language differs across domains.  
+- **Example**: "Prom" (5.94) appears in Twitter (rank 4876) but is missing from Google Books, NYT, and lyrics. This makes sense, people tweet about prom, but it rarely appears in serious writing. But the cutoff means we can't see where "prom" would rank in books (maybe 8,000). "Mis" appears in Twitter and lyrics but not in formal writing, showing how abbreviations live in casual contexts.  
+  
+**5: A snapshot instead of an ongoing picture**  
+- **The choice**: The dataset was created at one point in time.  
+- **The consequence**: Language evolves, new words appear, meanings shift, but the dataset can't capture this.  
+- **Example**: "Wen" (4.8) appears only in Twitter. Today this might be a misspelling of "when" in texting slang. A 2024 dataset might show different patterns. Words that emerged after the dataset (like "COVID" or "doomscrolling") aren't included at all.  
+  
+### 6.3 Instrument Note: Using This Dataset Today  
+**What I would trust this dataset to measure well:**  
 This dataset reliably captures broad, mainstream emotional associations for common English words as seen by a specific demographic (mostly U.S. English speakers) in the early 2010s. It excels at finding words with strong emotional consensus, your top 10 positives like "laughter" (8.5, σ=0.9313) and "happiness" (8.44, σ=0.9723) show strong agreement, as do your random sample negatives like "suicide" (1.3, σ=0.8391) and "rape" (1.44, σ=0.7866). The extremely low standard deviations here suggest these evaluations are deeply embedded in shared cultural values.
 The frequency rankings usefully show how language differs across domains. "On" appears in all four corpora with very high frequency, confirming function words are stable. But "friendship" appears in all four with varying ranks, showing it's universally discussed but more common in books than tweets. "Naval" appears only in Google Books and NYT, a word that belongs to formal discourse.
 
-**What I would NOT claim based on it:**
+**What I would NOT claim based on it:**  
 I would not claim this dataset measures "universal" emotional meaning. The scores can't tell us how words actually make people feel in real life, only how isolated words were rated in an artificial task. I would avoid using it for claims about non-English languages, non-Western cultures, or communities different from the MTurk raters.
 The dataset also can't capture emotional nuance. Looking at your random sample, "suicide" (1.3), "cancer" (1.54), "died" (1.56), and "kill" (1.56) all cluster together despite being fundamentally different experiences, grief, fear, loss, violence. The scale treats them as almost the same.
 I would also avoid treating missing corpus ranks as evidence that words don't exist in that domain. "Prom" missing from Google Books doesn't mean it never appears in books, just that it's not in the top 5,000. It might be at rank 8,000, but the cutoff hides this.
 
-**How I would improve it:**
+**How I would improve it:**  
 First, I would show words in context by presenting them in example sentences, so raters respond to actual usage. This would reduce the "multiple meanings" problem seen with words like "grand" (7.06, σ=1.3614).
 Second, I would diversify the rater pool and collect demographic information, allowing analysis of how emotional associations vary by age, region, and background. Words like "prom" (5.94) might mean different things to teenagers versus adults.
 Third, I would expand beyond the 1-9 scale by asking raters to select emotion categories (joy, fear, anger, sadness) alongside the happiness score. This would distinguish between different kinds of negative emotions instead of lumping them all as "unhappy."
