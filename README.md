@@ -165,5 +165,4 @@ Finally, I would track changes over time by updating the dataset regularly to ca
 Peter Sheridan Dodds, Kameron Decker Harris, Isabel M. Kloumann, Catherine A. Bliss, & Christopher M. Danforth (2011). Temporal Patterns of Happiness and Information in a Global Social Network: Hedonometrics and Twitter. PLoS ONE 6(12): e26752.
 
 ## 9. AI-use disclosure  
-We used UvA AI Chat for (1) ... and (2) ... and ... .
-We reviewed and edited all suggestions, ran the script end-to-end, and verified outputs on sample inputs. Final work is my responsibility.
+We used UvA AI Chat and ChatGPT for (1) interpreting tracebacks and DeepSeek for (2) clarification of the assignment steps. We reviewed and edited all suggestions, ran the script end-to-end, and verified outputs on sample inputs. Final work is our responsibility.
