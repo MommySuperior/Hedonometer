@@ -35,13 +35,13 @@ Multiple dataframes were created to extract the distribution of the happiness sc
 
 ## 4.  Results section
 
-### 2.1 Histogram and data distribution:  
+### Histogram and data distribution:  
 What we can gather from the histogram (see fig. 1) is a skewed distribution. A majority of words in the graph skew right, indicating a higher overall happiness average per number of words. What we found to be unexpected was the averages which were found in both the 5th and 95th percentiles. The 5th percentile displayed an average of 3.18 which was significantly higher than initially expected. The same goes for the 95th percentile which displayed an average of 7.08 which indicates that the dataset contains words which are more positive than negative.  
 
 ![Image](https://github.com/MommySuperior/Hedonometer/blob/main/output/figures/happiness_average_hist.png "Average Happiness, Histogram")  
 *Figure 1: Histogram representing average happiness distribution amongst number of words.*  
   
-### 2.2 What words are contested:  
+### What words are contested:  
 **1. Capitalism**  
 Capitalism presents a very interesting case for a word which is somewhat contested. We can derive a few things from the data as well as through a bit of cultural reasoning. Firstly, the data suggests that capitalism is a word with a slightly positive connotation. We believe this implies that the data set has a bias towards the west. People living in a capitalist country may be more inclined to view the term in a positive light.  
   
@@ -60,7 +60,7 @@ Mortality, despite being overall a negative concept, is one which is found to be
 ![image](https://github.com/MommySuperior/Hedonometer/blob/main/output/figures/happiness_vs_std_scatter.png "Disagreement vs Score, Scatterplot")  
 *Figure 2: Scatterplot comparing average happiness rating and standard deviation.*  
   
-### 2.3 Plots, Diagrams and further reasoning:  
+### Plots, Diagrams and further reasoning:  
 In addition to the other plots created, an additional bar chart (see fig. 3) as well as scatter plot (see fig. 4) were made in order to further our understanding of the dataset. Firstly, The bar chart is able to visualize how many LabMT words make it into the top 5000 of the dataset from each corpus. The graph shows that indeed all of the LabMT words did in fact make it into the top 5000. In addition to this the scatter plot was made in order to show words present in the Twitter corpus and overlapping with the New York Times corpus. This scatter plot provided some deeper insights, for example it provided us with a clear distribution of words which centralized at the origin and spread out as words became unique to the corpus. This is valuable because it tells us that there were in fact certain words which did not appear in one corpus but had in the other. Some words which fit this description includes platform vernacular present on Twitter, such as rt (an abbreviation for re-tweet), lol, haha, ya, wanna, damn as well as other more informal words which would typically be found in Twitter posts, yet would be absent in New York Times articles. Another interesting set of words which were unique to Twitter were various foreign words such as que (the word for what in spanish) and da (the word for yes in russian, romanian as well as other languages) which match up with other affirming words like yeah, ok and ya on the platform.
   
 ![image](https://github.com/MommySuperior/Hedonometer/blob/main/output/figures/corpus_rank_coverage_bar.png "Words per Corpus Top 5000, Bar")  
@@ -80,7 +80,7 @@ The weird/corpus-specific set- beloved, survived, chorus, Wednesday, and sorry s
 
 ## 6. Critical Reflection: How was this dataset generated and why does it matter?
 
-### 6.1 Reconstructing the Pipeline (Data Provenance)
+### Reconstructing the Pipeline (Data Provenance)
 
 The labMT dataset was created through several steps:
 1. **Word selection**: Researchers compiled 10,222 common English words.
@@ -99,7 +99,7 @@ The labMT dataset was created through several steps:
 
  5. **Final compilation**: The dataset combines happiness scores with frequency information for 10,222 words.
 
-### 6.2 Consequences and Limitations: Five Critical Design Choices  
+### Consequences and Limitations: Five Critical Design Choices  
 **1: Rating words without context**  
 - **The choice**: People rated words alone, without sentences.  
 - **The consequence**: This misses how meaning changes with context. Words with multiple meanings get forced into one score.  
@@ -125,7 +125,7 @@ The labMT dataset was created through several steps:
 - **The consequence**: Language evolves, new words appear, meanings shift, but the dataset can't capture this.  
 - **Example**: "Wen" (4.8) appears only in Twitter. Today this might be a misspelling of "when" in texting slang. A 2024 dataset might show different patterns. Words that emerged after the dataset (like "COVID" or "doomscrolling") aren't included at all.  
   
-### 6.3 Instrument Note: Using This Dataset Today  
+### Instrument Note: Using This Dataset Today  
 **What I would trust this dataset to measure well:**  
 This dataset reliably captures broad, mainstream emotional associations for common English words as seen by a specific demographic (mostly U.S. English speakers) in the early 2010s. It excels at finding words with strong emotional consensus, your top 10 positives like "laughter" (8.5, σ=0.9313) and "happiness" (8.44, σ=0.9723) show strong agreement, as do your random sample negatives like "suicide" (1.3, σ=0.8391) and "rape" (1.44, σ=0.7866). The extremely low standard deviations here suggest these evaluations are deeply embedded in shared cultural values.
 The frequency rankings usefully show how language differs across domains. "On" appears in all four corpora with very high frequency, confirming function words are stable. But "friendship" appears in all four with varying ranks, showing it's universally discussed but more common in books than tweets. "Naval" appears only in Google Books and NYT, a word that belongs to formal discourse.
