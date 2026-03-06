@@ -31,8 +31,8 @@ In this sense, these words reflect widely shared social understandings of what c
 ### 2.1 Histogram and data distribution:  
 What we can gather from the histogram (see fig. 1) is a skewed distribution. A majority of words in the graph skew right, indicating a higher overall happiness average per number of words. What we found to be unexpected was the averages which were found in both the 5th and 95th percentiles. The 5th percentile displayed an average of 3.18 which was significantly higher than initially expected. The same goes for the 95th percentile which displayed an average of 7.08 which indicates that the dataset contains words which are more positive than negative.  
 
-![Image](https://github.com/MommySuperior/Hedonometer/blob/main/output/figures/happiness_average_hist.png "Average Happiness, Histogram")
-*Figure 1: Histogram representing average happiness distribution amongst number of words.*
+![Image](https://github.com/MommySuperior/Hedonometer/blob/main/output/figures/happiness_average_hist.png "Average Happiness, Histogram")  
+*Figure 1: Histogram representing average happiness distribution amongst number of words.*  
   
 ### 2.2 What words are contested:  
 **1. Capitalism**  
@@ -49,19 +49,19 @@ Fucking and its many variations is a word with many purpose. From its original m
   
 **5. Mortality**  
 Mortality, despite being overall a negative concept, is one which is found to be contested in our dataset. This could be for a plethora of reasons however, the most simple explanation is that the word was found in contexts both positive and negative. The corpus for the word was collected from Google books, which can somewhat explain the contested word with books varying in their descriptions of mortality.  
-
-![image](https://github.com/MommySuperior/Hedonometer/blob/main/output/figures/happiness_vs_std_scatter.png "Disagreement vs Score, Scatterplot")
-*Figure 2: Scatterplot comparing average happiness rating and standard deviation.*
+  
+![image](https://github.com/MommySuperior/Hedonometer/blob/main/output/figures/happiness_vs_std_scatter.png "Disagreement vs Score, Scatterplot")  
+*Figure 2: Scatterplot comparing average happiness rating and standard deviation.*  
   
 ### 2.3 Plots, Diagrams and further reasoning:  
 In addition to the other plots created, an additional bar chart (see fig. 3) as well as scatter plot (see fig. 4) were made in order to further our understanding of the dataset. Firstly, The bar chart is able to visualize how many LabMT words make it into the top 5000 of the dataset from each corpus. The graph shows that indeed all of the LabMT words did in fact make it into the top 5000. In addition to this the scatter plot was made in order to show words present in the Twitter corpus and overlapping with the New York Times corpus. This scatter plot provided some deeper insights, for example it provided us with a clear distribution of words which centralized at the origin and spread out as words became unique to the corpus. This is valuable because it tells us that there were in fact certain words which did not appear in one corpus but had in the other. Some words which fit this description includes platform vernacular present on Twitter, such as rt (an abbreviation for re-tweet), lol, haha, ya, wanna, damn as well as other more informal words which would typically be found in Twitter posts, yet would be absent in New York Times articles. Another interesting set of words which were unique to Twitter were various foreign words such as que (the word for what in spanish) and da (the word for yes in russian, romanian as well as other languages) which match up with other affirming words like yeah, ok and ya on the platform.
+  
+![image](https://github.com/MommySuperior/Hedonometer/blob/main/output/figures/corpus_rank_coverage_bar.png "Words per Corpus Top 5000, Bar")  
+*Figure 3: Bar chart representing words per corpus of top 5000 words.*  
 
-![image](https://github.com/MommySuperior/Hedonometer/blob/main/output/figures/corpus_rank_coverage_bar.png "Words per Corpus Top 5000, Bar")
-*Figure 3: Bar chart representing words per corpus of top 5000 words.*
-
-![image](https://github.com/MommySuperior/Hedonometer/blob/main/output/figures/twitter_rank_vs_nyt_rank_scatter.png "Twitter vs NYT rank, Scatterplot")
-*Figure 4: Scatterplot representing ranks of common words in Twitter posts and New York Times articles.* 
-
+![image](https://github.com/MommySuperior/Hedonometer/blob/main/output/figures/twitter_rank_vs_nyt_rank_scatter.png "Twitter vs NYT rank, Scatterplot")  
+*Figure 4: Scatterplot representing ranks of common words in Twitter posts and New York Times articles.*  
+  
 ## 5. Qualitative “exhibit” of words  
 The qualitative exploration exhibit shows four different “types” of feeling words and explains why the lexicon can’t be seen as completely objective. For example, the very positive set which includes words such as laughter (8.50), happiness (8.44), love (8.42), glad (8.30), and laughed (8.26) scores highly because these terms clearly name pleasant emotions or joyful expressions and are socially acknowledged as desirable states. Their standard deviations are rather low (between 0.93 and 1.16), which means that the raters mostly agree: these words are frequently seen as positive even without any context. The corpus ranks also suggest that there are distinctions between genres. For example, love is particularly common in expressive settings like Twitter and song lyrics, but words like laughter, laughed are less common across corpora, which suggests that they are not equally important to all types of writing.  
   
