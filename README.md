@@ -35,13 +35,13 @@ Multiple dataframes were created to extract the distribution of the happiness sc
 
 ## 4.  Results section
 
-### Histogram and data distribution:  
+### Histogram and data distribution  
 What we can gather from the histogram (see fig. 1) is a skewed distribution. A majority of words in the graph skew right, indicating a higher overall happiness average per number of words. What we found to be unexpected was the averages which were found in both the 5th and 95th percentiles. The 5th percentile displayed an average of 3.18 which was significantly higher than initially expected. The same goes for the 95th percentile which displayed an average of 7.08 which indicates that the dataset contains words which are more positive than negative.  
 
 ![Image](https://github.com/MommySuperior/Hedonometer/blob/main/output/figures/happiness_average_hist.png "Average Happiness, Histogram")  
 *Figure 1: Histogram representing average happiness distribution amongst number of words.*  
   
-### What words are contested:  
+### What words are contested  
 **1. Capitalism**  
 Capitalism presents a very interesting case for a word which is somewhat contested. We can derive a few things from the data as well as through a bit of cultural reasoning. Firstly, the data suggests that capitalism is a word with a slightly positive connotation. We believe this implies that the data set has a bias towards the west. People living in a capitalist country may be more inclined to view the term in a positive light.  
   
@@ -60,7 +60,7 @@ Mortality, despite being overall a negative concept, is one which is found to be
 ![image](https://github.com/MommySuperior/Hedonometer/blob/main/output/figures/happiness_vs_std_scatter.png "Disagreement vs Score, Scatterplot")  
 *Figure 2: Scatterplot comparing average happiness rating and standard deviation.*  
   
-### Plots, Diagrams and further reasoning:  
+### Plots, Diagrams and further reasoning  
 In addition to the other plots created, an additional bar chart (see fig. 3) as well as scatter plot (see fig. 4) were made in order to further our understanding of the dataset. Firstly, The bar chart is able to visualize how many LabMT words make it into the top 5000 of the dataset from each corpus. The graph shows that indeed all of the LabMT words did in fact make it into the top 5000. In addition to this the scatter plot was made in order to show words present in the Twitter corpus and overlapping with the New York Times corpus. This scatter plot provided some deeper insights, for example it provided us with a clear distribution of words which centralized at the origin and spread out as words became unique to the corpus. This is valuable because it tells us that there were in fact certain words which did not appear in one corpus but had in the other. Some words which fit this description includes platform vernacular present on Twitter, such as rt (an abbreviation for re-tweet), lol, haha, ya, wanna, damn as well as other more informal words which would typically be found in Twitter posts, yet would be absent in New York Times articles. Another interesting set of words which were unique to Twitter were various foreign words such as que (the word for what in spanish) and da (the word for yes in russian, romanian as well as other languages) which match up with other affirming words like yeah, ok and ya on the platform.
   
 ![image](https://github.com/MommySuperior/Hedonometer/blob/main/output/figures/corpus_rank_coverage_bar.png "Words per Corpus Top 5000, Bar")  
