@@ -30,6 +30,8 @@ In this sense, these words reflect widely shared social understandings of what c
 
 ### 2.1 Histogram and data distribution:  
 What we can gather from the histogram is a skewed distribution. A majority of words in the graph skew right, indicating a higher overall happiness average per number of words. What we found to be unexpected was the averages which were found in both the 5th and 95th percentiles. The 5th percentile displayed an average of 3.18 which was significantly higher than initially expected. The same goes for the 95th percentile which displayed an average of 7.08 which indicates that the dataset contains words which are more positive than negative.  
+
+![Image](https://github.com/MommySuperior/Hedonometer/blob/main/output/figures/happiness_average_hist.png "Histogram")
   
 ### 2.2 What words are contested:
 **1. Capitalism**  
