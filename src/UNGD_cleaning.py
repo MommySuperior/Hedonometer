@@ -2,8 +2,52 @@ import pandas as pd
 import numpy as np
 from pathlib import Path
 import matplotlib.pyplot as plt
+import shutil as sh
 
-___ = Path(__file__).resolve().parent
-ROOT = ___.parent
+raw = Path(__file__).parent.parent / "data" / "raw" / "TXT"
+out = Path(__file__).parent.parent / "data" / "processed"
 
+out.mkdir(parents=True, exist_ok=True)
+print(f"Converting sessions 55-80 from {raw} to CSV")
 
+folders = []
+for f in raw.iterdir():
+    if f.is_dir() and not f.name.startswith('._'):
+        folders.append(f)
+
+converted = []
+not_found = []
+
+for num in range(55, 81):
+    print(f"\nSession {num}:")
+
+    found = None
+    for f in folders:
+        if f.name.startswith(f"Session {num} -"):
+            found = f
+            break
+
+    if not found:
+            print(f"  Not found")
+            not_found.append(num)
+
+    out_folder = out / found.name
+    out_folder.mkdir(exist_ok=True)
+
+    count = 0
+    for file in found.iterdir():
+        if file.suffix == '.txt' and not file.name.startswith('._'):
+            dest_file = out_folder / (file.stem + '.txt')
+            #try:
+            #df = pd.read_csv(file, sep=' ', engine='python')
+            #df.to_csv(csv_file, sep='=', index=False) # csvs use semicolons instead of commas
+            #count += 1
+            #print(f"  Converted: {file.name} -> {csv_file.name}")
+            #except:
+            #    print(f"  Error: Could not convert {file.name}")
+            result= sh.copy2(file, dest_file)
+            print(result)
+
+    #if count > 0:
+    #    converted.append(found.name)
+    #    print(f" Done: {count} files converted")
