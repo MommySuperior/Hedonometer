@@ -8,7 +8,7 @@ raw = Path(__file__).parent.parent / "data" / "raw" / "TXT"
 out = Path(__file__).parent.parent / "data" / "raw" / "range"
 
 out.mkdir(parents=True, exist_ok=True)
-print(f"Converting sessions 55-80 from {raw} to CSV")
+print(f"Converting sessions 71-80 from {raw} to CSV")
 
 folders = []
 for f in raw.iterdir():
@@ -18,7 +18,7 @@ for f in raw.iterdir():
 converted = []
 not_found = []
 
-for num in range(55, 81):
+for num in range(71, 81):
     print(f"\nSession {num}:")
 
     found = None
