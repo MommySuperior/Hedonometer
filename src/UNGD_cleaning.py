@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import shutil as sh
 
 raw = Path(__file__).parent.parent / "data" / "raw" / "TXT"
-out = Path(__file__).parent.parent / "data" / "processed"
+out = Path(__file__).parent.parent / "data" / "raw" / "range"
 
 out.mkdir(parents=True, exist_ok=True)
 print(f"Converting sessions 55-80 from {raw} to CSV")
