@@ -51,3 +51,41 @@ for num in range(71, 81):
     #if count > 0:
     #    converted.append(found.name)
     #    print(f" Done: {count} files converted")
+
+raw_range = out
+
+labmt_clean = Path(__file__).parent.parent / "data" / "processed" / "Data_Set_S1_clean.csv"
+labmt_df = pd.read_csv(labmt_clean)
+labmt_dict = dict(zip(labmt_df["word"], labmt_df["happiness_average"]))
+labmt_words = set(labmt_dict.keys())
+
+# function to tokenize and clean txt, not tested yet
+PUNCT = ".,;:?!/()&$"
+def tok_clean(txt):
+     txt = txt.strip().lower()
+     for ch in PUNCT:
+          txt = txt.replace(ch, "")
+     return txt.split()
+
+# iteration loop UNGD raw_range
+UNGD_rows = []
+for txt_file in raw_range.rglob("*.txt"):
+    name = txt_file.stem  # removes .txt
+    country, session, year = name.split("_") 
+
+    text = txt_file.read_text(encoding="utf-8")
+    tokens = tok_clean(text)
+
+    for token in tokens:
+         if token in labmt_words:
+                UNGD_rows.append({
+                "year": year,
+                "country": country,
+                "session": session,
+                "word": token,
+                "happiness_average": labmt_dict[token]
+            })
+
+df = pd.DataFrame(UNGD_rows)
+df.to_csv("data/processed/UNGD_happiness.csv", index=False)
+ 
