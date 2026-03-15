@@ -8,35 +8,37 @@ raw = Path(__file__).parent.parent / "data" / "raw" / "TXT"
 out = Path(__file__).parent.parent / "data" / "raw" / "range"
 
 out.mkdir(parents=True, exist_ok=True)
-print(f"Converting sessions 71-80 from {raw} to CSV")
+print(f"Converting sessions 1-80 from {raw} to CSV")
 
 folders = []
-for f in raw.iterdir():
-    if f.is_dir() and not f.name.startswith('._'):
-        folders.append(f)
+for file in raw.iterdir():
+    if file.is_dir() and not file.name.startswith("."):
+        folders.append(file)
 
 converted = []
 not_found = []
 
-for num in range(71, 81):
+for num in range(1, 81):
+    num = str(num).zfill(2)
     print(f"\nSession {num}:")
 
     found = None
-    for f in folders:
-        if f.name.startswith(f"Session {num} -"):
-            found = f
+    for file in folders:
+        if file.name.startswith(f"Session {num} -"):
+            found = file
             break
 
     if not found:
             print(f"  Not found")
             not_found.append(num)
+            continue
 
     out_folder = out / found.name
     out_folder.mkdir(exist_ok=True)
 
     count = 0
     for file in found.iterdir():
-        if file.suffix == '.txt' and not file.name.startswith('._'):
+        if file.suffix == '.txt' and not file.name.startswith('.'):
             dest_file = out_folder / (file.stem + '.txt')
             #try:
             #df = pd.read_csv(file, sep=' ', engine='python')
@@ -76,15 +78,19 @@ for txt_file in raw_range.rglob("*.txt"):
     text = txt_file.read_text(encoding="utf-8")
     tokens = tok_clean(text)
 
+    scores = []
+
     for token in tokens:
          if token in labmt_words:
-                UNGD_rows.append({
-                "year": year,
-                "country": country,
-                "session": session,
-                "word": token,
-                "happiness_average": labmt_dict[token]
-            })
+                scores.append(labmt_dict[token])
+    avg_score = np.mean(scores)
+
+    UNGD_rows.append({
+    "year": year,
+    "country": country,
+    "session": session,
+    "happiness_average": avg_score
+    })
 
 df = pd.DataFrame(UNGD_rows)
 df.to_csv("data/processed/UNGD_happiness.csv", index=False)
