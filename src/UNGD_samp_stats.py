@@ -5,6 +5,8 @@ import matplotlib.pyplot as plt
 import shutil as sh
 
 UNGD_happiness = Path(__file__).parent.parent / "data" / "processed" / "UNGD_happiness.csv"
+UNGD_pre_covid = Path(__file__).parent.parent / "data" / "processed" / "UNGD_pre_covid.csv"
+UNGD_post_covid = Path(__file__).parent.parent / "data" / "processed" / "UNGD_post_covid.csv"
 
 #function which automatically does bootstraping, for example see use below
 nboot = 1000 #change value of itterations
@@ -65,4 +67,3 @@ plt.hist(summary_bootstrap, bins=50)
 plt.tight_layout()
 plt.savefig("Hedonometer/output/figures/UNGD_summary_bootstrap.png")
 plt.close()
-
