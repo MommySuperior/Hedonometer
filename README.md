@@ -197,8 +197,7 @@ First, we used the script to set the locations of the raw data and the processed
 Inside each session folder, the script found all .txt sub-files and copied them into the processed folder using shutil.copy2. we researched multiple ways to execute this action and we even asked friends that studied coding before and this was the easiest way for us to comprehend how to apply this function, so later in the script we went to the first lines and added on line 5 “import shutil as sh”. This keeps the original files unchanged and also preserves their metadata.  
   
 Originally, the script was meant to convert the .txt files into .csv files using pandas, but that part is currently commented out. For now, the script mainly organizes and copies the dataset files so they are ready for later analysis. I tried to execute this part as well, but when it read the script it only converted certain files into .csv, not all of them. We realized later that this might be a problem from the dataset, because after opening multiple files to try and figure out how were they different we realized they had different characters separating the lines.   
-
-
+  
 ### Pre- and Post-COVID Happiness Comparison in UN General Debate Speeches
 The script loads the relevant datasets and focuses on speeches delivered between 2015 and 2025. The data are separated into two groups: a pre-COVID period (2015–2019) and a post-COVID period (2020–2025). Before we compare, we made sure that the code checks that the datasets contain the expected years and that the number of speeches per year is reasonable. These checks help confirm that the data have been filtered correctly and that the comparison between the two periods is valid.
 
@@ -206,5 +205,19 @@ To summarize the data, the script calculates several descriptive statistics for 
 
 The main quantity of interest is the difference in mean happiness between post-COVID and pre-COVID speeches, defined as mean(post-COVID) minus mean(pre-COVID). To ensure that the results are not driven by extreme values, a robustness check is performed using the median happiness score instead of the mean. The similarity between the mean and median comparisons suggests that the overall result is stable and not sensitive to outliers.
 
-Finally, the summary statistics are organized into a table and exported as a CSV file for use in further analysis and reporting within the project.
+Finally, the summary statistics are organized into a table and exported as a CSV file for use in further analysis and reporting within the project.  
+  
+### Bootstrap sampling  
+  
+We bootstrap sampled the full range of years 2015 to 2024 as well as the pre-COVID and post-COVID groups with 2000 iterations for sufficient accuracy. We chose to use mean rather than median based on statistics conventions for normally distributed data.  
+  
+### Confidence intervals  
+
+We calculated the percentile confidence intervals of both the pre-COVID group and the post-COVID group, as well as the difference between these groups, to measure whether the difference in average happiness for both groups is statistically significant.  
+
+### Visualizations  
+
+We opted to use scatter plots to show the relationship between the data and the standard deviation of the data. This relationship tells us about the spread of the data, normality, as well as the ability to detect outliers in the data. In addition we opted to use histograms to display our data’s pre and post covid happiness scores to compliment the previously mentioned scatter plots. To assess uncertainty as well as the proximity to reality, we bootstrapped the data frames and plotted them as histograms too.  
+  
+
 
