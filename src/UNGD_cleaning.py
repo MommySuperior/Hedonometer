@@ -20,7 +20,7 @@ not_found = []
 
 for num in range(1, 81):
     num = str(num).zfill(2) #this is for sessions 01 to 09, since range() doesn't pick up on zero
-    print(f"\nSession {num}:")
+ #   print(f"\nSession {num}:")
 
     found = None
     for file in folders:
@@ -93,7 +93,7 @@ for txt_file in raw_range.rglob("*.txt"):
     })
 
 df = pd.DataFrame(UNGD_rows)
-df.to_csv("data/processed/UNGD_happiness.csv", index=False)
+#df.to_csv("data/processed/UNGD_happiness.csv", index=False)
 
 UNGD_happiness = Path(__file__).parent.parent / "data" / "processed" / "UNGD_happiness.csv"
 
@@ -101,5 +101,19 @@ df = pd.read_csv(UNGD_happiness)
 pre_covid = df[(df["year"] >= 2015) & (df["year"] <= 2019)]
 post_covid = df[(df["year"] >= 2020) & (df["year"] <= 2025)]
  
-pre_covid.to_csv("data/processed/UNGD_pre_covid.csv", index=False)
-post_covid.to_csv("data/processed/UNGD_post_covid.csv", index=False)
+#pre_covid.to_csv("data/processed/UNGD_pre_covid.csv", index=False)
+#post_covid.to_csv("data/processed/UNGD_post_covid.csv", index=False)
+
+print("UNGD Data dictionary:")
+
+col_dtypes = df.dtypes.astype(str).reset_index()
+col_dtypes.columns = ["column", "dtype"]
+
+missing = df.isna().sum().reset_index()
+missing.columns = ["column", "n_missing"]
+
+
+UNGD_data_dictionary = col_dtypes.merge(missing, on="column")
+
+print(UNGD_data_dictionary.to_string(index=False))
+UNGD_data_dictionary.to_csv("data/processed/UNGD_data_dictionary.csv", index=False)
