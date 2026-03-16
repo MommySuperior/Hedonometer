@@ -165,13 +165,31 @@ Finally, I would track changes over time by updating the dataset regularly to ca
 Peter Sheridan Dodds, Kameron Decker Harris, Isabel M. Kloumann, Catherine A. Bliss, & Christopher M. Danforth (2011). Temporal Patterns of Happiness and Information in a Global Social Network: Hedonometrics and Twitter. PLoS ONE 6(12): e26752.
 
 ## 9. AI-use disclosure  
+
 We used UvA AI Chat and ChatGPT for (1) interpreting tracebacks and DeepSeek for (2) clarification of the assignment steps. We reviewed and edited all suggestions, ran the script end-to-end, and verified outputs on sample inputs. Final work is our responsibility. 
 
 
-## Dataset loading
-For this part I wrote a Python script to load and organize the dataset files. The script looks in the raw data folder that contains the original session files (the files are named „session 1 – 1946”, „...”, „session 80 – 2025” and they all contain sub-files) and extracts and copies them into a processed data folder so they are easier to use later.
+# Inference  
 
+## Dataset
+  
+### UN General Debate
+
+### Data dictionary (per column)  
+   - **year**: The year in which the General Debate statement in the document was delivered. The data type object of this column is a 64-bit integer. No years were missing, meaning each document name contained a year.
+   - **country**: The country that delivered the General Debate statement in the document. The data type object of this column is a string. No country names were missing, meaning each document name contained a country name.
+   - **session**: The United Nations General Assembly session during which the General Debate statement in the document was delivered. The data type object of this column is a 64-bit integer. No session numbers were missing, meaning each document name contained a session number.
+   - **happiness_average**: The average happiness rate for each document based on the mean average happiness rate for all words per document. The average happiness rates of the words are based on the LabMT 1.0 dataset. The data type object of this column is a 64-bit float. No average rates were missing, meaning each document had an average happiness rate assigned.
+   - **happiness_standard_deviation**: The standard deviation of happiness rates per document based on the mean standard deviation for all words per document. The standard deviation of happiness rates is based on the labMT 1.0 dataset. The data type object of this column is a 64-bit float. No standard deviation rates were missing, meaning each document had a standard deviation rate assigned.
+ 
+## Methods section
+  
+### Dataset loading  
+For this part I wrote a Python script to load and organize the dataset files. The script looks in the raw data folder that contains the original session files (the files are named „session 1 – 1946”, „...”, „session 80 – 2025” and they all contain sub-files) and extracts and copies them into a processed data folder so they are easier to use later.  
+  
 First, I used the script to set the locations of the raw data and the processed data folders (using pathlib), into the already made processed data folder. The script then goes through all folders inside the raw data directory and collects the valid session folders while ignoring hidden system files (meaning everything except files (and sub-files) that start with ._). Then, I created a loop to select just the session files that interested us, so the script loops through sessions 55 to 80 (from year 2000 to 2025). For each number, it searches for a folder whose name starts with "Session <number> -". After finding the already existing folder, the script created a matching folder in the processed data directory.
-Inside each session folder, the script found all .txt sub-files and copied them into the processed folder using shutil.copy2. I researched multiple ways to execute this action and I even asked my friends that studied coding before and this was the easiest way for me to comprehend how to apply this function, so later in the script I went to the first lines and added on line 5 “import shutil as sh”. This keeps the original files unchanged and also preserves their metadata.
+Inside each session folder, the script found all .txt sub-files and copied them into the processed folder using shutil.copy2. I researched multiple ways to execute this action and I even asked my friends that studied coding before and this was the easiest way for me to comprehend how to apply this function, so later in the script I went to the first lines and added on line 5 “import shutil as sh”. This keeps the original files unchanged and also preserves their metadata.  
+  
+Originally, the script was meant to convert the .txt files into .csv files using pandas, but that part is currently commented out. For now, the script mainly organizes and copies the dataset files so they are ready for later analysis. I tried to execute this part as well, but when it read the script it only converted certain files into .csv, not all of them. I realized later that this might be a problem from the dataset, because after opening multiple files to try and figure out how were they different I realized they had different characters separating the lines.   
 
-Originally, the script was meant to convert the .txt files into .csv files using pandas, but that part is currently commented out. For now, the script mainly organizes and copies the dataset files so they are ready for later analysis. I tried to execute this part as well, but when it read the script it only converted certain files into .csv, not all of them. I realized later that this might be a problem from the dataset, because after opening multiple files to try and figure out how were they different I realized they had different characters separating the lines. 
+
