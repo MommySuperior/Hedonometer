@@ -170,7 +170,9 @@ We used UvA AI Chat and ChatGPT for (1) interpreting tracebacks and DeepSeek for
 
 
 # Inference  
-
+  
+This project analyses speeches from the United Nations General Debate using computational text analysis. By using the UN General Debate Corpus, we treat the speeches as data and measure their emotional tones with the hedonometer (labMT word list). We compare happiness scores across countries, years or topics, while at the same time explore how different points of view in global political discourse vary over time.
+  
 ## Dataset
   
 ### UN General Debate
