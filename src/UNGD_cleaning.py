@@ -104,7 +104,7 @@ UNGD_happiness = Path(__file__).parent.parent / "data" / "processed" / "UNGD_hap
 
 df = pd.read_csv(UNGD_happiness)
 pre_covid = df[(df["year"] >= 2015) & (df["year"] <= 2019)]
-post_covid = df[(df["year"] >= 2020) & (df["year"] <= 2025)]
+post_covid = df[(df["year"] >= 2020) & (df["year"] <= 2024)]
  
 pre_covid.to_csv("data/processed/UNGD_pre_covid.csv", index=False)
 post_covid.to_csv("data/processed/UNGD_post_covid.csv", index=False)

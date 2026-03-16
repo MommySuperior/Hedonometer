@@ -17,7 +17,7 @@ src_folder = Path(__file__).resolve().parent
 ROOT = src_folder.parent
 
 df = pd.read_csv(UNGD_happiness)
-df = df[(df["year"] >= 2015) & (df["year"] <= 2025)]
+df = df[(df["year"] >= 2015) & (df["year"] <= 2024)]
 df_pre = pd.read_csv(UNGD_pre_covid)
 df_post = pd.read_csv(UNGD_post_covid)
 
@@ -42,7 +42,7 @@ def summarize_happiness(df, label):
 
 # calculate stats for pre and post covid dataframes
 pre_stats = summarize_happiness(df_pre, "Pre-COVID (2015–2019)")
-post_stats = summarize_happiness(df_post, "Post-COVID (2020–2025)")
+post_stats = summarize_happiness(df_post, "Post-COVID (2020–2024)")
 
 results_df = pd.DataFrame([pre_stats, post_stats])
 
