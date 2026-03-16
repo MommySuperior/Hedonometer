@@ -9,13 +9,13 @@ UNGD_pre_covid = Path(__file__).parent.parent / "data" / "processed" / "UNGD_pre
 UNGD_post_covid = Path(__file__).parent.parent / "data" / "processed" / "UNGD_post_covid.csv"
 
 #function which automatically does bootstraping, for example see use below
-nboot = 2000 #change value of itterations
+nboot = 2000 #change value of iterations
 def bootstrap(x, nboot, statsfunc):
     x = np.array(x)
 
     resampled_stats = []
     for i in range(nboot):
-        index = np.random.randint(0,len(x), len(x))
+        index = np.random.randint(0,len(x), len(x)) 
         sample = x[index]
         bstatistic = statsfunc(sample)
         resampled_stats.append(bstatistic)
@@ -42,17 +42,20 @@ summary = df.groupby("year")["happiness_average"].agg(
 print("Range summary:")
 print(summary)
 
-summary_bootstrap = bootstrap(summary, nboot, np.mean) # example of bootstrap function feel free to change var name
+range_bootstrap = bootstrap(df["happiness_average"], nboot, np.mean) # example of bootstrap function feel free to change var name
 
 # important stats for analysis, repeat for following data frames
-print("Summary mean: \n", np.mean(summary))
-print("Summary bootstrap mean: \n", np.mean(summary_bootstrap))
-print("Summary bootstrap median \n", np.median(summary_bootstrap))
-print("Summary bootstrap std: \n", np.std(summary_bootstrap))
+print("Range mean: \n", np.mean(df["happiness_average"]))
+print("Range bootstrap mean: \n", np.mean(range_bootstrap))
+print("Range bootstrap median: \n", np.median(range_bootstrap))
+print("Range bootstrap std: \n", np.std(range_bootstrap))
+
+ci = np.percentile(range_bootstrap, [2.5, 97.5])
+print("95% confidence interval:", ci)
 
 # histogram for the summary dataframe
 plt.figure()
-plt.hist(summary_bootstrap, bins=50)
+plt.hist(range_bootstrap, bins=50)
 plt.tight_layout()
 plt.savefig("output/figures/UNGD_summary_bootstrap.png")
 plt.close()
@@ -77,20 +80,23 @@ summary_pre = df_pre.groupby("year")["happiness_average"].agg(
 print("Pre-COVID summary:")
 print(summary_pre)
 
-summary_pre_bootstrap = bootstrap(summary_pre, nboot, np.mean) # example of bootstrap function feel free to change var name
+range_pre_bootstrap = bootstrap(df_pre["happiness_average"], nboot, np.mean) # example of bootstrap function feel free to change var name
 
 # important stats for analysis, repeat for following data frames
-print("Summary mean: \n", np.mean(summary_pre))
-print("Summary bootstrap mean: \n", np.mean(summary_pre_bootstrap))
-print("Summary bootstrap median \n", np.median(summary_pre_bootstrap))
-print("Summary bootstrap std: \n", np.std(summary_pre_bootstrap))
+print("Pre-COVID mean: \n", np.mean(df_pre["happiness_average"]))
+print("Pre-COVID bootstrap mean: \n", np.mean(range_pre_bootstrap))
+print("Pre-COVID bootstrap median: \n", np.median(range_pre_bootstrap))
+print("Pre-COVID bootstrap std: \n", np.std(range_pre_bootstrap))
 
 # histogram for the summary dataframe
 plt.figure()
-plt.hist(summary_pre_bootstrap, bins=50)
+plt.hist(range_pre_bootstrap, bins=50)
 plt.tight_layout()
 plt.savefig("output/figures/UNGD_pre_covid_bootstrap.png")
 plt.close()
+
+ci = np.percentile(range_pre_bootstrap, [2.5, 97.5])
+print("95% confidence interval:", ci)
 
 #-----------------------------------------------------
 # UNGD_post_covid summary, bootstrap, and histogram
@@ -112,17 +118,22 @@ summary_post = df_post.groupby("year")["happiness_average"].agg(
 print("Post-COVID summary:")
 print(summary_post)
 
-summary_post_bootstrap = bootstrap(summary_post, nboot, np.mean) # example of bootstrap function feel free to change var name
+range_post_bootstrap = bootstrap(df_post["happiness_average"], nboot, np.mean) # example of bootstrap function feel free to change var name
 
 # important stats for analysis, repeat for following data frames
-print("Summary mean: \n", np.mean(summary_post))
-print("Summary bootstrap mean: \n", np.mean(summary_post_bootstrap))
-print("Summary bootstrap median \n", np.median(summary_post_bootstrap))
-print("Summary bootstrap std: \n", np.std(summary_post_bootstrap))
+print("Post-COVID mean: \n", np.mean(df_post["happiness_average"]))
+print("Post-COVID bootstrap mean: \n", np.mean(range_post_bootstrap))
+print("Post-COVID bootstrap median: \n", np.median(range_post_bootstrap))
+print("Post-COVID bootstrap std: \n", np.std(range_post_bootstrap))
 
 # histogram for the summary dataframe
 plt.figure()
-plt.hist(summary_post_bootstrap, bins=50)
+plt.hist(range_post_bootstrap, bins=50)
 plt.tight_layout()
 plt.savefig("output/figures/UNGD_post_covid_bootstrap.png")
 plt.close()
+
+ci = np.percentile(range_post_bootstrap, [2.5, 97.5])
+print("95% confidence interval:", ci)
+
+# note: histograms still need defined x/y-axes + labels!
