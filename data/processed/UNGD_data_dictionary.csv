@@ -3,3 +3,4 @@ year,int64,0
 country,str,0
 session,int64,0
 happiness_average,float64,0
+happiness_standard_deviation,float64,0
