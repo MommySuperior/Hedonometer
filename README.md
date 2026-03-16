@@ -216,6 +216,8 @@ We opted to use scatter plots to show the relationship between the data and the 
 - Oskaras - editor & figure curator
 
 **Citation**  
+Baturo, Alexander, Niheer Dasandi, and Slava J. Mikhaylov. 2017. “Understanding State Preferences with Text as Data: Introducing the UN General Debate Corpus.” Research & Politics 4 (2): 1–9. https://doi.org/10.1177/2053168017712821  
+  
 Peter Sheridan Dodds, Kameron Decker Harris, Isabel M. Kloumann, Catherine A. Bliss, & Christopher M. Danforth (2011). Temporal Patterns of Happiness and Information in a Global Social Network: Hedonometrics and Twitter. PLoS ONE 6(12): e26752.
 
 ## AI-use disclosure  
