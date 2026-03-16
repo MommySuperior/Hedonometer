@@ -235,53 +235,53 @@ plt.savefig("output/figures/UNGD_post_comparison.png")
 
 
 
-## Scatter plot for the full range of the data:
+# Scatter plot for the full range of the data:
 
-# plt.figure()
-# plt.scatter(
-#     df["happiness_average"],
-#     df["standard_deviation"],
-#     s=10,
-#     alpha=0.35,
-#     marker='1',
-# )
-# plt.title("Post and Pre COVID happiness")
-# plt.xlabel("Happiness average")
-# plt.ylabel("Happiness standard distribution")
-# plt.tight_layout
-# plt.savefig("output/figures/UNGD_Full_Range_Scatter.png")
-# plt.close()
+plt.figure()
+plt.scatter(
+    df["happiness_average"],
+    df["happiness_standard_deviation"],
+    s=10,
+    alpha=0.35,
+    marker='1',
+)
+plt.title("Post and Pre COVID happiness")
+plt.xlabel("Happiness average")
+plt.ylabel("Happiness standard distribution")
+plt.tight_layout
+plt.savefig("output/figures/UNGD_Full_Range_Scatter.png")
+plt.close()
 
-## Scatter plot for the pre-covid dataframe:
+# Scatter plot for the pre-covid dataframe:
 
-# plt.figure()
-# plt.scatter(
-#     df_pre["happiness_average"],
-#     df_pre["standard_deviation"],
-#     s=10,
-#     alpha=0.35,
-#     marker='1',
-# )
-# plt.title("Post and Pre COVID happiness")
-# plt.xlabel("Happiness average")
-# plt.ylabel("Happiness standard distribution")
-# plt.tight_layout
-# plt.savefig("output/figures/UNGD_pre_COVID_Scatter.png")
-# plt.close()
+plt.figure()
+plt.scatter(
+    df_pre["happiness_average"],
+    df_pre["happiness_standard_deviation"],
+    s=10,
+    alpha=0.35,
+    marker='1',
+)
+plt.title("Post and Pre COVID happiness")
+plt.xlabel("Happiness average")
+plt.ylabel("Happiness standard distribution")
+plt.tight_layout
+plt.savefig("output/figures/UNGD_pre_COVID_Scatter.png")
+plt.close()
 
-## Scatter plot for the post-covid dataframe:
+# Scatter plot for the post-covid dataframe:
 
-# plt.figure()
-# plt.scatter(
-#     df_post["happiness_average"],
-#     df_post["standard_deviation"],
-#     s=10,
-#     alpha=0.35,
-#     marker='1',
-# )
-# plt.title("Post-COVID happiness")
-# plt.xlabel("Happiness average")
-# plt.ylabel("Happiness standard distribution")
-# plt.tight_layout
-# plt.savefig("output/figures/UNGD_post_COVID_Scatter.png")
-# plt.close()
+plt.figure()
+plt.scatter(
+    df_post["happiness_average"],
+    df_post["happiness_standard_deviation"],
+    s=10,
+    alpha=0.35,
+    marker='1',
+)
+plt.title("Post-COVID happiness")
+plt.xlabel("Happiness average")
+plt.ylabel("Happiness standard distribution")
+plt.tight_layout
+plt.savefig("output/figures/UNGD_post_COVID_Scatter.png")
+plt.close()
