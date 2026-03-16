@@ -193,3 +193,12 @@ Inside each session folder, the script found all .txt sub-files and copied them 
 Originally, the script was meant to convert the .txt files into .csv files using pandas, but that part is currently commented out. For now, the script mainly organizes and copies the dataset files so they are ready for later analysis. I tried to execute this part as well, but when it read the script it only converted certain files into .csv, not all of them. We realized later that this might be a problem from the dataset, because after opening multiple files to try and figure out how were they different we realized they had different characters separating the lines.   
 
 
+## Pre- and Post-COVID Happiness Comparison in UN General Debate Speeches
+The script loads the relevant datasets and focuses on speeches delivered between 2015 and 2025. The data are separated into two groups: a pre-COVID period (2015–2019) and a post-COVID period (2020–2025). Before we compare, we made sure that the code checks that the datasets contain the expected years and that the number of speeches per year is reasonable. These checks help confirm that the data have been filtered correctly and that the comparison between the two periods is valid.
+
+To summarize the data, the script calculates several descriptive statistics for each period, including the number of speeches, the mean happiness score, the median happiness score, and the standard deviation. These statistics provide an overview of how happiness scores are distributed within each group.
+
+The main quantity of interest is the difference in mean happiness between post-COVID and pre-COVID speeches, defined as mean(post-COVID) minus mean(pre-COVID). To ensure that the results are not driven by extreme values, a robustness check is performed using the median happiness score instead of the mean. The similarity between the mean and median comparisons suggests that the overall result is stable and not sensitive to outliers.
+
+Finally, the summary statistics are organized into a table and exported as a CSV file for use in further analysis and reporting within the project.
+
