@@ -236,8 +236,26 @@ Figure 8 Post COVID histogram:
   
 The same pattern can be seen for the post covid histogram, yet this time the data displays a distribution skewing more to the lower happiness average.
   
-
-
+### Inference summaries    
+  
+Pre-COVID speeches (2015-2019) exhibit a mean happiness of 5.4507 (n= 974, SD = 0.0646), while Post-COVID speeches (2020-2025) demonstrate a mean happiness of 5.4488 (n = 1154, SD = 0.0670). The point estimate for the shift is:   
+  
+Difference = mean(post) - mean(pre) = [5.4488 - 5.4507] = -0.00193  
+Difference = mean(post) - mean(pre) [5.4488 - 5.4507] = -0.00193  
+95% CI (pre mean): 5.4466, 4547  
+95% CI (post mean): 5.4449, 5.4527  
+95% CI ( = post - (pre): [-0.0073, 0.0039]  
+  
+This represents a negligible difference on the happiness scale. The bootstrap histograms (Figures 1-3) indicate that uncertainty surrounding the mean happiness estimates before and after COVID is minimal. The estimated difference is difference = mean(post) - mean(pre) = 0.00193, and the 95% confidence interval for the difference is [-0.0073, 0.0039]. Since this interval encompasses 0, we cannot conclusively determine a rise or decline in mean happiness post-2020.  
+  
+## Qualitative analysis of results
+  
+The point estimate difference  = -0.00193 indicates the post-COVID average speech happiness is marginally lower than the pre-COVID average. Nonetheless, the pre/post difference is minimal, therefore we depend on estimation instead of only the point estimate because the pre/post difference is so minor. The 95% confidence range for  using bootstrap resampling (2000 iterations) is -0.0073, 0.0039, which includes 0. The direction of change is ambiguous, as the actual difference may be marginally positive or marginally negative. As a result, we should proceed with caution when claiming that average speech happiness would rise or fall after 2020.  
+  
+## Critical reflection  
+  
+Our bootstrap considers each speech (document) as the unit for resampling. We resample speeches with replacement for each time period, determine the variability of the averages, and their differences under repeated sampling. This indirectly regards talks as autonomous observations. A significant restriction is that the independence assumption is merely approximate, as countries are represented multiple times over years, resulting in clustered observations by country and the potential for rhetorical styles to endure across time. Moreover, UN General Debate speeches represent a formal diplomatic category, and hedonometer-based scoring and analysis inadequately cover context such as dissent, sarcasm, or specific strategy phrasing, which might influence the expression of the exact “happiness” in political discourse.  
+  
 ## How to run the code
 
 **1: Clone the repository:** In your terminal, type `git clone https://github.com/MommySuperior/Hedonometer`.  
