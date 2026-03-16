@@ -50,14 +50,14 @@ print("Range bootstrap mean: \n", np.mean(range_bootstrap))
 print("Range bootstrap median: \n", np.median(range_bootstrap))
 print("Range bootstrap std: \n", np.std(range_bootstrap))
 
-ci = np.percentile(range_bootstrap, [2.5, 97.5])
-print("95% confidence interval:", ci)
+ci_range = np.percentile(range_bootstrap, [2.5, 97.5])
+print("95% confidence interval range:", ci_range)
 
 # histogram for the summary dataframe
 plt.figure()
 plt.hist(range_bootstrap, bins=50)
 plt.tight_layout()
-plt.savefig("output/figures/UNGD_summary_bootstrap.png")
+#plt.savefig("output/figures/UNGD_summary_bootstrap.png")
 plt.close()
 
 #-----------------------------------------------------
@@ -92,11 +92,11 @@ print("Pre-COVID bootstrap std: \n", np.std(range_pre_bootstrap))
 plt.figure()
 plt.hist(range_pre_bootstrap, bins=50)
 plt.tight_layout()
-plt.savefig("output/figures/UNGD_pre_covid_bootstrap.png")
+#plt.savefig("output/figures/UNGD_pre_covid_bootstrap.png")
 plt.close()
 
-ci = np.percentile(range_pre_bootstrap, [2.5, 97.5])
-print("95% confidence interval:", ci)
+ci_pre = np.percentile(range_pre_bootstrap, [2.5, 97.5])
+print("95% confidence interval pre-COVID:", ci_pre)
 
 #-----------------------------------------------------
 # UNGD_post_covid summary, bootstrap, and histogram
@@ -130,10 +130,13 @@ print("Post-COVID bootstrap std: \n", np.std(range_post_bootstrap))
 plt.figure()
 plt.hist(range_post_bootstrap, bins=50)
 plt.tight_layout()
-plt.savefig("output/figures/UNGD_post_covid_bootstrap.png")
+#plt.savefig("output/figures/UNGD_post_covid_bootstrap.png")
 plt.close()
 
-ci = np.percentile(range_post_bootstrap, [2.5, 97.5])
-print("95% confidence interval:", ci)
+ci_post = np.percentile(range_post_bootstrap, [2.5, 97.5])
+print("95% confidence interval post-COVID:", ci_post)
+ci_difference = np.percentile(range_post_bootstrap - range_pre_bootstrap, [2.5, 97.5])
+
+print("\n95% confidence interval difference:", ci_difference, "\n")
 
 # note: histograms still need defined x/y-axes + labels!
