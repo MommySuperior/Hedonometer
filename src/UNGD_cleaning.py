@@ -113,7 +113,7 @@ missing = df.isna().sum().reset_index()
 missing.columns = ["column", "n_missing"]
 
 
-data_dictionary = col_dtypes.merge(missing, on="column")
+UNGD_data_dictionary = col_dtypes.merge(missing, on="column")
 
-print(data_dictionary.to_string(index=False))
-data_dictionary.to_csv("data/processed/data_dictionary.csv", index=False)
+print(UNGD_data_dictionary.to_string(index=False))
+UNGD_data_dictionary.to_csv("data/processed/UNGD_data_dictionary.csv", index=False)
