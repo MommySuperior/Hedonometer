@@ -181,6 +181,8 @@ The main quantity of interest is the difference in mean happiness between post-C
 Finally, the summary statistics are organized into a table and exported as a CSV file for use in further analysis and reporting within the project.  
   
 ### Bootstrap sampling  
+
+Using our bootstrapping function we resampled the documents using the numpy’s random.randint() method to pick at random samples from our text at a defined rate of iteration (Nboot).Next we applied an individually defined method to the sample, in our case it was numpy’s .mean() in order to recompute our statistic for each random sample fetched.  
   
 We bootstrap sampled the full range of years 2015 to 2024 as well as the pre-COVID and post-COVID groups with 2000 iterations for sufficient accuracy. We chose to use mean rather than median based on statistics conventions for normally distributed data.  
   
