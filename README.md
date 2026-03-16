@@ -194,8 +194,50 @@ We calculated the percentile confidence intervals of both the pre-COVID group an
 
 We opted to use scatter plots to show the relationship between the data and the standard deviation of the data. This relationship tells us about the spread of the data, normality, as well as the ability to detect outliers in the data. In addition we opted to use histograms to display our data’s pre and post covid happiness scores to compliment the previously mentioned scatter plots. To assess uncertainty as well as the proximity to reality, we bootstrapped the data frames and plotted them as histograms too.  
   
+## Results  
+
+Figure 1. Full range scatter plot:  
+![Alt text](output/figures/UNGD_Full_Range_Scatter.png)  
   
+This plot shows us that much of the dataset clusters around 5.4 and 5.5 happiness average, with some data points being outside that range. This is interesting because we would expect there to be two cleared groups to distinguish from a pre covid and post covid world.  
   
+Figure 2. Pre COVID range scatter plot:   
+![Alt text](output/figures/UNGD_pre_COVID_Scatter.png)  
+  
+This deepens our understanding of how the data is distributed between the two time ranges. We can tell that a clear chunk of the data points leaning towards a lower happiness average disappear when comparing to the full data range.
+  
+Figure 3. Post COVID range scatter plot:  
+![Alt text](output/figures/UNGD_post_COVID_Scatter.png)  
+  
+The opposite can be said about the post covid scatter plot. Here we see a portion of the data leaning towards a higher happiness average disappear from the plot. From this we can conclude that the pre covid world UN general debates contained slightly happier overall moods.  
+  
+Figure 4. Full range bootstrapping histogram:  
+![Alt text](output/figures/UNGD_summary_bootstrap.png)  
+  
+This is the first histogram which we used to obtain information about our data uncertainty as well as our confidence interval. Alongside this graph, we extracted a bootstrapped value for the mean, median as well as the standard deviation. The value of the bootstrapped mean was close to our overall mean, with a difference only being observed past the 4th or 5th decimal point. Another important pattern to notice is the bell curve of the bootstrapped histogram which occurs due to the central limit theorem. This normal distribution presents itself despite the un-bootstrapped histograms (see figures 7 and 8) presenting a skewed distribution. (again the product of the central limit theorem)
+  
+Figure 5. Pre COVID range bootstrapping histogram:  
+![Alt text](output/figures/UNGD_pre_covid_bootstrap.png)  
+  
+The same can be said for the pre covid bootstrapped histogram. The graph presents itself as a normal distribution which has a mean close to the original.   
+  
+Figure 6. Post COVID range bootstrapping histogram:  
+![Alt text](output/figures/UNGD_post_covid_bootstrap.png)  
+  
+The difference between the two histograms and their overall mean and medians is negligible, and therefore irrelevant to our dataset. This however also implies a low uncertainty in our data.
+  
+Figure 7. Pre COVID histogram:  
+![Alt text](output/figures/UNGD_pre_comparison.png)  
+  
+The histogram representing the pre covid world mirrors the scatter plot, showing a distribution which leans more towards a higher happiness average. Another thing to notice is the skewed distribution, with a heavier right side then left.
+  
+Figure 8 Post COVID histogram:  
+![Alt text](output/figures/UNGD_post_comparison.png)  
+  
+The same pattern can be seen for the post covid histogram, yet this time the data displays a distribution skewing more to the lower happiness average.
+  
+
+
 ## How to run the code
 
 **1: Clone the repository:** In your terminal, type `git clone https://github.com/MommySuperior/Hedonometer`.  
