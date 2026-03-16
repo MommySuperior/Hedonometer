@@ -174,10 +174,9 @@ We used UvA AI Chat and ChatGPT for (1) interpreting tracebacks and DeepSeek for
   
 ### UN General Debate
 
-### Data dictionary (per column)
-column, dtype, n_missing
-year, int64, 0
-country, str, 0
-session, int64, 0
-happiness_average, float64,0
-happiness_standard_deviation, float64, 0
+### Data dictionary (per column)  
+   - **year**: The year in which the General Debate statement in the document was delivered. The data type object of this column is a 64-bit integer. No years were missing, meaning each document name contained a year.
+   - **country**: The country that delivered the General Debate statement in the document. The data type object of this column is a string. No country names were missing, meaning each document name contained a country name.
+   - **session**: The United Nations General Assembly session during which the General Debate statement in the document was delivered. The data type object of this column is a 64-bit integer. No session numbers were missing, meaning each document name contained a session number.
+   - **happiness_average**: The average happiness rate for each document based on the mean average happiness rate for all words per document. The average happiness rates of the words are based on the LabMT 1.0 dataset. The data type object of this column is a 64-bit float. No average rates were missing, meaning each document had an average happiness rate assigned.
+   - **happiness_standard_deviation**: The standard deviation of happiness rates per document based on the mean standard deviation for all words per document. The standard deviation of happiness rates is based on the labMT 1.0 dataset. The data type object of this column is a 64-bit float. No standard deviation rates were missing, meaning each document had a standard deviation rate assigned.
