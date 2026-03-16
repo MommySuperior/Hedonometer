@@ -1,8 +1,8 @@
-# 1. Hedonometer: Quantitative and Qualitative Exploration
+# Hedonometer: Quantitative and Qualitative Exploration
 
 This group project investigates the **labMT 1.0** “hedonometer” dataset, which attribute happiness scores to words based on ratings from Amazon Mechanical Turk participants. Using data analytic methods, we examine the statistical distribution of word happiness and scores and explore how language can mirror emotional patterns. By grounding quantitative and qualitative ways of exploration of the Hedonometer in our project, we investigate how sentiment is measured and what kind of limitations this dataset may undergo.
 
-## 2. Dataset section  
+## Dataset section  
 
 ### labMT 1.0  
 The labMT 1.0 dataset was taken from a paper by Dodds et al. (2011), in which evaluations of happiness were collected for 10,222 words from four different corpora using Amazon Mechanical Turk. These corpora included Twitter posts, Google Books, New York Times articles, and music lyrics. The 5000 most frequently recurring words in each corpus were used in the labMT 1.0 dataset, and overlap between words was addressed by removing duplicates (4).
@@ -17,7 +17,7 @@ The labMT 1.0 dataset was taken from a paper by Dodds et al. (2011), in which ev
    - **nyt_rank**: The rank order of the word based on how many times it showed up in the top 5000 of words in a corpus of New York Times articles. The data type object of this column is a 64-bit float. 5222 words in total were missing from the top 5000 of words in the corpus of New York Times articles.
    - **lyrics_rank**: The rank order of the word based on how many times it showed up in the top 5000 of words in a corpus of music lyrics. The data type object of this column is a 64-bit float. 5222 words in total were missing from the top 5000 of words in the corpus of music lyrics.
   
-## 3. Methods section 
+## Methods section 
 
 ### Loading and Cleaning dataset  
 The dataset was loaded with pandas using pd.read_cvs, the tab separation is specified (sep=”/t”) and the first three metadata lines are skipped (skiprows=3). To prevent parsing errors, all columns were read as strings. Using NumPy, -- is replaced with just empty space and all numeric columns are converted to floating point values for statistical analysis. Additionally, all words were converted to lowercase to ensure consistency. 
@@ -33,7 +33,7 @@ In this sense, these words reflect widely shared social understandings of what c
   
 Multiple dataframes were created to extract the distribution of the happiness scores, the 15 most contested words, the overlap between words in the corpora, and words that occur on Twitter but do not occur in the New York Times from the dataset, as well as an exhibit of the five most positive, five most negative, five highly contested, and five corpus-specific words. The dataframes were converted to CSV files using pandas and printed to tables. Furthermore, Mathplotlib was used to create representational plots of the data and save the plots as PNG files. These plots include a histogram, a bar chart, and two scatterplots.
 
-## 4.  Results section
+## Results section
 
 ### Histogram and data distribution  
 What we can gather from the histogram (see fig. 1) is a skewed distribution. A majority of words in the graph skew right, indicating a higher overall happiness average per number of words. What we found to be unexpected was the averages which were found in both the 5th and 95th percentiles. The 5th percentile displayed an average of 3.18 which was significantly higher than initially expected. The same goes for the 95th percentile which displayed an average of 7.08 which indicates that the dataset contains words which are more positive than negative.  
@@ -69,7 +69,7 @@ In addition to the other plots created, an additional bar chart (see fig. 3) as 
 ![image](https://github.com/MommySuperior/Hedonometer/blob/main/output/figures/twitter_rank_vs_nyt_rank_scatter.png "Twitter vs NYT rank, Scatterplot")  
 *Figure 4: Scatterplot representing ranks of common words in Twitter posts and New York Times articles.*  
   
-## 5. Qualitative “exhibit” of words  
+## Qualitative “exhibit” of words  
 The qualitative exploration exhibit shows four different “types” of feeling words and explains why the lexicon can’t be seen as completely objective. For example, the very positive set which includes words such as laughter (8.50), happiness (8.44), love (8.42), glad (8.30), and laughed (8.26) scores highly because these terms clearly name pleasant emotions or joyful expressions and are socially acknowledged as desirable states. Their standard deviations are rather low (between 0.93 and 1.16), which means that the raters mostly agree: these words are frequently seen as positive even without any context. The corpus ranks also suggest that there are distinctions between genres. For example, love is particularly common in expressive settings like Twitter and song lyrics, but words like laughter, laughed are less common across corpora, which suggests that they are not equally important to all types of writing.  
   
 The really negative collection, on the other hand, includes suicide (1.30), terrorist (1.30), rape (1.44), murder (1.48), and terrorism (1.48), which all have low averages since they are all about injury, violence, and trauma. These terms also exhibit very small disagreement (standard deviations of about 0.79-1.02), which means that people tend to agree on their negative values. The way these words are used in different contexts suits their social role. For example, words like terrorism and terrorist are very common in news articles (as shown by the NYT ranks), but they are less common or not at all in other types of writing, which is why certain rank columns have nan values.  
@@ -78,7 +78,7 @@ The really divisive and contested words indicate that disagreement can be just a
   
 The weird/corpus-specific set- beloved, survived, chorus, Wednesday, and sorry shows how genre affects the value of words. Chorus has a high rank in lyrics (88) but a low rank in the NYT (4891) because it is a song-structure phrase and not a news term. Beloved and Survived, on the other hand, have high scores in the NYT (149 and 143), which is typical of journalistic genres like crisis reporting. Sorry is different from other words since it has a lot of social meaning, like apology, empathy, or tension, which helps explain why its happiness average is lower (3.66) and its ranks are not consistent between corpora. In general, these words illustrate that sentiment scores are based on more than just feelings; they also take into account the situation and where the phrase is employed.
 
-## 6. Critical Reflection: How was this dataset generated and why does it matter?
+## Critical Reflection: How was this dataset generated and why does it matter?
 
 ### Reconstructing the Pipeline (Data Provenance)
 
@@ -142,33 +142,6 @@ Third, I would expand beyond the 1-9 scale by asking raters to select emotion ca
 Fourth, I would include frequency data beyond the top 5,000 and provide percentile ranks instead of arbitrary cutoffs, giving a more complete picture of language distribution.
 Finally, I would track changes over time by updating the dataset regularly to capture how word meanings evolve and to include new words (like "COVID") that have emerged since the dataset was created.
 
-## 7. How to run the code
-
-**1: Clone the repository:** In your terminal, type `git clone https://github.com/MommySuperior/Hedonometer`.  
-**2: Change directory to the repository:** In your terminal, type `cd Hedonometer`.  
-**3: Create a virtual environment:** In your terminal, type `python -m venv .venv` for Windows, or `python3 -m venv .venv` for MacOS.  
-**4: Activate virtual environment:** In your terminal, type `.\.venv\Scripts\Activate.ps1` for PowerShell, `.\.venv\Scripts\activate.bat` for Command Prompt, or `source .venv/bin/activate` for MacOS.  
-**5: Install requirements.txt:** In your terminal, type `python -m pip install -r requirements.txt` for Windows, or `python3 -m pip install -r requirements.txt` for MacOS.  
-**6: Run cleaning.py:** In your terminal, type `python src/cleaning.py` for Windows, or `python3 src/cleaning.py` for MacOS.  
-  
-## 8. Credits
-
-**Team Roles**  
-- Repo & workflow lead - Roos
-- Data wrangler - Leo
-- Quantitative analyst - Razvan
-- Qualitative / close-reading lead - Emilis
-- Provenance & critique lead - Alessia
-- Editor & figure curator - Oskaras
-
-**Citation**  
-Peter Sheridan Dodds, Kameron Decker Harris, Isabel M. Kloumann, Catherine A. Bliss, & Christopher M. Danforth (2011). Temporal Patterns of Happiness and Information in a Global Social Network: Hedonometrics and Twitter. PLoS ONE 6(12): e26752.
-
-## 9. AI-use disclosure  
-
-We used UvA AI Chat and ChatGPT for (1) interpreting tracebacks and DeepSeek for (2) clarification of the assignment steps. We reviewed and edited all suggestions, ran the script end-to-end, and verified outputs on sample inputs. Final work is our responsibility. 
-
-
 # Inference  
   
 This project analyses speeches from the United Nations General Debate using computational text analysis. By using the UN General Debate Corpus, we treat the speeches as data and measure their emotional tones with the hedonometer (labMT word list). We compare happiness scores across countries, years or topics, while at the same time explore how different points of view in global political discourse vary over time.
@@ -219,5 +192,35 @@ We calculated the percentile confidence intervals of both the pre-COVID group an
 
 We opted to use scatter plots to show the relationship between the data and the standard deviation of the data. This relationship tells us about the spread of the data, normality, as well as the ability to detect outliers in the data. In addition we opted to use histograms to display our data’s pre and post covid happiness scores to compliment the previously mentioned scatter plots. To assess uncertainty as well as the proximity to reality, we bootstrapped the data frames and plotted them as histograms too.  
   
+  
+  
+## How to run the code
+
+**1: Clone the repository:** In your terminal, type `git clone https://github.com/MommySuperior/Hedonometer`.  
+**2: Change directory to the repository:** In your terminal, type `cd Hedonometer`.  
+**3: Create a virtual environment:** In your terminal, type `python -m venv .venv` for Windows, or `python3 -m venv .venv` for MacOS.  
+**4: Activate virtual environment:** In your terminal, type `.\.venv\Scripts\Activate.ps1` for PowerShell, `.\.venv\Scripts\activate.bat` for Command Prompt, or `source .venv/bin/activate` for MacOS.  
+**5: Install requirements.txt:** In your terminal, type `python -m pip install -r requirements.txt` for Windows, or `python3 -m pip install -r requirements.txt` for MacOS.  
+**6: Run cleaning.py:** In your terminal, type `python src/cleaning.py` for Windows, or `python3 src/cleaning.py` for MacOS.  
+**7: Run UNGD_cleaning.py:** In your terminal, type `python src/UNGD_cleaning.py` for Windows, or `python3 src/UNGD_cleaning.py` for MacOS.
+**8: Run UNGD_samp_stats.py:** In your terminal, type `python src/UNGD_samp_stats.py` for Windows, or `python3 src/UNGD_samp_stats.py` for MacOS.
+  
+## Credits
+
+**Team Roles**  
+- Roos - repo & workflow lead + measurement lead
+- Leo - data wrangler + stats & sampling lead
+- Razvan - quantitative analyst + visualisation lead
+- Emilis - qualitative / close-reading lead
+- Alessia - provenance & critique lead + data acquisition lead
+- Oskaras - editor & figure curator
+
+**Citation**  
+Peter Sheridan Dodds, Kameron Decker Harris, Isabel M. Kloumann, Catherine A. Bliss, & Christopher M. Danforth (2011). Temporal Patterns of Happiness and Information in a Global Social Network: Hedonometrics and Twitter. PLoS ONE 6(12): e26752.
+
+## AI-use disclosure  
+
+We used UvA AI Chat and ChatGPT for (1) interpreting tracebacks and DeepSeek for (2) clarification of the assignment steps. We reviewed and edited all suggestions, ran the script end-to-end, and verified outputs on sample inputs. Final work is our responsibility. 
+
 
 
