@@ -244,7 +244,7 @@ Difference = mean(post) - mean(pre) = [5.4488 - 5.4507] = -0.00193
 Difference = mean(post) - mean(pre) [5.4488 - 5.4507] = -0.00193  
 95% CI (pre mean): 5.4466, 4547  
 95% CI (post mean): 5.4449, 5.4527  
-95% CI ( = post - (pre): [-0.0073, 0.0039]  
+95% CI (difference = post - (pre): [-0.0073, 0.0039]  
   
 This represents a negligible difference on the happiness scale. The bootstrap histograms (Figures 1-3) indicate that uncertainty surrounding the mean happiness estimates before and after COVID is minimal. The estimated difference is difference = mean(post) - mean(pre) = 0.00193, and the 95% confidence interval for the difference is [-0.0073, 0.0039]. Since this interval encompasses 0, we cannot conclusively determine a rise or decline in mean happiness post-2020.  
   
