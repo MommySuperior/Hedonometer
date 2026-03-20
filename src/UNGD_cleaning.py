@@ -8,7 +8,7 @@ raw = Path(__file__).parent.parent / "data" / "raw" / "TXT"
 out = Path(__file__).parent.parent / "data" / "raw" / "range"
 
 out.mkdir(parents=True, exist_ok=True)
-print(f"Converting sessions 1-80 from {raw} to CSV")
+# *print(f"Converting sessions 1-80 from {raw} to CSV")
 
 folders = []
 for file in raw.iterdir():
@@ -20,7 +20,7 @@ not_found = []
 
 for num in range(1, 81):
     num = str(num).zfill(2) #this is for sessions 01 to 09, since range() doesn't pick up on zero
- #   print(f"\nSession {num}:")
+    print(f"\nSession {num}:")
 
     found = None
     for file in folders:
@@ -122,3 +122,19 @@ UNGD_data_dictionary = col_dtypes.merge(missing, on="column")
 
 print(UNGD_data_dictionary.to_string(index=False))
 UNGD_data_dictionary.to_csv("data/processed/UNGD_data_dictionary.csv", index=False)
+
+#-----------------------------------------------------
+# Check missing countries
+#-----------------------------------------------------
+
+all_countries = df["country"].unique()
+
+pre_covid_countries = pre_covid.pivot(index="country", columns="year", values="session").reindex(index=all_countries)
+pre_covid_countries = pre_covid_countries.astype("Int64")
+print("\nMissing countries pre-COVID:")
+print("\n", pre_covid_countries.to_string(index=True))
+
+post_covid_countries = post_covid.pivot(index="country", columns="year", values="session").reindex(index=all_countries)
+post_covid_countries = post_covid_countries.astype("Int64")
+print("\nMissing countries post-COVID:")
+print("\n", post_covid_countries.to_string(index=True))
