@@ -109,6 +109,13 @@ post_covid = df[(df["year"] >= 2020) & (df["year"] <= 2024)]
 pre_covid.to_csv("data/processed/UNGD_pre_covid.csv", index=False)
 post_covid.to_csv("data/processed/UNGD_post_covid.csv", index=False)
 
+pre_per_year = pre_covid.groupby("year")["happiness_average"].mean()
+post_per_year = post_covid.groupby("year")["happiness_average"].mean()
+print("\nAverage happiness per year pre-COVID:")
+print(pre_per_year)
+print("\nAverage happiness per year post-COVID:")
+print(post_per_year)
+
 print("UNGD Data dictionary:")
 
 col_dtypes = df.dtypes.astype(str).reset_index()
@@ -116,7 +123,6 @@ col_dtypes.columns = ["column", "dtype"]
 
 missing = df.isna().sum().reset_index()
 missing.columns = ["column", "n_missing"]
-
 
 UNGD_data_dictionary = col_dtypes.merge(missing, on="column")
 
