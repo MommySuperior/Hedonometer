@@ -269,6 +269,29 @@ The point estimate difference  = -0.00193 indicates the post-COVID average speec
   
 Our bootstrap considers each speech (document) as the unit for resampling. We resample speeches with replacement for each time period, determine the variability of the averages, and their differences under repeated sampling. This indirectly regards talks as autonomous observations. A significant restriction is that the independence assumption is merely approximate, as countries are represented multiple times over years, resulting in clustered observations by country and the potential for rhetorical styles to endure across time. Moreover, UN General Debate speeches represent a formal diplomatic category, and hedonometer-based scoring and analysis inadequately cover context such as dissent, sarcasm, or specific strategy phrasing, which might influence the expression of the exact “happiness” in political discourse.  
 
+### Reconstructing the Pipeline (Data Provenance)  
+  
+The UN General Debates corpus from 1970 to 2014 was compiled as described in the steps below (Baturo, Dasandi, and Mikhaylov 2017). However, since the paper was published, new speeches have been added from years 1946 to 1969 and from 2015 to 2025. It is unclear whether the same steps were taken for these speeches.  
+  
+1. **Collecting the speeches**: speeches from 1970 to 2014 were collected from UN archives  
+  
+2. **Digitization**: pre-1992 scanned documents were converted into machine-readable text using OCR  
+  
+3. **Translation**: all speeches were translated to English  
+  
+4. **Cleaning and preprocessing text**:  
+- Noise was removed from OCR outputs
+- Formatting was standardized
+  
+5. **Storing each speech as a document with metadata**:  
+- Country
+- Year
+- Session
+  
+6. **Address geopolitical changes**: historical states were renamed as their successors if necessary (e.g. the USSR is renamed as Russia)  
+  
+7. **Creating the corpus**: the 7314 speeches from 1970 to 2014 were compiled into one dataset  
+  
 ### Consequences and Limitations  
 **1: Possible bias in happiness scores**  
 - **The choice:** Relying on the happiness scores assigned by Amazon MTurks.  
