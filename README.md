@@ -153,22 +153,22 @@ Finally, I would track changes over time by updating the dataset regularly to ca
   
 For the second part of this research, we analyse speeches from the United Nations General Debates using computational text analysis. We do so by comparing the dataset to the clean labMT 1.0 dataset in order to assign happiness scores to each document. By using the UN General Debate Corpus, we treat the speeches as data and measure their emotional tones with the Hedonometer. We compare happiness scores across countries, years and topics, while at the same time exploring how different points of view in global political discourse vary over time.
   
-## Dataset
+## Dataset section  
   
 ### UN General Debate  
   
 The dataset which was used in this project comes from the United Nations General Debate Corpus. It contains various transcripts of speeches which were delivered by representatives of UN member states during the annual United Nations General Assembly General Debate in New York. Throughout these debates, governments presented their views on major global issues namely international security, climate change, development and diplomacy.
   
 The corpus was compiled by Alexander Baturo, Niheer Dasandi, and Slava J. Mikhaylov (2017) and includes over 7,00 speeches delivered between 1970 and 2014. This dataset is publicly available through the Harvard Dataverse, where the authors provided structured text data suitable for computational analysis. As the speeches are delivered annually by most UN member states, the corpus allows researchers to measure political discourse across countries and over time.
-
+  
 ### Data dictionary (per column)  
    - **year**: The year in which the General Debate statement in the document was delivered. The data type object of this column is a 64-bit integer. No years were missing, meaning each document name contained a year.
    - **country**: The country that delivered the General Debate statement in the document. The data type object of this column is a string. No country names were missing, meaning each document name contained a country name.
    - **session**: The United Nations General Assembly session during which the General Debate statement in the document was delivered. The data type object of this column is a 64-bit integer. No session numbers were missing, meaning each document name contained a session number.
    - **happiness_average**: The average happiness rate for each document based on the mean average happiness rate for all words per document. The average happiness rates of the words are based on the LabMT 1.0 dataset. The data type object of this column is a 64-bit float. No average rates were missing, meaning each document had an average happiness rate assigned.
    - **happiness_standard_deviation**: The standard deviation of happiness rates per document based on the mean standard deviation for all words per document. The standard deviation of happiness rates is based on the labMT 1.0 dataset. The data type object of this column is a 64-bit float. No standard deviation rates were missing, meaning each document had a standard deviation rate assigned.
- 
-## Methods section
+  
+## Methods section  
   
 ### Dataset loading  
 For this part we wrote a Python script to load and organize the dataset files. The script looks in the raw data folder that contains the original session files (the files are named „session 1 – 1946”, „...”, „session 80 – 2025” and they all contain sub-files) and extracts and copies them into a processed data folder so they are easier to use later.  
@@ -179,7 +179,7 @@ Inside each session folder, the script found all .txt sub-files and copied them 
   
 We tokenized and cleaned the documents, after which we placed all documents in one table and converted it to a .csv file with the columns mentioned in the data dictionary.   
   
-### Pre- and Post-COVID Happiness Comparison in UN General Debate Speeches
+### Pre- and Post-COVID Happiness Comparison in UN General Debate Speeches  
 The script loads the relevant datasets and focuses on speeches delivered between 2015 and 2025. The data are separated into two groups: a pre-COVID period (2015–2019) and a post-COVID period (2020–2025). Before we compare, we made sure that the code checks that the datasets contain the expected years and that the number of speeches per year is reasonable. These checks help confirm that the data have been filtered correctly and that the comparison between the two periods is valid.
 
 To summarize the data, the script calculates several descriptive statistics for each period, including the number of speeches, the mean happiness score, the median happiness score, and the standard deviation. These statistics provide an overview of how happiness scores are distributed within each group.
@@ -202,7 +202,7 @@ We calculated the percentile confidence intervals of both the pre-COVID group an
 
 We opted to use scatter plots to show the relationship between the data and the standard deviation of the data. This relationship tells us about the spread of the data, normality, as well as the ability to detect outliers in the data. In addition we opted to use histograms to display our data’s pre and post covid happiness scores to compliment the previously mentioned scatter plots. To assess uncertainty as well as the proximity to reality, we bootstrapped the data frames and plotted them as histograms too.  
   
-## Results  
+## Results section  
 
 Figure 1. Full range scatter plot:  
 ![Alt text](output/figures/UNGD_Full_Range_Scatter.png)  
