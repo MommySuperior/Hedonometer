@@ -288,7 +288,7 @@ The UN General Debates corpus from 1970 to 2014 was compiled as described in the
    - Year
    - Session
   
-6. **Address geopolitical changes**: historical states were renamed as their successors if necessary (e.g. the USSR is renamed as Russia)  
+6. **Addressing geopolitical changes**: historical states were renamed as their successors if necessary (e.g. the USSR is renamed as Russia)  
   
 7. **Creating the corpus**: the 7314 speeches from 1970 to 2014 were compiled into one dataset  
   
