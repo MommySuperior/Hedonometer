@@ -263,6 +263,18 @@ The point estimate difference  = -0.00193 indicates the post-COVID average speec
 ## Critical reflection  
   
 Our bootstrap considers each speech (document) as the unit for resampling. We resample speeches with replacement for each time period, determine the variability of the averages, and their differences under repeated sampling. This indirectly regards talks as autonomous observations. A significant restriction is that the independence assumption is merely approximate, as countries are represented multiple times over years, resulting in clustered observations by country and the potential for rhetorical styles to endure across time. Moreover, UN General Debate speeches represent a formal diplomatic category, and hedonometer-based scoring and analysis inadequately cover context such as dissent, sarcasm, or specific strategy phrasing, which might influence the expression of the exact “happiness” in political discourse.  
+
+## Repository structure  
+  
+Hedonometer/  
+├── data/  
+│ ├── raw/  
+│ └── processed/   
+├──outputs/figures/  
+├── src/  
+├── .gitignore  
+├── README.md  
+└── requirements.txt  
   
 ## How to run the code
 
@@ -272,8 +284,8 @@ Our bootstrap considers each speech (document) as the unit for resampling. We re
 **4: Activate virtual environment:** In your terminal, type `.\.venv\Scripts\Activate.ps1` for PowerShell, `.\.venv\Scripts\activate.bat` for Command Prompt, or `source .venv/bin/activate` for MacOS.  
 **5: Install requirements.txt:** In your terminal, type `python -m pip install -r requirements.txt` for Windows, or `python3 -m pip install -r requirements.txt` for MacOS.  
 **6: Run cleaning.py:** In your terminal, type `python src/cleaning.py` for Windows, or `python3 src/cleaning.py` for MacOS.  
-**7: Run UNGD_cleaning.py:** In your terminal, type `python src/UNGD_cleaning.py` for Windows, or `python3 src/UNGD_cleaning.py` for MacOS.
-**8: Run UNGD_samp_stats.py:** In your terminal, type `python src/UNGD_samp_stats.py` for Windows, or `python3 src/UNGD_samp_stats.py` for MacOS.
+**7: Run UNGD_cleaning.py:** In your terminal, type `python src/UNGD_cleaning.py` for Windows, or `python3 src/UNGD_cleaning.py` for MacOS.  
+**8: Run UNGD_samp_stats.py:** In your terminal, type `python src/UNGD_samp_stats.py` for Windows, or `python3 src/UNGD_samp_stats.py` for MacOS.  
   
 ## Credits
 
