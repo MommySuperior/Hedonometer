@@ -17,7 +17,7 @@ src_folder = Path(__file__).resolve().parent
 ROOT = src_folder.parent
 
 df = pd.read_csv(UNGD_happiness)
-df = df[(df["year"] >= 2015) & (df["year"] <= 2024)]
+df = df[(df["year"] >= 2015) & (df["year"] <= 2025)]
 df_pre = pd.read_csv(UNGD_pre_covid)
 df_post = pd.read_csv(UNGD_post_covid)
 
@@ -42,7 +42,7 @@ def summarize_happiness(df, label):
 
 # calculate stats for pre and post covid dataframes
 pre_stats = summarize_happiness(df_pre, "Pre-COVID (2015–2019)")
-post_stats = summarize_happiness(df_post, "Post-COVID (2020–2024)")
+post_stats = summarize_happiness(df_post, "Post-COVID (2020–2025)")
 
 results_df = pd.DataFrame([pre_stats, post_stats])
 
@@ -213,28 +213,6 @@ ci_difference = np.percentile(range_post_bootstrap - range_pre_bootstrap, [2.5, 
 
 print("\n95% confidence interval difference:", ci_difference, "\n")
 
-# note: histograms still need defined x/y-axes + labels!
-
-plt.figure()
-plt.hist(df_pre["happiness_average"], bins=50)
-plt.yticks()
-plt.title("Happiness average pre COVID")
-plt.xlabel("Average happiness")
-plt.ylabel("Frequency")
-plt.tight_layout
-plt.savefig("output/figures/UNGD_pre_comparison.png")
-
-plt.figure()
-plt.hist(df_post["happiness_average"], bins=50)
-plt.yticks()
-plt.title("Happiness average pre COVID")
-plt.xlabel("Average happiness")
-plt.ylabel("Frequency")
-plt.tight_layout
-plt.savefig("output/figures/UNGD_post_comparison.png")
-
-
-
 # Scatter plot for the full range of the data:
 
 plt.figure()
@@ -247,41 +225,42 @@ plt.scatter(
 )
 plt.title("Post and Pre COVID happiness")
 plt.xlabel("Happiness average")
-plt.ylabel("Happiness standard distribution")
+plt.ylabel("Happiness standard deviation")
 plt.tight_layout
 plt.savefig("output/figures/UNGD_Full_Range_Scatter.png")
 plt.close()
 
-# Scatter plot for the pre-covid dataframe:
+
+plt.figure()
+plt.hist(df_pre["happiness_average"], bins=50, label="Pre COVID", alpha=0.5)
+plt.hist(df_post["happiness_average"], bins=50, label="Post COVID", alpha=0.5)
+plt.legend(loc="best")
+plt.title("Happiness difference in pre and post COVID UNGDs")
+plt.xlabel("Average happiness")
+plt.ylabel("Frequency")
+plt.tight_layout
+plt.savefig("output/figures/UNGD_pre_post_comparison.png")
+plt.close()
 
 plt.figure()
 plt.scatter(
     df_pre["happiness_average"],
     df_pre["happiness_standard_deviation"],
     s=10,
-    alpha=0.35,
+    alpha=0.45,
     marker='1',
 )
-plt.title("Post and Pre COVID happiness")
-plt.xlabel("Happiness average")
-plt.ylabel("Happiness standard distribution")
-plt.tight_layout
-plt.savefig("output/figures/UNGD_pre_COVID_Scatter.png")
-plt.close()
-
-# Scatter plot for the post-covid dataframe:
-
-plt.figure()
 plt.scatter(
     df_post["happiness_average"],
     df_post["happiness_standard_deviation"],
     s=10,
-    alpha=0.35,
+    alpha=0.45,
     marker='1',
 )
-plt.title("Post-COVID happiness")
+plt.legend(loc="best")
+plt.title("Happiness avg vs std in pre and post COVID UNGDs")
 plt.xlabel("Happiness average")
-plt.ylabel("Happiness standard distribution")
+plt.ylabel("Happiness standard deviation")
 plt.tight_layout
-plt.savefig("output/figures/UNGD_post_COVID_Scatter.png")
+plt.savefig("output/figures/UNGD_pre_post_COVID_Scatter.png")
 plt.close()
