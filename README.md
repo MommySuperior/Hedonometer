@@ -1,6 +1,7 @@
 # Hedonometer: Happiness of UN General Debates Pre- and Post-COVID
+
   
-# Quantitative and Qualitative Exploration  
+## Quantitative and Qualitative Exploration  
   
 First, we investigate the **labMT 1.0** “Hedonometer” dataset, which attributes happiness scores to words based on ratings from Amazon Mechanical Turk participants. Using data analytic methods, we examine the statistical distribution of word happiness and scores and explore how language can mirror emotional patterns. By grounding quantitative and qualitative ways of exploration of the Hedonometer in our project, we investigate how sentiment is measured and what kind of limitations this dataset may undergo.
 
@@ -146,8 +147,9 @@ Second, I would diversify the rater pool and collect demographic information, al
 Third, I would expand beyond the 1-9 scale by asking raters to select emotion categories (joy, fear, anger, sadness) alongside the happiness score. This would distinguish between different kinds of negative emotions instead of lumping them all as "unhappy."
 Fourth, I would include frequency data beyond the top 5,000 and provide percentile ranks instead of arbitrary cutoffs, giving a more complete picture of language distribution.
 Finally, I would track changes over time by updating the dataset regularly to capture how word meanings evolve and to include new words (like "COVID") that have emerged since the dataset was created.
-
-# Inference  
+  
+  
+## Inference  
   
 For the second part of this research, we analyse speeches from the United Nations General Debates using computational text analysis. We do so by comparing the dataset to the clean labMT 1.0 dataset in order to assign happiness scores to each document. By using the UN General Debate Corpus, we treat the speeches as data and measure their emotional tones with the Hedonometer. We compare happiness scores across countries, years and topics, while at the same time exploring how different points of view in global political discourse vary over time.
   
