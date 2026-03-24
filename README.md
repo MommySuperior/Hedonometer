@@ -28,9 +28,7 @@ Furthermore, the data set contains 10222 rows and 8 columns. The missing rank va
 
 ### Sanity Checks  
 - We checked the word column for unique entries, ensuring that no duplicate words appear. This confirms that each word has a single associated happiness score.  
-  
 - We inspected a random sample of 15 rows to confirm that the dataset was correctly loaded and cleaned, and that numeric values were converted properly.  
-  
 - We identified the top 10 most positive and top 10 most negative words based on their average happiness scores. Many positive words align with positive emotions such as happiness and love, while most negative words correspond to concepts associated with suffering and death. 
   
 In this sense, these words reflect widely shared social understandings of what counts as positive or negative emotions. Emotional meaning is shaped by cultural norms, historical context and perspectives. The strong agreement around words such as “suicice”, “rape”, and “murder” suggest that these words show little disagreement, meaning most people agree they are strongly negative. Moreover, they are embedded in moral and legal frameworks that shape how people are expected to evaluate them. It reflects both shared emotional response and what social norms consider harmful and tragic. Thus, the dataset captures a particular social consensus rather than an objective and universal definition of emotion.  
@@ -178,6 +176,13 @@ First, we used the script to set the locations of the raw data and the processed
 Inside each session folder, the script found all .txt sub-files and copied them into the processed folder using shutil.copy2. We researched multiple ways to execute this action and found that this was the most efficient way for us to apply this function. This keeps the original files unchanged and also preserves their metadata.  
   
 We tokenized and cleaned the documents, after which we placed all documents in one table and converted it to a .csv file with the columns mentioned in the data dictionary.   
+
+### Sanity checks  
+
+- We checked the file names and file destinations check, which ensures that all the .txt files have been extracted and moved into their designated folder.
+- We checked the pre- and post-COVID groups for missing countries per year, which shows us that, in total, 62 speeches from specific countries were missing in the sessions from our chosen range of years.  
+- We verfied the average happiness per country, which shows the lowest, highest, and average happiness scores for the pre- and post-COVID groups.
+- We verified the average happiness of all countries per year, which shows the variability in average happiness per year in our chosen range.
   
 ### Pre- and Post-COVID Happiness Comparison in UN General Debate Speeches  
 The script loads the relevant datasets and focuses on speeches delivered between 2015 and 2025. The data are separated into two groups: a pre-COVID period (2015–2019) and a post-COVID period (2020–2025). Before we compare, we made sure that the code checks that the datasets contain the expected years and that the number of speeches per year is reasonable. These checks help confirm that the data have been filtered correctly and that the comparison between the two periods is valid.
