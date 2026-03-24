@@ -230,7 +230,7 @@ Figure 5. Post COVID range bootstrapping histogram:
 The difference between the two histograms and their overall mean and medians is negligible, and therefore irrelevant to our dataset. This however also implies a low uncertainty in our data.
   
 Figure 6. Pre and post COVID histogram comparison:
-![Alt text](output/figures/UNGD_pre_post_comparison)
+![Alt text](output/figures/UNGD_pre_post_comparison.png)
 
 A comparison of both pre and post covid happiness in the UN general debates reveals some interesting statistical findings. For example the median is different for both histograms, with the histogram representing the pre COVID data showing a higher happiness median. Another trend that appears in the histograms is the peaks and tails. The peak of the histogram representing pre COVID is higher, while the tails of the histogram representing post COVID appear as larger. Generally you can see the post COVID histograms as a backwards translation of the pre COVID graph.
   
