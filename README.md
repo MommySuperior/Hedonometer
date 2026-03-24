@@ -1,6 +1,8 @@
-# Hedonometer: Quantitative and Qualitative Exploration
-
-This group project investigates the **labMT 1.0** “hedonometer” dataset, which attribute happiness scores to words based on ratings from Amazon Mechanical Turk participants. Using data analytic methods, we examine the statistical distribution of word happiness and scores and explore how language can mirror emotional patterns. By grounding quantitative and qualitative ways of exploration of the Hedonometer in our project, we investigate how sentiment is measured and what kind of limitations this dataset may undergo.
+# Hedonometer: Happiness of UN General Debates Pre- and Post-COVID
+  
+# Quantitative and Qualitative Exploration  
+  
+First, we investigate the **labMT 1.0** “Hedonometer” dataset, which attributes happiness scores to words based on ratings from Amazon Mechanical Turk participants. Using data analytic methods, we examine the statistical distribution of word happiness and scores and explore how language can mirror emotional patterns. By grounding quantitative and qualitative ways of exploration of the Hedonometer in our project, we investigate how sentiment is measured and what kind of limitations this dataset may undergo.
 
 ## Dataset section  
 
@@ -147,7 +149,7 @@ Finally, I would track changes over time by updating the dataset regularly to ca
 
 # Inference  
   
-This project analyses speeches from the United Nations General Debate using computational text analysis. By using the UN General Debate Corpus, we treat the speeches as data and measure their emotional tones with the hedonometer (labMT word list). We compare happiness scores across countries, years or topics, while at the same time explore how different points of view in global political discourse vary over time.
+For the second part of this research, we analyse speeches from the United Nations General Debates using computational text analysis. We do so by comparing the dataset to the clean labMT 1.0 dataset in order to assign happiness scores to each document. By using the UN General Debate Corpus, we treat the speeches as data and measure their emotional tones with the Hedonometer. We compare happiness scores across countries, years and topics, while at the same time exploring how different points of view in global political discourse vary over time.
   
 ## Dataset
   
