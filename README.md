@@ -271,19 +271,19 @@ Our bootstrap considers each speech (document) as the unit for resampling. We re
 
 ### Consequences and Limitations  
 **1: Possible bias in happiness scores**  
-**The choice:** Relying on the happiness scores assigned by Amazon MTurks.  
-**The consequence:** The potential bias and lack of context that occurs in the labMT 1.0 dataset is transferred to the happiness scores of the United Nations General Debates speeches.  
-**Example:** As we showed in our critical reflection on the labMT 1.0 dataset, happiness ratings are highly subjective and can carry different connotations for people with different backgrounds.  
+- **The choice:** Relying on the happiness scores assigned by Amazon MTurks.  
+- **The consequence:** The potential bias and lack of context that occurs in the labMT 1.0 dataset is transferred to the happiness scores of the United Nations General Debates speeches.  
+- **Example:** As we showed in our critical reflection on the labMT 1.0 dataset, happiness ratings are highly subjective and can carry different connotations for people with different backgrounds.  
   
 **2: Exclusion of words from speeches**  
-**The choice:** Only using words from the United Nations General Debates dataset that also occurred in the labMT 1.0 dataset to measure the average happiness scores of the speeches.  
-**The consequence:** Words that did not occur in the labMT 1.0 dataset were excluded from our research, thus not part of the research results.  
-**Example:** the words “covid” and “corona” do not occur in the labMT 1.0 dataset, meaning that these words are not part of the average happiness scores of the United Nations General Debates speeches.  
+- **The choice:** Only using words from the United Nations General Debates dataset that also occurred in the labMT 1.0 dataset to measure the average happiness scores of the speeches.  
+- **The consequence:** Words that did not occur in the labMT 1.0 dataset were excluded from our research, thus not part of the research results.  
+- **Example:** the words “covid” and “corona” do not occur in the labMT 1.0 dataset, meaning that these words are not part of the average happiness scores of the United Nations General Debates speeches.  
   
 **3: Addressing missing countries**  
-**The choice:** Bootstrapping to compensate for missing countries.  
-**The consequence:** Not all countries within a year have the same happiness scores, meaning that our bootstrapped samples may not be fully representative.  
-**Example:** Our sanity checks show that the difference in average happiness scores between countries per group can be up to 0.30, for example, for Syria (5.28) and Oman (5.58) post-COVID.  
+- **The choice:** Bootstrapping to compensate for missing countries.  
+- **The consequence:** Not all countries within a year have the same happiness scores, meaning that our bootstrapped samples may not be fully representative.  
+- **Example:** Our sanity checks show that the difference in average happiness scores between countries per group can be up to 0.30, for example, for Syria (5.28) and Oman (5.58) post-COVID.  
   
 ## Repository structure  
   
