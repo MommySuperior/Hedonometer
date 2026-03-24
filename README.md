@@ -280,13 +280,13 @@ The UN General Debates corpus from 1970 to 2014 was compiled as described in the
 3. **Translation**: all speeches were translated to English  
   
 4. **Cleaning and preprocessing text**:  
-  - Noise was removed from OCR outputs
-  - Formatting was standardized
+   - Noise was removed from OCR outputs
+   - Formatting was standardized
   
 5. **Storing each speech as a document with metadata**:  
-  - Country
-  - Year
-  - Session
+   - Country
+   - Year
+   - Session
   
 6. **Address geopolitical changes**: historical states were renamed as their successors if necessary (e.g. the USSR is renamed as Russia)  
   
