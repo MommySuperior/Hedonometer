@@ -109,14 +109,77 @@ post_covid = df[(df["year"] >= 2020) & (df["year"] <= 2024)]
 pre_covid.to_csv("data/processed/UNGD_pre_covid.csv", index=False)
 post_covid.to_csv("data/processed/UNGD_post_covid.csv", index=False)
 
+#-----------------------------------------------------
+# Check average happiness per year
+#-----------------------------------------------------
+
 pre_per_year = pre_covid.groupby("year")["happiness_average"].mean()
 post_per_year = post_covid.groupby("year")["happiness_average"].mean()
+
 print("\nAverage happiness per year pre-COVID:")
 print(pre_per_year)
 print("\nAverage happiness per year post-COVID:")
 print(post_per_year)
 
-print("UNGD Data dictionary:")
+#-----------------------------------------------------
+# Check averge happiness per country
+#-----------------------------------------------------
+
+pre_per_country = pre_covid.groupby("country")["happiness_average"].mean()
+post_per_country = post_covid.groupby("country")["happiness_average"].mean()
+
+pre_stats = pd.DataFrame({
+    "lowest_happiness": [pre_per_country.idxmin()],
+    "lowest_value": [pre_per_country.min()],
+    "highest_country": [pre_per_country.idxmax()],
+    "highest_happiness": [pre_per_country.max()],
+    "average_happiness": [pre_per_country.mean()]
+})
+
+post_stats = pd.DataFrame({
+    "lowest_country": [post_per_country.idxmin()],
+    "lowest_happiness": [post_per_country.min()],
+    "highest_country": [post_per_country.idxmax()],
+    "highest_happiness": [post_per_country.max()],
+    "average_happiness": [post_per_country.mean()]
+})
+
+print("\nMin, max, and average happiness pre-COVID:")
+print(pre_stats.to_string(index=False))
+print("\nMin, max, and average happiness post-COVID:")
+print(post_stats.to_string(index=False))
+
+#-----------------------------------------------------
+# Check missing countries
+#-----------------------------------------------------
+
+all_countries = df["country"].unique()
+
+pre_covid_countries = pre_covid.pivot(index="country", columns="year", values="session").reindex(index=all_countries)
+pre_covid_countries = pre_covid_countries.astype("Int64")
+# print("\nMissing countries pre-COVID:")
+# print("\n", pre_covid_countries.to_string(index=True))
+
+post_covid_countries = post_covid.pivot(index="country", columns="year", values="session").reindex(index=all_countries)
+post_covid_countries = post_covid_countries.astype("Int64")
+# print("\nMissing countries post-COVID:")
+# print("\n", post_covid_countries.to_string(index=True))
+
+#-----------------------------------------------------
+# Number of countries missing per year
+#-----------------------------------------------------
+
+print("\nNumber of missing countries per year:")
+missing_countries_pre = pre_covid_countries.isna().sum(axis=0)
+missing_countries_post = post_covid_countries.isna().sum(axis=0)
+print(missing_countries_pre)
+print(missing_countries_post)
+
+#-----------------------------------------------------
+# UNGD data dictionary
+#-----------------------------------------------------
+
+print("UNGD_happiness data dictionary:")
 
 col_dtypes = df.dtypes.astype(str).reset_index()
 col_dtypes.columns = ["column", "dtype"]
@@ -128,19 +191,3 @@ UNGD_data_dictionary = col_dtypes.merge(missing, on="column")
 
 print(UNGD_data_dictionary.to_string(index=False))
 UNGD_data_dictionary.to_csv("data/processed/UNGD_data_dictionary.csv", index=False)
-
-#-----------------------------------------------------
-# Check missing countries
-#-----------------------------------------------------
-
-all_countries = df["country"].unique()
-
-pre_covid_countries = pre_covid.pivot(index="country", columns="year", values="session").reindex(index=all_countries)
-pre_covid_countries = pre_covid_countries.astype("Int64")
-print("\nMissing countries pre-COVID:")
-print("\n", pre_covid_countries.to_string(index=True))
-
-post_covid_countries = post_covid.pivot(index="country", columns="year", values="session").reindex(index=all_countries)
-post_covid_countries = post_covid_countries.astype("Int64")
-print("\nMissing countries post-COVID:")
-print("\n", post_covid_countries.to_string(index=True))
