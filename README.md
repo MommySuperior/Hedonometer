@@ -169,20 +169,22 @@ The corpus was compiled by Alexander Baturo, Niheer Dasandi, and Slava J. Mikhay
 ## Methods section  
   
 ### Dataset loading  
-For this part we wrote a Python script to load and organize the dataset files. The script looks in the raw data folder that contains the original session files (the files are named „session 1 – 1946”, „...”, „session 80 – 2025” and they all contain sub-files) and extracts and copies them into a processed data folder so they are easier to use later.  
-  
-First, we used the script to set the locations of the raw data and the processed data folders (using pathlib), into the already made processed data folder. The script then goes through all folders inside the raw data directory and collects the valid session folders while ignoring hidden system files, meaning everything except folders and files that start with a period. Then, we created a loop to select just the session files that interested us, so the script loops through sessions 55 to 80, which corresponds to years 2000 to 2025. For each number, it searches for a folder whose name starts with "Session <number> -". After finding the already existing folder, the script created a matching folder in the processed data directory.  
-  
-Inside each session folder, the script found all .txt sub-files and copied them into the processed folder using shutil.copy2. We researched multiple ways to execute this action and found that this was the most efficient way for us to apply this function. This keeps the original files unchanged and also preserves their metadata.  
-  
-We tokenized and cleaned the documents, after which we placed all documents in one table and converted it to a .csv file with the columns mentioned in the data dictionary.   
+We started handling the UN General Debates dataset by writing a Python script to load and organize the text files. The file names contain the country, session, and year of the speech stored in the document. The script extracts and copies the files into our processed data folder, keeping the original folder structure of the dataset in tact.
+- First, we set the paths to the locations of the raw data and the processed data folders using `pathlib`. 
+- The script then iterates over all folders inside the raw data folder and collects the valid session folders while ignoring hidden metadata files, meaning the loop extracts all folders except those that start with a period. 
+- Inside each session folder, we extracted all .txt sub-files and copied them into the processed folder using `shutil.copy2`. This way, the original files remain unchanged and their metadata is preserved.
+- We tokenized the documents, removed basic punctuation, and converted the words into lowercase
+- We then compared the cleaned documents directly to the labMT 1.0 dataset using an iteration loop, in order to assign happiness scores to each word in the UN General Debates speeches that also occurred in the labMT 1.0 dataset.
+- We appended the metadata and average happiness scores for each document as rows in one table and converted the table to a .csv file.
+- Furthermore, we made two subsets with year ranges from 2015 to 2019 and 2020 to 2024, serving as our pre- and post-COVID groups.
+ 
 
 ### Sanity checks  
-
-- We checked the file names and file destinations check, which ensures that all the .txt files have been extracted and moved into their designated folder.
-- We checked the pre- and post-COVID groups for missing countries per year, which shows us that, in total, 62 speeches from specific countries were missing in the sessions from our chosen range of years.  
-- We verfied the average happiness per country, which shows the lowest, highest, and average happiness scores for the pre- and post-COVID groups.
-- We verified the average happiness of all countries per year, which shows the variability in average happiness per year in our chosen range.
+To check the files for missingness and correct assignment of happiness scores, we implemented several sanity checks.
+- We printed all the file names and file destinations to ensure that all the .txt files have been extracted and moved into their designated folder.
+- Then, we checked the pre- and post-COVID groups for missing countries per year, which shows us that, in total, 62 speeches from specific countries were missing in the sessions from our chosen range of years. By implementing this check, we can address the missingness of countries in both our methodology and the critical reflection.
+- We verified the average happiness scores per country, which shows the lowest, highest, and average happiness scores for the pre- and post-COVID groups. This not only allows us to see whether happiness scores were correctly assigned, but it also gives us an indication of the variability in average happiness scores amongst countries.
+- Lastly, we verified the average happiness of all countries per year, which shows the variability in average happiness per year in our chosen range. Similar to our happiness per country check, this allows us to both verify whether happiness scores were correctly assigned and to get an idea of the variability of the scores amongst individual years.
   
 ### Pre- and Post-COVID Happiness Comparison in UN General Debate Speeches  
 The script loads the relevant datasets and focuses on speeches delivered between 2015 and 2025. The data are separated into two groups: a pre-COVID period (2015–2019) and a post-COVID period (2020–2025). Before we compare, we made sure that the code checks that the datasets contain the expected years and that the number of speeches per year is reasonable. These checks help confirm that the data have been filtered correctly and that the comparison between the two periods is valid.
