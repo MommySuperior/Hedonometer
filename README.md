@@ -212,12 +212,12 @@ This plot shows us that much of the dataset clusters around 5.4 and 5.5 happines
 Figure 2. Pre and post COVID scatter plot comparison:   
 ![Alt text](output/figures/UNGD_pre_post_COVID_Scatter.png)
   
-Splitting the two time frames into different groups reveals more about the differance of the two ranges. In doing this the plot still shows one consistent area of happiness however it would seem that the data points representing the pre COVID time range prove to be further to the right and therefore to be happier then the points that represent post COVID times. This is further confirmed by figure 6.
+Splitting the two time frames into different groups reveals more about the differance of the two ranges. In doing this the plot still shows one consistent area of happiness however it would seem that the data points representing the pre COVID time range prove to be further to the right and therefore to be happier then the points that represent post COVID times. This is further confirmed by figure 6. However this may not be the case in reality. Due to our confidence interval having overlaped with 0 (implying clear statistical insignificance) this may suggest any differences in the visualizations of the data to be merely statistical noise produced by the dataset and our sampling method.
 
 Figure 3. Full range bootstrapping histogram:  
 ![Alt text](output/figures/UNGD_summary_bootstrap.png)  
   
-This is the first histogram which we used to obtain information about our data uncertainty as well as our confidence interval. Alongside this graph, we extracted a bootstrapped value for the mean, median as well as the standard deviation. The value of the bootstrapped mean was close to our overall mean, with a difference only being observed past the 4th or 5th decimal point. Another important pattern to notice is the bell curve of the bootstrapped histogram which occurs due to the central limit theorem. This normal distribution presents itself despite the un-bootstrapped histograms (see figures 7 and 8) presenting a skewed distribution. (again the product of the central limit theorem)
+This is the first histogram which we used to obtain information about our data uncertainty as well as our confidence interval. Alongside this graph, we extracted a bootstrapped value for the mean, median as well as the standard deviation. The value of the bootstrapped mean was close to our overall mean, with a difference only being observed past the 4th or 5th decimal point. Another important pattern to notice is the bell curve of the bootstrapped histogram which occurs due to the central limit theorem. This normal distribution presents itself despite the un-bootstrapped histograms (see figures 4 and 5) presenting a skewed distribution. (again the product of the central limit theorem)
   
 Figure 4. Pre COVID range bootstrapping histogram:  
 ![Alt text](output/figures/UNGD_pre_covid_bootstrap.png)  
@@ -232,7 +232,7 @@ The difference between the two histograms and their overall mean and medians is 
 Figure 6. Pre and post COVID histogram comparison:
 ![Alt text](output/figures/UNGD_pre_post_comparison.png)
 
-A comparison of both pre and post covid happiness in the UN general debates reveals some interesting statistical findings. For example the median is different for both histograms, with the histogram representing the pre COVID data showing a higher happiness median. Another trend that appears in the histograms is the peaks and tails. The peak of the histogram representing pre COVID is higher, while the tails of the histogram representing post COVID appear as larger. Generally you can see the post COVID histograms as a backwards translation of the pre COVID graph.
+A comparison of both pre and post covid happiness in the UN general debates reveals some interesting statistical findings. For example the median is different for both histograms, with the histogram representing the pre COVID data showing a higher happiness median. Another trend that appears in the histograms is the peaks and tails. The peak of the histogram representing pre COVID is higher, while the tails of the histogram representing post COVID appear as larger. Generally you can see the post COVID histograms as a backwards translation of the pre COVID graph. While this may imply a difference, once again due to our confidence interval showing a near 0 value suggests this to be just statisical noise with no real statisical implications. 
   
 ### Inference summaries    
   
