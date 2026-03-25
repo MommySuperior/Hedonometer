@@ -308,7 +308,7 @@ The UN General Debates corpus from 1970 to 2014 was compiled as described in the
 - **Example:** Our sanity checks show that the difference in average happiness scores between countries per group can be up to 0.30, for example, for Syria (5.28) and Oman (5.58) post-COVID.
 
 ### Future research
-To identify what exactly is the cause of the aforementioned stability amongst UN General Debates speeches, further inquiry is needed into the exact vocabulary used per speech. That way, it can be said with more certainty whether specific discourse is responsible for the little variability in happiness amongst UN General Debates speeches. Additionally, future research should address the difference between average happiness scores amongst countries in more detail, since this variability is significantly higher than the variability amongst years.
+To identify what exactly is the cause of the aforementioned stability of average happiness scores amongst UN General Debates speeches for the pre- and post-COVID groups, further inquiry is needed into the exact vocabulary used per speech. That way, it can be said with more certainty whether specific discourse is responsible for the little variability in happiness amongst UN General Debates speeches. Additionally, future research should address the difference between average happiness scores amongst countries in more detail, since this variability is significantly higher than the variability amongst years.
   
 ## Repository structure  
   
