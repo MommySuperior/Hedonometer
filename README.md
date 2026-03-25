@@ -184,16 +184,9 @@ To check the files for missingness and correct assignment of happiness scores, w
 - We printed all the file names and file destinations to ensure that all the .txt files have been extracted and moved into their designated folder.
 - Then, we checked the pre- and post-COVID groups for missing countries per year, which shows us that, in total, 62 speeches from specific countries were missing in the sessions from our chosen range of years. By implementing this check, we can address the missingness of countries in both our methodology and the critical reflection.
 - We verified the average happiness scores per country, which shows the lowest, highest, and average happiness scores for the pre- and post-COVID groups. This not only allows us to see whether happiness scores were correctly assigned, but it also gives us an indication of the variability in average happiness scores amongst countries.
-- Lastly, we verified the average happiness of all countries per year, which shows the variability in average happiness per year in our chosen range. Similar to our happiness per country check, this allows us to both verify whether happiness scores were correctly assigned and to get an idea of the variability of the scores amongst individual years.
-  
-### Pre- and Post-COVID Happiness Comparison in UN General Debate Speeches  
-The script loads the relevant datasets and focuses on speeches delivered between 2015 and 2025. The data are separated into two groups: a pre-COVID period (2015–2019) and a post-COVID period (2020–2025). Before we compare, we made sure that the code checks that the datasets contain the expected years and that the number of speeches per year is reasonable. These checks help confirm that the data have been filtered correctly and that the comparison between the two periods is valid.
-
-To summarize the data, the script calculates several descriptive statistics for each period, including the number of speeches, the mean happiness score, the median happiness score, and the standard deviation. These statistics provide an overview of how happiness scores are distributed within each group.
-
-The main quantity of interest is the difference in mean happiness between post-COVID and pre-COVID speeches, defined as mean(post-COVID) minus mean(pre-COVID). To ensure that the results are not driven by extreme values, a robustness check is performed using the median happiness score instead of the mean. The similarity between the mean and median comparisons suggests that the overall result is stable and not sensitive to outliers.
-
-Finally, the summary statistics are organized into a table and exported as a CSV file for use in further analysis and reporting within the project.  
+- We also verified the average happiness of all countries per year, which shows the variability in average happiness per year in our chosen range. Similar to our happiness per country check, this allows us to both verify whether happiness scores were correctly assigned and to get an idea of the variability of the scores amongst individual years.
+- Lastly, we created a data dictionary, which shows us the data types stored in the columns of our dataframe as well as notes on missingness.
+ 
   
 ### Bootstrap sampling  
 
