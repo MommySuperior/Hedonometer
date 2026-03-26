@@ -158,7 +158,7 @@ For the second part of this research, we analyse speeches from the United Nation
 The dataset which was used in this project comes from the United Nations General Debate Corpus. It contains various transcripts of speeches which were delivered by representatives of UN member states during the annual United Nations General Assembly General Debate in New York. Throughout these debates, governments presented their views on major global issues namely international security, climate change, development and diplomacy.
   
 The corpus was compiled by Alexander Baturo, Niheer Dasandi, and Slava J. Mikhaylov (2017) and includes over 7,00 speeches delivered between 1970 and 2014. This dataset is publicly available through the Harvard Dataverse, where the authors provided structured text data suitable for computational analysis. As the speeches are delivered annually by most UN member states, the corpus allows researchers to measure political discourse across countries and over time.
-  
+
 ### Data dictionary (per column)  
    - **year**: The year in which the General Debate statement in the document was delivered. The data type object of this column is a 64-bit integer. No years were missing, meaning each document name contained a year.
    - **country**: The country that delivered the General Debate statement in the document. The data type object of this column is a string. No country names were missing, meaning each document name contained a country name.
@@ -190,17 +190,26 @@ To check the files for missingness and correct assignment of happiness scores, w
   
 ### Bootstrap sampling  
 
-Using our bootstrapping function we resampled the documents using the numpy’s random.randint() method to pick at random samples from our text at a defined rate of iteration (Nboot).Next we applied an individually defined method to the sample, in our case it was numpy’s .mean() in order to recompute our statistic for each random sample fetched.  
-  
-We bootstrap sampled the full range of years 2015 to 2024 as well as the pre-COVID and post-COVID groups with 2000 iterations for sufficient accuracy. We chose to use mean rather than median based on statistics conventions for normally distributed data.  
+We created a function to simplify bootstrapping data for use in multiple histograms. This function has three main parameters it takes to operate. Firstly a value defined as x is passed into the function and is then subsequently turned into a numpy array. Firstly we define a table called resampled_stats, after which we then start an iterative loop for a predetermined second parameter for the function. We then pick a random sample from our dataset using the random.randint() method in numpy. This sample is then passed into a function called “bstatistic” which applies our third parameter, statsfunc to the sample. These samples are then appended to the resampled_stats table.
+
+Next, we applied an individually defined method to the sample, in our case it was numpy’s .mean() in order to recompute our statistic for each random sample fetched. This was done for all three histograms, with the only parameter changed between all three being x, the dataframe we used to define pre and post COVID years.
+
+We bootstrapped the full range of years 2015 to 2024 as well as the pre-COVID and post-COVID groups with 2000 iterations for sufficient accuracy. We chose to use mean rather than median based on statistics conventions for normally distributed data.
+
   
 ### Confidence intervals  
 
-We calculated the percentile confidence intervals of both the pre-COVID group and the post-COVID group, as well as the difference between these groups, to measure whether the difference in average happiness for both groups is statistically significant.  
+We calculated the percentile confidence intervals of both the pre-COVID group and the post-COVID group, as well as the difference between these groups, to measure whether the difference in average happiness for both groups is statistically significant. 
 
 ### Visualizations  
 
-We opted to use scatter plots to show the relationship between the data and the standard deviation of the data. This relationship tells us about the spread of the data, normality, as well as the ability to detect outliers in the data. In addition we opted to use histograms to display our data’s pre and post covid happiness scores to compliment the previously mentioned scatter plots. To assess uncertainty as well as the proximity to reality, we bootstrapped the data frames and plotted them as histograms too.  
+Visualizations
+We opted to use scatter plots to show the relationship between the data and the standard deviation of the data. This relationship tells us about the spread of the data, normality, as well as the ability to detect outliers in the data.
+
+In addition we opted to use histograms to display our data’s pre and post covid happiness scores to compliment the previously mentioned scatter plots. To assess uncertainty as well as the proximity to reality, we bootstrapped the data frames and plotted them as histograms too. These bootstrap histograms followed the central limit theorem which tells us that our data was near accurate to reality. We further confirmed this by finding the difference between the dataframe means and their bootstrapped means which displayed high closeness.
+
+The comparison histogram itself revealed slight variations, yet we can attribute this to statistical noise due to our 95% confidence interval results.
+
   
 ## Results section  
 
@@ -236,15 +245,20 @@ A comparison of both pre and post covid happiness in the UN general debates reve
   
 ### Inference summaries    
   
-Pre-COVID speeches (2015-2019) exhibit a mean happiness of 5.4507 (n= 974, SD = 0.0646), while Post-COVID speeches (2020-2025) demonstrate a mean happiness of 5.4488 (n = 1154, SD = 0.0670). The point estimate for the shift is:   
-  
-Difference = mean(post) - mean(pre) = [5.4488 - 5.4507] = -0.00193  
-Difference = mean(post) - mean(pre) [5.4488 - 5.4507] = -0.00193  
-95% CI (pre mean): 5.4466, 4547  
-95% CI (post mean): 5.4449, 5.4527  
-95% CI (difference = post - (pre)): [-0.0073, 0.0039]  
-  
-This represents a negligible difference on the happiness scale. The bootstrap histograms (Figures 1-3) indicate that uncertainty surrounding the mean happiness estimates before and after COVID is minimal. The estimated difference is difference = mean(post) - mean(pre) = 0.00193, and the 95% confidence interval for the difference is [-0.0073, 0.0039]. Since this interval encompasses 0, we cannot conclusively determine a rise or decline in mean happiness post-2020.  
+Pre-COVID speeches (2015-2019) exhibit a mean happiness of 5.4507 (n= 974, SD = 0.0646), while Post-COVID speeches (2020-2025) demonstrate a mean happiness of 5.4488 (n = 1154, SD = 0.0670). The point estimate for the shift is: 
+
+ = mean(post) - mean(pre) = [5.4488 - 5.4507] = -0.00193
+
+ = mean(post) - mean(pre) [5.4488 - 5.4507] = -0.00193
+
+95% CI (pre mean): 5.4466, 4547
+
+95% CI (post mean): 5.4449, 5.4527
+
+95% CI (= post - (pre)): [-0.0073, 0.0039]
+
+This represents a negligible difference on the happiness scale. The bootstrap histograms (Figures 1-3) indicate that uncertainty surrounding the mean happiness estimates before and after COVID is minimal. The estimated difference is  = mean(post) - mean(pre) = 0.00193, and the 95% confidence interval for  is [-0.0073, 0.0039]. Since this interval encompasses 0, we cannot conclusively determine a rise or decline in mean happiness post-2020.
+
   
 ## Qualitative analysis of results
   
