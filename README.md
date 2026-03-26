@@ -255,9 +255,6 @@ A possible cause for this stability of emotional tonality across speeches, years
 Another possible explanation for the stability in happiness is the consistency of emotional charge of topics discussed. The UN General Debates primarily discuss “major issues in world politics” (1), meaning that the speeches generally revolve around serious themes and topics. This causes UN General Debates discourse to be consistently problem-oriented, setting a baseline emotional tone for all speeches. This means that, even as the topics of the debates change, the tone remains relatively consistent amongst different time ranges.
   
 ## Critical reflection  
-  
-Our bootstrap considers each speech (document) as the unit for resampling. We resample speeches with replacement for each time period, determine the variability of the averages, and their differences under repeated sampling. This indirectly regards talks as autonomous observations. A significant restriction is that the independence assumption is merely approximate, as countries are represented multiple times over years, resulting in clustered observations by country and the potential for rhetorical styles to endure across time. Moreover, UN General Debate speeches represent a formal diplomatic category, and hedonometer-based scoring and analysis inadequately cover context such as dissent, sarcasm, or specific strategy phrasing, which might influence the expression of the exact “happiness” in political discourse.  
-
 ### Reconstructing the Pipeline (Data Provenance)  
   
 The UN General Debates corpus from 1970 to 2014 was compiled as described in the steps below (Baturo, Dasandi, and Mikhaylov 2017). However, since the paper was published, new speeches have been added from years 1946 to 1969 and from 2015 to 2025. It is unclear whether the same steps were taken for these speeches.  
