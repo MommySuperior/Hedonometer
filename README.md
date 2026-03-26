@@ -1,5 +1,5 @@
 # Hedonometer: Happiness of UN General Debates Pre- and Post-COVID
-
+Our project investigates two datasets, the labMT 1.0 dataset, which contains words and corresponding happiness scores, serving as a Hedonometer to score other textual data with, and the United Nations General Debates dataset, which contains speeches from the UN General Assembly. We compare the datasets to measure to what extent the corona pandemic influenced the emotional tone of these speeches.
   
 ## Quantitative and Qualitative Exploration  
   
@@ -28,9 +28,7 @@ Furthermore, the data set contains 10222 rows and 8 columns. The missing rank va
 
 ### Sanity Checks  
 - We checked the word column for unique entries, ensuring that no duplicate words appear. This confirms that each word has a single associated happiness score.  
-  
 - We inspected a random sample of 15 rows to confirm that the dataset was correctly loaded and cleaned, and that numeric values were converted properly.  
-  
 - We identified the top 10 most positive and top 10 most negative words based on their average happiness scores. Many positive words align with positive emotions such as happiness and love, while most negative words correspond to concepts associated with suffering and death. 
   
 In this sense, these words reflect widely shared social understandings of what counts as positive or negative emotions. Emotional meaning is shaped by cultural norms, historical context and perspectives. The strong agreement around words such as “suicice”, “rape”, and “murder” suggest that these words show little disagreement, meaning most people agree they are strongly negative. Moreover, they are embedded in moral and legal frameworks that shape how people are expected to evaluate them. It reflects both shared emotional response and what social norms consider harmful and tragic. Thus, the dataset captures a particular social consensus rather than an objective and universal definition of emotion.  
@@ -171,22 +169,24 @@ The corpus was compiled by Alexander Baturo, Niheer Dasandi, and Slava J. Mikhay
 ## Methods section  
   
 ### Dataset loading  
-For this part we wrote a Python script to load and organize the dataset files. The script looks in the raw data folder that contains the original session files (the files are named „session 1 – 1946”, „...”, „session 80 – 2025” and they all contain sub-files) and extracts and copies them into a processed data folder so they are easier to use later.  
-  
-First, we used the script to set the locations of the raw data and the processed data folders (using pathlib), into the already made processed data folder. The script then goes through all folders inside the raw data directory and collects the valid session folders while ignoring hidden system files, meaning everything except folders and files that start with a period. Then, we created a loop to select just the session files that interested us, so the script loops through sessions 55 to 80, which corresponds to years 2000 to 2025. For each number, it searches for a folder whose name starts with "Session <number> -". After finding the already existing folder, the script created a matching folder in the processed data directory.  
-  
-Inside each session folder, the script found all .txt sub-files and copied them into the processed folder using shutil.copy2. We researched multiple ways to execute this action and found that this was the most efficient way for us to apply this function. This keeps the original files unchanged and also preserves their metadata.  
-  
-We tokenized and cleaned the documents, after which we placed all documents in one table and converted it to a .csv file with the columns mentioned in the data dictionary.   
-  
-### Pre- and Post-COVID Happiness Comparison in UN General Debate Speeches  
-The script loads the relevant datasets and focuses on speeches delivered between 2015 and 2025. The data are separated into two groups: a pre-COVID period (2015–2019) and a post-COVID period (2020–2025). Before we compare, we made sure that the code checks that the datasets contain the expected years and that the number of speeches per year is reasonable. These checks help confirm that the data have been filtered correctly and that the comparison between the two periods is valid.
+We started handling the UN General Debates dataset by writing a Python script to load and organize the text files. The file names contain the country, session, and year of the speech stored in the document. The script extracts and copies the files into our processed data folder, keeping the original folder structure of the dataset in tact.
+- First, we set the paths to the locations of the raw data and the processed data folders using `pathlib`. 
+- The script then iterates over all folders inside the raw data folder and collects the valid session folders while ignoring hidden metadata files, meaning the loop extracts all folders except those that start with a period. 
+- Inside each session folder, we extracted all .txt sub-files and copied them into the processed folder using `shutil.copy2`. This way, the original files remain unchanged and their metadata is preserved.
+- We tokenized the documents, removed basic punctuation, and converted the words into lowercase
+- We then compared the cleaned documents directly to the labMT 1.0 dataset using an iteration loop, in order to assign happiness scores to each word in the UN General Debates speeches that also occurred in the labMT 1.0 dataset.
+- We appended the metadata and average happiness scores for each document as rows in one table and converted the table to a .csv file.
+- Furthermore, we made two subsets with year ranges from 2015 to 2019 and 2020 to 2024, serving as our pre- and post-COVID groups.
+ 
 
-To summarize the data, the script calculates several descriptive statistics for each period, including the number of speeches, the mean happiness score, the median happiness score, and the standard deviation. These statistics provide an overview of how happiness scores are distributed within each group.
-
-The main quantity of interest is the difference in mean happiness between post-COVID and pre-COVID speeches, defined as mean(post-COVID) minus mean(pre-COVID). To ensure that the results are not driven by extreme values, a robustness check is performed using the median happiness score instead of the mean. The similarity between the mean and median comparisons suggests that the overall result is stable and not sensitive to outliers.
-
-Finally, the summary statistics are organized into a table and exported as a CSV file for use in further analysis and reporting within the project.  
+### Sanity checks  
+To check the files for missingness and correct assignment of happiness scores, we implemented several sanity checks.
+- We printed all the file names and file destinations to ensure that all the .txt files have been extracted and moved into their designated folder.
+- Then, we checked the pre- and post-COVID groups for missing countries per year, which shows us that, in total, 62 speeches from specific countries were missing in the sessions from our chosen range of years. By implementing this check, we can address the missingness of countries in both our methodology and the critical reflection.
+- We verified the average happiness scores per country, which shows the lowest, highest, and average happiness scores for the pre- and post-COVID groups. This not only allows us to see whether happiness scores were correctly assigned, but it also gives us an indication of the variability in average happiness scores amongst countries.
+- We also verified the average happiness of all countries per year, which shows the variability in average happiness per year in our chosen range. Similar to our happiness per country check, this allows us to both verify whether happiness scores were correctly assigned and to get an idea of the variability of the scores amongst individual years.
+- Lastly, we created a data dictionary, which shows us the data types stored in the columns of our dataframe as well as notes on missingness.
+ 
   
 ### Bootstrap sampling  
 
@@ -227,7 +227,7 @@ The same can be said for the pre covid bootstrapped histogram. The graph present
 Figure 5. Post COVID range bootstrapping histogram:  
 ![Alt text](output/figures/UNGD_post_covid_bootstrap.png)  
   
-The difference between the two histograms and their overall mean and medians is negligible, and therefore irrelevant to our dataset. This however also implies a low uncertainty in our data.
+The difference between the two histograms and their overall mean and medians is negligible. This however also implies a low uncertainty in our data.
   
 Figure 6. Pre and post COVID histogram comparison:
 ![Alt text](output/figures/UNGD_pre_post_comparison.png)
@@ -248,11 +248,66 @@ This represents a negligible difference on the happiness scale. The bootstrap hi
   
 ## Qualitative analysis of results
   
-The point estimate difference  = -0.00193 indicates the post-COVID average speech happiness is marginally lower than the pre-COVID average. Nonetheless, the pre/post difference is minimal, therefore we depend on estimation instead of only the point estimate because the pre/post difference is so minor. The 95% confidence range for  using bootstrap resampling (2000 iterations) is -0.0073, 0.0039, which includes 0. The direction of change is ambiguous, as the actual difference may be marginally positive or marginally negative. As a result, we should proceed with caution when claiming that average speech happiness would rise or fall after 2020.  
+Based on our results, we found that the difference in happiness pre- and post-COVID is statistically insignificant. The overlap of the confidence interval with zero implies a marginal difference in average happiness scores between the groups. However, this marginal difference is not meaningless. Our research indicates that the happiness of UN General Debates speeches is stable across years and countries, implying consistency in the tone used in the speeches despite variability of topics. Based on additional sanity checks, we found that this stability is not only present amongst the pre- and post-COVID groups, but also between individual years. This is visible when looking at the maximum deviations in our chosen range of 0.025 between 2019 and 2022.   
+  
+A possible cause for this stability of emotional tonality across speeches, years, and countries is the highly “formal and institutionalised setting” (Baturo, Dasandi, and Mikhaylov 2017, 2) and, consequently, tone of the UN General Debates. This formality promotes emotionally restrained language rather than emotionally charged language (3). Additionally, speakers participate in “strategic signalling” (3), meant to influence the perception of both the states speakers themselves represent and other states, as well as accomplish other political goals. This strategic signalling results in a tendency towards diplomatic discourse.   
+  
+Another possible explanation for the stability in happiness is the consistency of emotional charge of topics discussed. The UN General Debates primarily discuss “major issues in world politics” (1), meaning that the speeches generally revolve around serious themes and topics. This causes UN General Debates discourse to be consistently problem-oriented, setting a baseline emotional tone for all speeches. This means that, even as the topics of the debates change, the tone remains relatively consistent amongst different time ranges.
   
 ## Critical reflection  
+### Reconstructing the Pipeline (Data Provenance)  
   
-Our bootstrap considers each speech (document) as the unit for resampling. We resample speeches with replacement for each time period, determine the variability of the averages, and their differences under repeated sampling. This indirectly regards talks as autonomous observations. A significant restriction is that the independence assumption is merely approximate, as countries are represented multiple times over years, resulting in clustered observations by country and the potential for rhetorical styles to endure across time. Moreover, UN General Debate speeches represent a formal diplomatic category, and hedonometer-based scoring and analysis inadequately cover context such as dissent, sarcasm, or specific strategy phrasing, which might influence the expression of the exact “happiness” in political discourse.  
+The UN General Debates corpus from 1970 to 2014 was compiled as described in the steps below (Baturo, Dasandi, and Mikhaylov 2017). However, since the paper was published, new speeches have been added from years 1946 to 1969 and from 2015 to 2025. It is unclear whether the same steps were taken for these speeches.  
+  
+1. **Collecting the speeches**: speeches from 1970 to 2014 were collected from UN archives  
+  
+2. **Digitization**: pre-1992 scanned documents were converted into machine-readable text using OCR  
+  
+3. **Translation**: all speeches were translated to English  
+  
+4. **Cleaning and preprocessing text**:  
+   - Noise was removed from OCR outputs
+   - Formatting was standardized
+  
+5. **Storing each speech as a document with metadata**:  
+   - Country
+   - Year
+   - Session
+  
+6. **Addressing geopolitical changes**: historical states were renamed as their successors if necessary (e.g. the USSR is renamed as Russia)  
+  
+7. **Creating the corpus**: the 7314 speeches from 1970 to 2014 were compiled into one dataset  
+  
+### Consequences and Limitations  
+**1: Possible bias in happiness scores**  
+- **The choice:** Relying on the happiness scores assigned by Amazon MTurks.  
+- **The consequence:** The potential bias and lack of context that occurs in the labMT 1.0 dataset is transferred to the happiness scores of the United Nations General Debates speeches.  
+- **Example:** As we showed in our critical reflection on the labMT 1.0 dataset, happiness ratings are highly subjective and can carry different connotations for people with different backgrounds.  
+  
+**2: Exclusion of words from speeches**  
+- **The choice:** Only using words from the United Nations General Debates dataset that also occurred in the labMT 1.0 dataset to measure the average happiness scores of the speeches.  
+- **The consequence:** Words that did not occur in the labMT 1.0 dataset were excluded from our research, thus not part of the research results.  
+- **Example:** the words “covid” and “corona” do not occur in the labMT 1.0 dataset, meaning that these words are not part of the average happiness scores of the United Nations General Debates speeches.  
+  
+**3: Addressing missing countries**  
+- **The choice:** Bootstrapping to compensate for missing countries.  
+- **The consequence:** Not all countries within a year have the same happiness scores, meaning that our bootstrapped samples may not be fully representative.  
+- **Example:** Our sanity checks show that the difference in average happiness scores between countries per group can be up to 0.30, for example, for Syria (5.28) and Oman (5.58) post-COVID.
+
+### Future research
+To identify what exactly is the cause of the aforementioned stability of average happiness scores amongst UN General Debates speeches for the pre- and post-COVID groups, further inquiry is needed into the exact vocabulary used per speech. That way, it can be said with more certainty whether specific discourse is responsible for the little variability in happiness amongst UN General Debates speeches. Additionally, future research should address the difference between average happiness scores amongst countries in more detail, since this variability is significantly higher than the variability amongst years.
+  
+## Repository structure  
+  
+Hedonometer/  
+├── data/  
+│ ├── raw/  
+│ └── processed/   
+├──outputs/figures/  
+├── src/  
+├── .gitignore  
+├── README.md  
+└── requirements.txt  
   
 ## How to run the code
 
@@ -262,8 +317,8 @@ Our bootstrap considers each speech (document) as the unit for resampling. We re
 **4: Activate virtual environment:** In your terminal, type `.\.venv\Scripts\Activate.ps1` for PowerShell, `.\.venv\Scripts\activate.bat` for Command Prompt, or `source .venv/bin/activate` for MacOS.  
 **5: Install requirements.txt:** In your terminal, type `python -m pip install -r requirements.txt` for Windows, or `python3 -m pip install -r requirements.txt` for MacOS.  
 **6: Run cleaning.py:** In your terminal, type `python src/cleaning.py` for Windows, or `python3 src/cleaning.py` for MacOS.  
-**7: Run UNGD_cleaning.py:** In your terminal, type `python src/UNGD_cleaning.py` for Windows, or `python3 src/UNGD_cleaning.py` for MacOS.
-**8: Run UNGD_samp_stats.py:** In your terminal, type `python src/UNGD_samp_stats.py` for Windows, or `python3 src/UNGD_samp_stats.py` for MacOS.
+**7: Run UNGD_cleaning.py:** In your terminal, type `python src/UNGD_cleaning.py` for Windows, or `python3 src/UNGD_cleaning.py` for MacOS.  
+**8: Run UNGD_samp_stats.py:** In your terminal, type `python src/UNGD_samp_stats.py` for Windows, or `python3 src/UNGD_samp_stats.py` for MacOS.  
   
 ## Credits
 
@@ -282,7 +337,7 @@ Peter Sheridan Dodds, Kameron Decker Harris, Isabel M. Kloumann, Catherine A. Bl
 
 ## AI-use disclosure  
 
-We used UvA AI Chat and ChatGPT for (1) interpreting tracebacks and DeepSeek for (2) clarification of the assignment steps. We reviewed and edited all suggestions, ran the script end-to-end, and verified outputs on sample inputs. Final work is our responsibility. 
+We used UvA AI Chat and ChatGPT for (1) interpreting tracebacks and (2) suggesting modules for specific coding goals, and DeepSeek for (3) clarification of the assignment steps. We reviewed and edited all suggestions, ran the script end-to-end, and verified outputs on sample inputs. Final work is our responsibility. 
 
 
 
