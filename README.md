@@ -227,7 +227,7 @@ The same can be said for the pre covid bootstrapped histogram. The graph present
 Figure 5. Post COVID range bootstrapping histogram:  
 ![Alt text](output/figures/UNGD_post_covid_bootstrap.png)  
   
-The difference between the two histograms and their overall mean and medians is negligible, and therefore irrelevant to our dataset. This however also implies a low uncertainty in our data.
+The difference between the two histograms and their overall mean and medians is negligible. This however also implies a low uncertainty in our data.
   
 Figure 6. Pre and post COVID histogram comparison:
 ![Alt text](output/figures/UNGD_pre_post_comparison.png)
@@ -252,7 +252,7 @@ Based on our results, we found that the difference in happiness pre- and post-CO
   
 A possible cause for this stability of emotional tonality across speeches, years, and countries is the highly “formal and institutionalised setting” (Baturo, Dasandi, and Mikhaylov 2017, 2) and, consequently, tone of the UN General Debates. This formality promotes emotionally restrained language rather than emotionally charged language (3). Additionally, speakers participate in “strategic signalling” (3), meant to influence the perception of both the states speakers themselves represent and other states, as well as accomplish other political goals. This strategic signalling results in a tendency towards diplomatic discourse.   
   
-Another possible explanation for the stability in happiness is the consistency of emotional charge of topics discussed. The UN General Debates primarily discuss “major issues in world politics” (1), meaning that the speeches generally revolve around serious themes and topics. This causes UN General Debates discourse to be consistently problem-oriented, setting a baseline emotional tone for all speeches.  
+Another possible explanation for the stability in happiness is the consistency of emotional charge of topics discussed. The UN General Debates primarily discuss “major issues in world politics” (1), meaning that the speeches generally revolve around serious themes and topics. This causes UN General Debates discourse to be consistently problem-oriented, setting a baseline emotional tone for all speeches. This means that, even as the topics of the debates change, the tone remains relatively consistent amongst different time ranges.
   
 ## Critical reflection  
   
