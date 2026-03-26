@@ -1,5 +1,5 @@
 # Hedonometer: Happiness of UN General Debates Pre- and Post-COVID
-Introduction + research question go here!!
+Our project investigates two datasets, the labMT 1.0 dataset, which contains words and corresponding happiness scores, serving as a Hedonometer to score other textual data with, and the United Nations General Debates dataset, which contains speeches from the UN General Assembly. We compare the datasets to measure to what extent the corona pandemic influenced the emotional tone of these speeches.
   
 ## Quantitative and Qualitative Exploration  
   
