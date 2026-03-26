@@ -279,3 +279,7 @@ plt.ylabel("Happiness standard deviation")
 plt.tight_layout
 plt.savefig("output/figures/UNGD_pre_post_COVID_Scatter.png")
 plt.close()
+
+print("Statistical uncertainty (post/pre):")
+print((np.max(df_pre["happiness_average"]) - np.min(df_pre["happiness_average"]))/2)
+print((np.max(df_post["happiness_average"]) - np.min(df_post["happiness_average"]))/2)
