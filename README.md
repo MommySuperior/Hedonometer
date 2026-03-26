@@ -207,42 +207,32 @@ We opted to use scatter plots to show the relationship between the data and the 
 Figure 1. Full range scatter plot:  
 ![Alt text](output/figures/UNGD_Full_Range_Scatter.png)  
   
-This plot shows us that much of the dataset clusters around 5.4 and 5.5 happiness average, with some data points being outside that range. This is interesting because we would expect there to be two cleared groups to distinguish from a pre covid and post covid world.  
+This plot shows us that much of the dataset clusters around 5.4 and 5.5 happiness average, with some data points being outside that range. This is interesting because we hypothesized that there would be two clear groups to distinguish from in the pre covid and post covid world.  
   
-Figure 2. Pre COVID range scatter plot:   
-![Alt text](output/figures/UNGD_pre_COVID_Scatter.png)  
+Figure 2. Pre and post COVID scatter plot comparison:   
+![Alt text](output/figures/UNGD_pre_post_COVID_Scatter.png)
   
-This deepens our understanding of how the data is distributed between the two time ranges. We can tell that a clear chunk of the data points leaning towards a lower happiness average disappear when comparing to the full data range.
-  
-Figure 3. Post COVID range scatter plot:  
-![Alt text](output/figures/UNGD_post_COVID_Scatter.png)  
-  
-The opposite can be said about the post covid scatter plot. Here we see a portion of the data leaning towards a higher happiness average disappear from the plot. From this we can conclude that the pre covid world UN general debates contained slightly happier overall moods.  
-  
-Figure 4. Full range bootstrapping histogram:  
+Splitting the two time frames into different groups reveals more about the differance of the two ranges. In doing this the plot still shows one consistent area of happiness however it would seem that the data points representing the pre COVID time range prove to be further to the right and therefore to be happier then the points that represent post COVID times. This is further confirmed by figure 6. However this may not be the case in reality. Due to our confidence interval having overlaped with 0 (implying clear statistical insignificance) this may suggest any differences in the visualizations of the data to be merely statistical noise produced by the dataset and our sampling method.
+
+Figure 3. Full range bootstrapping histogram:  
 ![Alt text](output/figures/UNGD_summary_bootstrap.png)  
   
-This is the first histogram which we used to obtain information about our data uncertainty as well as our confidence interval. Alongside this graph, we extracted a bootstrapped value for the mean, median as well as the standard deviation. The value of the bootstrapped mean was close to our overall mean, with a difference only being observed past the 4th or 5th decimal point. Another important pattern to notice is the bell curve of the bootstrapped histogram which occurs due to the central limit theorem. This normal distribution presents itself despite the un-bootstrapped histograms (see figures 7 and 8) presenting a skewed distribution. (again the product of the central limit theorem)
+This is the first histogram which we used to obtain information about our data uncertainty as well as our confidence interval. Alongside this graph, we extracted a bootstrapped value for the mean, median as well as the standard deviation. The value of the bootstrapped mean was close to our overall mean, with a difference only being observed past the 4th or 5th decimal point. Another important pattern to notice is the bell curve of the bootstrapped histogram which occurs due to the central limit theorem. This normal distribution presents itself despite the un-bootstrapped histograms (see figures 4 and 5) presenting a skewed distribution. (again the product of the central limit theorem)
   
-Figure 5. Pre COVID range bootstrapping histogram:  
+Figure 4. Pre COVID range bootstrapping histogram:  
 ![Alt text](output/figures/UNGD_pre_covid_bootstrap.png)  
   
 The same can be said for the pre covid bootstrapped histogram. The graph presents itself as a normal distribution which has a mean close to the original.   
   
-Figure 6. Post COVID range bootstrapping histogram:  
+Figure 5. Post COVID range bootstrapping histogram:  
 ![Alt text](output/figures/UNGD_post_covid_bootstrap.png)  
   
 The difference between the two histograms and their overall mean and medians is negligible, and therefore irrelevant to our dataset. This however also implies a low uncertainty in our data.
   
-Figure 7. Pre COVID histogram:  
-![Alt text](output/figures/UNGD_pre_comparison.png)  
-  
-The histogram representing the pre covid world mirrors the scatter plot, showing a distribution which leans more towards a higher happiness average. Another thing to notice is the skewed distribution, with a heavier right side then left.
-  
-Figure 8 Post COVID histogram:  
-![Alt text](output/figures/UNGD_post_comparison.png)  
-  
-The same pattern can be seen for the post covid histogram, yet this time the data displays a distribution skewing more to the lower happiness average.
+Figure 6. Pre and post COVID histogram comparison:
+![Alt text](output/figures/UNGD_pre_post_comparison.png)
+
+A comparison of both pre and post covid happiness in the UN general debates reveals some interesting statistical findings. For example the median is different for both histograms, with the histogram representing the pre COVID data showing a higher happiness median. Another trend that appears in the histograms is the peaks and tails. The peak of the histogram representing pre COVID is higher, while the tails of the histogram representing post COVID appear as larger. Generally you can see the post COVID histograms as a backwards translation of the pre COVID graph. While this may imply a difference, once again due to our confidence interval showing a near 0 value suggests this to be just statisical noise with no real statisical implications. 
   
 ### Inference summaries    
   
@@ -252,7 +242,7 @@ Difference = mean(post) - mean(pre) = [5.4488 - 5.4507] = -0.00193
 Difference = mean(post) - mean(pre) [5.4488 - 5.4507] = -0.00193  
 95% CI (pre mean): 5.4466, 4547  
 95% CI (post mean): 5.4449, 5.4527  
-95% CI (difference = post - (pre): [-0.0073, 0.0039]  
+95% CI (difference = post - (pre)): [-0.0073, 0.0039]  
   
 This represents a negligible difference on the happiness scale. The bootstrap histograms (Figures 1-3) indicate that uncertainty surrounding the mean happiness estimates before and after COVID is minimal. The estimated difference is difference = mean(post) - mean(pre) = 0.00193, and the 95% confidence interval for the difference is [-0.0073, 0.0039]. Since this interval encompasses 0, we cannot conclusively determine a rise or decline in mean happiness post-2020.  
   
