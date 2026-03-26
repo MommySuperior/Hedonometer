@@ -3,45 +3,60 @@ import numpy as np
 from pathlib import Path
 import matplotlib.pyplot as plt
 
+#--------------------------------------
+# 1.1 loading the raw dataset test
+#--------------------------------------
 coding_humanities = Path(__file__).resolve().parent
 ROOT = coding_humanities.parent
 
 print_section = ("1.1")
 dataset_path = ROOT / "data" / "raw" / "Data_Set_S1.txt"
 
+# Load the dataset with appropriate parameters
 df = pd.read_csv(dataset_path, sep="\t", skiprows=3, dtype=str)
 
 df = df.replace("--", np.nan)
 df["word"] = df["word"].str.strip().str.lower()
 
+# Convert numeric columns to float, coercing errors to NaN
 num_cols = df.columns.difference(["word"])
 df[num_cols] = df[num_cols].apply(pd.to_numeric, errors="coerce")
 df[num_cols] = df[num_cols].astype(float)
 
+# Ensure the 'word' column is of string type
 df["word"] = df["word"].astype("string")
 print("\n1.1 Clean dataset test")
 print("\n", df.head(10).to_string(index=False))
 
 df.to_csv("data/processed/Data_Set_S1_clean.csv", index=False)
 
+#--------------------------------------
+# 1.2 Data dictionary
+#--------------------------------------
 print("\n1.2 Data dictionary")
 
+# Create a data dictionary with column names, data types, and number of missing values
 col_dtypes = df.dtypes.astype(str).reset_index()
 col_dtypes.columns = ["column", "dtype"]
 
+# Count missing values in each column
 missing = df.isna().sum().reset_index()
 missing.columns = ["column", "n_missing"]
 
-
+# Merge the data types and missing values into a single data dictionary
 data_dictionary = col_dtypes.merge(missing, on="column")
 
 print(data_dictionary.to_string(index=False))
 data_dictionary.to_csv("data/processed/data_dictionary.csv", index=False)
-    
+
+#--------------------------------------
+# # 1.3 Sanity checks
+# --------------------------------------   
 print("\n1.3 Sanity checks")
 
 print("\nDuplicated words:", df["word"].duplicated().sum())
 
+# Check for missing values in key columns
 sample_15 = df.sample(15, random_state=42)
 print("\nRandom sample (15 rows):")
 print("\n", sample_15)
@@ -49,7 +64,7 @@ sample_15.to_csv("data/processed/random_sample_15_rows.csv", index=False)
 
 show_cols = ["word", "happiness_average", "happiness_standard_deviation"]
 
-
+# Top 10 positive and negative words by happiness_average
 sorted_df = df.sort_values("happiness_average")
 top_10_positive = sorted_df.tail(10)[show_cols]
 top_10_negative = sorted_df.head(10)[show_cols]
@@ -60,9 +75,13 @@ print("\n", top_10_positive)
 print("\nTop 10 negative words:")
 print("\n", top_10_negative)
 
+# Save the top 10 positive and negative words to CSV files
 top_10_positive.to_csv("data/processed/top_10_positive_words.csv", index=False)
 top_10_negative.to_csv("data/processed/top_10_negative_words.csv", index=False)
 
+#--------------------------------------
+# 2.1 Exploratory data analysis
+#--------------------------------------
 print("\n2.1 Distribution of happiness_average")
 
 h = df["happiness_average"].dropna()
@@ -90,6 +109,7 @@ stats_summary = pd.DataFrame(
 print("\n", stats_summary.to_string(index=False))
 stats_summary.to_csv("data/processed/happiness_average_summary_stats.csv", index=False)
 
+# Plot the histogram of happiness_average
 plt.figure()
 plt.hist(h, bins=40, edgecolor="black")
 plt.title("Distrubution of average happiness")
@@ -99,6 +119,9 @@ plt.tight_layout()
 plt.savefig("output/figures/happiness_average_hist.png")
 plt.close()
 
+#---------------------------------------
+# 2.2 Disagreement: happiness_standard_deviation
+#---------------------------------------
 print("\n2.2 Disagreement: happiness_standard_deviation")
 
 plt.figure()
@@ -116,6 +139,7 @@ plt.tight_layout()
 plt.savefig("output/figures/happiness_vs_std_scatter.png")
 plt.close()
 
+# Identify the 15 words with the highest standard deviation (most "contested" words)
 most_contested_15 = df.sort_values("happiness_standard_deviation", ascending=False).head(15)
 print("\nTop 15 most 'contested' words (highest standard deviation):")
 print("\n", most_contested_15.to_string(index=False))
@@ -125,6 +149,7 @@ print("\n2.3 Corpus comparison: rank coverage + overlaps")
 
 rank_cols = ["twitter_rank", "google_rank", "nyt_rank", "lyrics_rank"]
 
+# Check how many words have a rank in each corpus and the share of the lexicon this represents
 coverage_rows = []
 for col in rank_cols:
     n_present = int(df[col].notna().sum())
@@ -167,6 +192,7 @@ print("\nOverlap of words over platforms:")
 print("\n", pattern_counts.head(12).to_string(index=False))
 pattern_counts.to_csv("data/processed/corpus_overlap_patterns.csv", index=False)
 
+# Calculate pairwise overlaps
 pairs = []
 for i in range(len(labels)):
     for j in range(i + 1, len(labels)):
