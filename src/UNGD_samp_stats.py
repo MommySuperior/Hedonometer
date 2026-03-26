@@ -75,6 +75,12 @@ results_df["Std Dev"] = results_df["Std Dev"].round(4)
 output_folder = ROOT / "data" / "processed"
 results_df.to_csv(output_folder / "happiness_pre_post_comparison.csv", index=False)
 
+#-----------------------------------------------------
+# Robustness check: median difference
+#-----------------------------------------------------
+median_difference = df_post["happiness_average"].median() - df_pre["happiness_average"].median()
+
+print("Median difference (post - pre):", round(median_difference, 4))
 
 #-----------------------------------------------------
 # Bootstrapping function
