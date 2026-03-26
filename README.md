@@ -340,7 +340,7 @@ Peter Sheridan Dodds, Kameron Decker Harris, Isabel M. Kloumann, Catherine A. Bl
 
 ## AI-use disclosure  
 
-We used UvA AI Chat and ChatGPT for (1) interpreting tracebacks and DeepSeek for (2) clarification of the assignment steps. We reviewed and edited all suggestions, ran the script end-to-end, and verified outputs on sample inputs. Final work is our responsibility. 
+We used UvA AI Chat and ChatGPT for (1) interpreting tracebacks and (2) suggesting modules for specific coding goals, and DeepSeek for (3) clarification of the assignment steps. We reviewed and edited all suggestions, ran the script end-to-end, and verified outputs on sample inputs. Final work is our responsibility. 
 
 
 
