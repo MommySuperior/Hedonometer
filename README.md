@@ -160,7 +160,7 @@ For the second part of this research, we analyse speeches from the United Nation
 The dataset which was used in this project comes from the United Nations General Debate Corpus. It contains various transcripts of speeches which were delivered by representatives of UN member states during the annual United Nations General Assembly General Debate in New York. Throughout these debates, governments presented their views on major global issues namely international security, climate change, development and diplomacy.
   
 The corpus was compiled by Alexander Baturo, Niheer Dasandi, and Slava J. Mikhaylov (2017) and includes over 7,00 speeches delivered between 1970 and 2014. This dataset is publicly available through the Harvard Dataverse, where the authors provided structured text data suitable for computational analysis. As the speeches are delivered annually by most UN member states, the corpus allows researchers to measure political discourse across countries and over time.
-  
+
 ### Data dictionary (per column)  
    - **year**: The year in which the General Debate statement in the document was delivered. The data type object of this column is a 64-bit integer. No years were missing, meaning each document name contained a year.
    - **country**: The country that delivered the General Debate statement in the document. The data type object of this column is a string. No country names were missing, meaning each document name contained a country name.
@@ -171,36 +171,65 @@ The corpus was compiled by Alexander Baturo, Niheer Dasandi, and Slava J. Mikhay
 ## Methods section  
   
 ### Dataset loading  
-For this part we wrote a Python script to load and organize the dataset files. The script looks in the raw data folder that contains the original session files (the files are named „session 1 – 1946”, „...”, „session 80 – 2025” and they all contain sub-files) and extracts and copies them into a processed data folder so they are easier to use later.  
-  
-First, we used the script to set the locations of the raw data and the processed data folders (using pathlib), into the already made processed data folder. The script then goes through all folders inside the raw data directory and collects the valid session folders while ignoring hidden system files, meaning everything except folders and files that start with a period. Then, we created a loop to select just the session files that interested us, so the script loops through sessions 55 to 80, which corresponds to years 2000 to 2025. For each number, it searches for a folder whose name starts with "Session <number> -". After finding the already existing folder, the script created a matching folder in the processed data directory.  
-  
-Inside each session folder, the script found all .txt sub-files and copied them into the processed folder using shutil.copy2. We researched multiple ways to execute this action and found that this was the most efficient way for us to apply this function. This keeps the original files unchanged and also preserves their metadata.  
-  
-We tokenized and cleaned the documents, after which we placed all documents in one table and converted it to a .csv file with the columns mentioned in the data dictionary.   
+We started handling the UN General Debates dataset by writing a Python script to load and organize the text files. The file names contain the country, session, and year of the speech stored in the document. The script extracts and copies the files into our processed data folder, keeping the original folder structure of the dataset intact.
+
+First, we set the paths to the locations of the raw data and the processed data folders using `pathlib`. 
+The script then iterates over all folders inside the raw data folder and collects the valid session folders while ignoring hidden metadata files, meaning the loop extracts all folders except those that start with a “._”. 
+Inside each session folder, we extracted all .txt sub-files and copied them into the processed folder using `shutil.copy2`. This way, the original files remain unchanged and their metadata is preserved.
+
+Then, we loaded the labMT dataset into panda from the raw text file.The original file included metadata lines at the top that were not part of the actual dataset, which we skipped before the table was read. The file was tab delimited, so tab separation was explicitly specified during loading. We avoided this problem by making all columns read as strings. 
+
+After loading, the dataset was cleaned so that it could be used reliably for analysis. We marked missing file values in the original file as --, and these were replaced with ,, so they would be recognized by pandas as missing values. If these values are still stored as strings, then statistical calculations later cannot be performed. The word column was also standardized by stripping extra whitespace and converting all words to lowercase. This ensured consistency, so that words like Love, love would not be treated as different entries. Finally all columns except the word column were converted to numeric types, specifically floating - point values, so later comparison and descriptive statistics could be computed. 
+
+In short, the purpose of this cleaning stage was to transform the raw lexicon file into a structured and analyzable dataset. Without these steps, the later matching between speech words and labMT entries would have been much less reliable.
+
+Sanity Checks
+   - We checked the word column for unique entries, ensuring that no duplicate words appear. This confirms that each word has a single associated happiness score.
+   - We then inspected a random sample of 15 rows to confirm that the dataset was correctly loaded and cleaned, and that numeric values were converted properly.
+   - We identified the top 10 most positive and top 10 most negative words based on their average happiness scores. Many positive words align with positive emotions such as happiness and love, while most negative words correspond to concepts associated with suffering and death.
+
+We checked the word column for duplicate entries. This was done to confirm that each word was associated with only one happiness score. 
+
+Then, a random sample of 15 rows was inspected. This was done to make sure that the table structure looked correct, where the values were aligned with proper columns, and that numeric values had been converted successfully. This kind of inspection was efficient because it gave us a quick way to detect obvious loading or formatting errors before deeper analysis. 
+
+We identified the top 10 most positive and top 10 most negative words based on their average happiness scores. Many positive words align with positive emotions such as happiness and love, while most negative words correspond to concepts associated with suffering and death. This suggested that the lexicon behaved in a broadly expected way. At the same time, it was recognized that these results reflected a socially shared judgment, instead of an objective truth about emotion. Moreover, Emotional meaning is shaped by cultural norms, historical context and perspectives. The strong agreement around words such as “suicice”, “rape”, and “murder” suggest that these words show little disagreement, meaning most people agree they are strongly negative. Moreover, they are embedded in moral and legal frameworks that shape how people are expected to evaluate them. It reflects both shared emotional response and what social norms consider harmful and tragic. Thus, the dataset captures a particular social consensus rather than an objective and universal definition of emotion.
+
+### Processing the dataset
+   - We created multiple data frames to extract the distribution of the happiness scores, the 15 most contested words, the overlap between words in the corpora, and words that occur on Twitter but do not occur in the New York Times from the dataset, as well as an exhibit of the five most positive, five most negative, five highly contested, and five corpus-specific words.
+   - We converted the data frames to CSV files using pandas and printed them to tables.
+   - Furthermore, we used Mathplotlib to create representational plots of the data and save the plots as PNG files. These plots include a histogram, a bar chart, and two scatterplots. These visualizations aid in interpreting and comparing the data.
+
   
 ### Pre- and Post-COVID Happiness Comparison in UN General Debate Speeches  
-The script loads the relevant datasets and focuses on speeches delivered between 2015 and 2025. The data are separated into two groups: a pre-COVID period (2015–2019) and a post-COVID period (2020–2025). Before we compare, we made sure that the code checks that the datasets contain the expected years and that the number of speeches per year is reasonable. These checks help confirm that the data have been filtered correctly and that the comparison between the two periods is valid.
+Before carrying out the comparison, several small sanity checks were performed to ensure that the year values in both subsets were checked to confirm that the data had been split correctly. We first confirmed that the pre-COVID dataset contained only speeches from 2015 to 2019 and that the post-COVID contained only speeches from 2020 to 2024. To be entirely certain, we counted the temporal split and the number of speeches per year for each subset to verify that the observations were distributed properly, and that no gaps errors were present. 
 
-To summarize the data, the script calculates several descriptive statistics for each period, including the number of speeches, the mean happiness score, the median happiness score, and the standard deviation. These statistics provide an overview of how happiness scores are distributed within each group.
+After, we calculated the descriptive statistics for each subset, including the sample size, mean and median happiness score, as well as standard deviation. Although these statistics were part of the main analysis, they functioned as a form of  sanity checks too because we used it as an inspection to see whether the values looked reasonable before moving on to the next section. We noticed that the close similarity between the means and median across the two groups suggested that the distributions were relatively stable. 
 
-The main quantity of interest is the difference in mean happiness between post-COVID and pre-COVID speeches, defined as mean(post-COVID) minus mean(pre-COVID). To ensure that the results are not driven by extreme values, a robustness check is performed using the median happiness score instead of the mean. The similarity between the mean and median comparisons suggests that the overall result is stable and not sensitive to outliers.
+Lastly, a quick robustness check was added by repeating the comparison with the median instead of the mean. This was done because the median is less sensitive to extreme values. Since the median difference remained statistically insignificant, this suggested that the result was not affected by unusual variables. 
 
-Finally, the summary statistics are organized into a table and exported as a CSV file for use in further analysis and reporting within the project.  
-  
+
 ### Bootstrap sampling  
 
-Using our bootstrapping function we resampled the documents using the numpy’s random.randint() method to pick at random samples from our text at a defined rate of iteration (Nboot).Next we applied an individually defined method to the sample, in our case it was numpy’s .mean() in order to recompute our statistic for each random sample fetched.  
-  
-We bootstrap sampled the full range of years 2015 to 2024 as well as the pre-COVID and post-COVID groups with 2000 iterations for sufficient accuracy. We chose to use mean rather than median based on statistics conventions for normally distributed data.  
+We created a function to simplify bootstrapping data for use in multiple histograms. This function has three main parameters it takes to operate. Firstly a value defined as x is passed into the function and is then subsequently turned into a numpy array. Firstly we define a table called resampled_stats, after which we then start an iterative loop for a predetermined second parameter for the function. We then pick a random sample from our dataset using the random.randint() method in numpy. This sample is then passed into a function called “bstatistic” which applies our third parameter, statsfunc to the sample. These samples are then appended to the resampled_stats table.
+
+Next, we applied an individually defined method to the sample, in our case it was numpy’s .mean() in order to recompute our statistic for each random sample fetched. This was done for all three histograms, with the only parameter changed between all three being x, the dataframe we used to define pre and post COVID years.
+
+We bootstrapped the full range of years 2015 to 2024 as well as the pre-COVID and post-COVID groups with 2000 iterations for sufficient accuracy. We chose to use mean rather than median based on statistics conventions for normally distributed data.
+
   
 ### Confidence intervals  
 
-We calculated the percentile confidence intervals of both the pre-COVID group and the post-COVID group, as well as the difference between these groups, to measure whether the difference in average happiness for both groups is statistically significant.  
+We calculated the percentile confidence intervals of both the pre-COVID group and the post-COVID group, as well as the difference between these groups, to measure whether the difference in average happiness for both groups is statistically significant. 
 
 ### Visualizations  
 
-We opted to use scatter plots to show the relationship between the data and the standard deviation of the data. This relationship tells us about the spread of the data, normality, as well as the ability to detect outliers in the data. In addition we opted to use histograms to display our data’s pre and post covid happiness scores to compliment the previously mentioned scatter plots. To assess uncertainty as well as the proximity to reality, we bootstrapped the data frames and plotted them as histograms too.  
+Visualizations
+We opted to use scatter plots to show the relationship between the data and the standard deviation of the data. This relationship tells us about the spread of the data, normality, as well as the ability to detect outliers in the data.
+
+In addition we opted to use histograms to display our data’s pre and post covid happiness scores to compliment the previously mentioned scatter plots. To assess uncertainty as well as the proximity to reality, we bootstrapped the data frames and plotted them as histograms too. These bootstrap histograms followed the central limit theorem which tells us that our data was near accurate to reality. We further confirmed this by finding the difference between the dataframe means and their bootstrapped means which displayed high closeness.
+
+The comparison histogram itself revealed slight variations, yet we can attribute this to statistical noise due to our 95% confidence interval results.
+
   
 ## Results section  
 
@@ -236,23 +265,29 @@ A comparison of both pre and post covid happiness in the UN general debates reve
   
 ### Inference summaries    
   
-Pre-COVID speeches (2015-2019) exhibit a mean happiness of 5.4507 (n= 974, SD = 0.0646), while Post-COVID speeches (2020-2025) demonstrate a mean happiness of 5.4488 (n = 1154, SD = 0.0670). The point estimate for the shift is:   
-  
-Difference = mean(post) - mean(pre) = [5.4488 - 5.4507] = -0.00193  
-Difference = mean(post) - mean(pre) [5.4488 - 5.4507] = -0.00193  
-95% CI (pre mean): 5.4466, 4547  
-95% CI (post mean): 5.4449, 5.4527  
-95% CI (difference = post - (pre)): [-0.0073, 0.0039]  
-  
-This represents a negligible difference on the happiness scale. The bootstrap histograms (Figures 1-3) indicate that uncertainty surrounding the mean happiness estimates before and after COVID is minimal. The estimated difference is difference = mean(post) - mean(pre) = 0.00193, and the 95% confidence interval for the difference is [-0.0073, 0.0039]. Since this interval encompasses 0, we cannot conclusively determine a rise or decline in mean happiness post-2020.  
+Pre-COVID speeches (2015-2019) exhibit a mean happiness of 5.4507 (n= 974, SD = 0.0646), while Post-COVID speeches (2020-2025) demonstrate a mean happiness of 5.4488 (n = 1154, SD = 0.0670). The point estimate for the shift is: 
+
+ = mean(post) - mean(pre) = [5.4488 - 5.4507] = -0.00193
+
+ = mean(post) - mean(pre) [5.4488 - 5.4507] = -0.00193
+
+95% CI (pre mean): 5.4466, 4547
+
+95% CI (post mean): 5.4449, 5.4527
+
+95% CI (= post - (pre)): [-0.0073, 0.0039]
+
+This represents a negligible difference on the happiness scale. The bootstrap histograms (Figures 1-3) indicate that uncertainty surrounding the mean happiness estimates before and after COVID is minimal. The estimated difference is  = mean(post) - mean(pre) = 0.00193, and the 95% confidence interval for  is [-0.0073, 0.0039]. Since this interval encompasses 0, we cannot conclusively determine a rise or decline in mean happiness post-2020.
+
   
 ## Qualitative analysis of results
   
-The point estimate difference  = -0.00193 indicates the post-COVID average speech happiness is marginally lower than the pre-COVID average. Nonetheless, the pre/post difference is minimal, therefore we depend on estimation instead of only the point estimate because the pre/post difference is so minor. The 95% confidence range for  using bootstrap resampling (2000 iterations) is -0.0073, 0.0039, which includes 0. The direction of change is ambiguous, as the actual difference may be marginally positive or marginally negative. As a result, we should proceed with caution when claiming that average speech happiness would rise or fall after 2020.  
+The point estimate difference  = -0.00193 indicates the post-COVID average speech happiness is marginally lower than the pre-COVID average. Nonetheless, the pre/post difference is minimal, therefore we depend on estimation instead of only the point estimate because the pre/post difference is so minor. The 95% confidence range for  using bootstrap resampling (2000 iterations) is -0.0073, 0.0039, which includes 0. The direction of change is ambiguous, as the actual difference may be marginally positive or marginally negative. As a result, we should proceed with caution when claiming that average speech happiness would rise or fall after 2020.
+
   
 ## Critical reflection  
   
-Our bootstrap considers each speech (document) as the unit for resampling. We resample speeches with replacement for each time period, determine the variability of the averages, and their differences under repeated sampling. This indirectly regards talks as autonomous observations. A significant restriction is that the independence assumption is merely approximate, as countries are represented multiple times over years, resulting in clustered observations by country and the potential for rhetorical styles to endure across time. Moreover, UN General Debate speeches represent a formal diplomatic category, and hedonometer-based scoring and analysis inadequately cover context such as dissent, sarcasm, or specific strategy phrasing, which might influence the expression of the exact “happiness” in political discourse.  
+Our bootstrap considers each speech (document) as the unit for resampling. We resample speeches with replacement for each time period, determine the variability of the averages, and their differences under repeated sampling. This indirectly regards talks as autonomous observations. A significant restriction is that the independence assumption is merely approximate, as countries are represented multiple times over years, resulting in clustered observations by country and the potential for rhetorical styles to endure across time. Moreover, UN General Debate speeches represent a formal diplomatic category, and hedonometer-based scoring and analysis inadequately cover context such as dissent, sarcasm, or specific strategy phrasing, which might influence the expression of the exact “happiness” in political discourse. 
   
 ## How to run the code
 
